@@ -13,8 +13,8 @@ public class BaseCell : HexCell
 		}
 	}
 
-	public override bool Matching(HexCell[] neighbours, out HashSet<HexCell> matches) {
-		matches = new HashSet<HexCell>();
+	public override bool Matching(HexCell[] neighbours, out HashSet<HexCell> otherCells) {
+		otherCells = new HashSet<HexCell>();
 		bool res = false;
 
 		for(int i = 0; i < neighbours.Length; ++i) {
@@ -26,10 +26,28 @@ public class BaseCell : HexCell
 			types.Sort();
 			if (types[0]==1 && types[1]==2 && types[2] == 3) {
 				res = true;
-				matches.Add(a);
-				matches.Add(b);
+				otherCells.Add(a);
+				otherCells.Add(b);
+
+				CellMatch.Match(this, a, b);
 			}
 		}
 		return res;
+	}
+
+	public override bool ApplyMatch() {
+		StartCoroutine(matchAnim(0.5f));
+		return true;
+	}
+
+	IEnumerator matchAnim(float dur) {
+		var startPos = transform.position;
+		var goalPos = match.getCenter();
+		for(float t = 0; t < 1; t += Time.deltaTime / dur) {
+			transform.position = Vector3.Lerp(startPos, goalPos, t);
+			transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, t);
+			yield return null;
+		}
+		Destroy(gameObject);
 	}
 }

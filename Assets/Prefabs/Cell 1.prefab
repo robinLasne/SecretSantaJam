@@ -80,10 +80,40 @@ PrefabInstance:
       propertyPath: m_text
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6420301200693696804, guid: 2bf6b6a6163a0a7478a9bd4a1152e9d5,
+        type: 3}
+      propertyPath: _SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6976377800614835265, guid: 2bf6b6a6163a0a7478a9bd4a1152e9d5,
         type: 3}
       propertyPath: m_Name
       value: Cell 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570281982663594355, guid: 2bf6b6a6163a0a7478a9bd4a1152e9d5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692982162920303889, guid: 2bf6b6a6163a0a7478a9bd4a1152e9d5,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.38995194
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692982162920303889, guid: 2bf6b6a6163a0a7478a9bd4a1152e9d5,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.6509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692982162920303889, guid: 2bf6b6a6163a0a7478a9bd4a1152e9d5,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.39204594
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692982162920303889, guid: 2bf6b6a6163a0a7478a9bd4a1152e9d5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3284447241558526347, guid: 2bf6b6a6163a0a7478a9bd4a1152e9d5, type: 3}

@@ -15,6 +15,6 @@ public class GridInputs : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 	}
 
 	public void OnEndDrag(PointerEventData eventData) {
-		grid.StopDrag(eventData.delta);
+		StartCoroutine(grid.StopDrag(eventData.delta));
 	}
 }

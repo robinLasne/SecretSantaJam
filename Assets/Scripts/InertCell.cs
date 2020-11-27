@@ -15,4 +15,8 @@ public class InertCell : HexCell
 		
 		return false;
 	}
+
+	public override bool ApplyMatch() {
+		throw new System.NotImplementedException();
+	}
 }
