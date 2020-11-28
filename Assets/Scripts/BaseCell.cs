@@ -24,7 +24,7 @@ public class BaseCell : HexCell
 
 			List<int> types = new List<int>() { a.type, b.type, type };
 			types.Sort();
-			if (types[0]==1 && types[1]==2 && types[2] == 3) {
+			if ((types[0]==1 && types[1]==2 && types[2] == 3) || (types[0] == 4 && types[1] == 5 && types[2] == 6)) {
 				res = true;
 				otherCells.Add(a);
 				otherCells.Add(b);
@@ -35,8 +35,8 @@ public class BaseCell : HexCell
 		return res;
 	}
 
-	public override bool ApplyMatch() {
-		StartCoroutine(matchAnim(0.5f));
+	public override bool ApplyMatch(float dur) {
+		StartCoroutine(matchAnim(dur));
 		return true;
 	}
 

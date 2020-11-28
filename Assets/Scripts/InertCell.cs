@@ -16,7 +16,7 @@ public class InertCell : HexCell
 		return false;
 	}
 
-	public override bool ApplyMatch() {
+	public override bool ApplyMatch(float dur) {
 		throw new System.NotImplementedException();
 	}
 }

@@ -283,6 +283,9 @@ MonoBehaviour:
   - {fileID: 4597735932855001558, guid: 15e962392512d884c887c4cab5f79502, type: 3}
   - {fileID: 8637118498842895638, guid: c20b33e8184df494a8fe8c7e983d5120, type: 3}
   - {fileID: 7893740294804701323, guid: d25864ec5364d4f4f957423fc441695c, type: 3}
+  - {fileID: 4597735932855001558, guid: 024e5f6f08256bf458cdfaefbebc546d, type: 3}
+  - {fileID: 8637118498842895638, guid: 497f5c23ac479a04aac0c7285c2a49a3, type: 3}
+  - {fileID: 7893740294804701323, guid: 7651573cc0d6b494187800ebc58aa7c3, type: 3}
   hexagonRadius: 6
 --- !u!1 &449460364
 GameObject:

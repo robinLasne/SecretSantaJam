@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using static Utils;
 
 public class DebugHexagons : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class DebugHexagons : MonoBehaviour
 	List<Vector3Int> draggedIndices = new List<Vector3Int>();
 	HexCell[] ghostWrapCells = new HexCell[2];
 
+	IEnumerable<IEnumerable<HexCell>> lastMatches;
+
 	Coroutine snapAnim;
 
 	Vector2[] directionByIndex;
@@ -29,7 +32,7 @@ public class DebugHexagons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		directionByIndex = new Vector2[]{ Vector2.right,Utils.rotate(Vector2.right, Mathf.PI / 3),Utils.rotate(Vector2.right, 2 * Mathf.PI / 3)};
+		directionByIndex = new Vector2[]{ Vector2.right,rotate(Vector2.right, Mathf.PI / 3),rotate(Vector2.right, 2 * Mathf.PI / 3)};
 
 		cells = new HexCell[hexagonRadius*2+1][];
 		cam = Camera.main;
@@ -41,7 +44,7 @@ public class DebugHexagons : MonoBehaviour
 			for (int i = minX; i <= maxX; ++i) {
 				var position = new Vector3Int(i, j, 0);
 
-				var instance = PlaceNewCell(Random.Range(0, prefabs.Length), position);
+				var instance = PlaceNewCellInstant(Random.Range(1, prefabs.Length), position);
 
 				// For Initial Check :
 				draggedIndices.Add(position);
@@ -49,14 +52,28 @@ public class DebugHexagons : MonoBehaviour
 			}
 		}
 
-		CheckMatches();
+		CheckMatches(draggedCellsLine);
     }
 
-	HexCell PlaceNewCell(int type, Vector3Int position) {
+	HexCell PlaceNewCellInstant(int type, Vector3Int position) {
 		var instance = Instantiate(prefabs[type], grid.CellToWorld(position), Quaternion.identity, transform);
 		setCell(position, instance);
 		instance.goalPosition = position;
 		return instance;
+	}
+
+	IEnumerator GrowNewCells(List<KeyValuePair<HexCell,HexCell>> cells, float dur) {
+		for(float t=0; t<1; t += Time.deltaTime / dur) {
+			foreach(var cell in cells) {
+				cell.Key.transform.localScale = t * Vector3.one;
+			}
+			yield return null;
+		}
+		foreach (var cell in cells) {
+			cell.Key.transform.localScale = Vector3.one;
+			Destroy(cell.Value.gameObject);
+		}
+
 	}
 
 	// Update is called once per frame
@@ -133,7 +150,11 @@ public class DebugHexagons : MonoBehaviour
 	public IEnumerator StopDrag(Vector2 delta) {
 		if (!isDragging) yield break;
 		isDragging = false;
-		if (CheckMatches()) {
+		if (CheckMatches(draggedCellsLine)) {
+			for (int i = 0; i < draggedIndices.Count; ++i) {
+				draggedCellsLine[i].goalPosition = draggedIndices[i];
+			}
+
 			snapAnim = StartCoroutine(SnapToSlots(.2f));
 		}
 		else {
@@ -155,6 +176,7 @@ public class DebugHexagons : MonoBehaviour
 		for (int i = 0; i < draggedCellsLine.Count; ++i) {
 			draggedCellsLine[i].transform.position = goalPos[i];
 		}
+		snapAnim = null;
 	}
 
 	IEnumerator SnapToStart(float dur) {
@@ -167,6 +189,7 @@ public class DebugHexagons : MonoBehaviour
 			yield return null;
 		}
 		MoveDraggedCellTo(goalPos, direction);
+		snapAnim = null;
 	}
 
 	void MoveDraggedCellTo(Vector3 position, Vector2 direction) {
@@ -207,30 +230,33 @@ public class DebugHexagons : MonoBehaviour
 		ghostWrapCells[1].transform.position = draggedCellsLine.Last().transform.position + dirVector;
 	}
 
-	bool CheckMatches() {
+	bool CheckMatches(List<HexCell> toCheck) {
 		var cellsToRemove = new HashSet<HexCell>();
 		bool hasMatches = false;
-		for(int i=0;i<draggedCellsLine.Count;++i) {
+		for(int i=0;i< toCheck.Count;++i) {
 			var tmpCells = new HashSet<HexCell>();
 
-			var neighboursIdx = GetAllAdjacentCells(draggedIndices[i]);
+			var neighboursIdx = GetAllAdjacentCells(toCheck[i].position);
 			var neighbourCells = new HexCell[neighboursIdx.Length];
 			for(int j = 0; j < neighboursIdx.Length; ++j) {
 				if (inBounds(neighboursIdx[j])) neighbourCells[j] = getCell(neighboursIdx[j]);
 			}
 
-			if(draggedCellsLine[i].Matching(neighbourCells,out tmpCells)) {
+			if(toCheck[i].Matching(neighbourCells,out tmpCells)) {
 				hasMatches = true;
 
-				cellsToRemove.Add(draggedCellsLine[i]);
+				cellsToRemove.Add(toCheck[i]);
 				cellsToRemove.UnionWith(tmpCells);
 			}
 		}
 
 		if (hasMatches) {
+			canDrag = false;
+			var lastMatchesPos = cellsToRemove.GroupBy(e => e.match, e => e.position);
+
 			foreach(var cell in cellsToRemove) {
-				if (cell.ApplyMatch()) {
-					var newCell = PlaceNewCell(0, cell.position);
+				if (cell.ApplyMatch(.3f)) {
+					var newCell = PlaceNewCellInstant(0, cell.position);
 					newCell.transform.position = cell.transform.position;
 
 					if (cell == draggedCell) {
@@ -240,21 +266,49 @@ public class DebugHexagons : MonoBehaviour
 					if (i >= 0) {
 						draggedCellsLine[i] = newCell;
 					}
-
-					//Destroy(cell.gameObject);
 				}
 				
 			}
 
-			for(int i=0; i<draggedIndices.Count; ++i) {
-				draggedCellsLine[i].goalPosition = draggedIndices[i];
-			}
+			StartCoroutine(RespawnPreviousMatches(.3f));
+			lastMatches = lastMatchesPos.Select(g => g.Select(getCell));
 		}
 
 		return hasMatches;
 	}
 
+	IEnumerator RespawnPreviousMatches(float animLength) {
+		if (lastMatches == null) {
+			canDrag = true;
+			yield break;
+		}
 
+		var newCells = new List<KeyValuePair<HexCell,HexCell>>();
+
+		foreach(var group in lastMatches) {
+			//figuring out what is the least common material in the grid:
+			int[] counting = new int[prefabs.Length - 1];
+			foreach(var line in cells) {
+				foreach(var hex in line) {
+					if(hex.type>0) counting[hex.type - 1]++;
+				}
+			}
+			int toSpawn = counting.IndexOfMin() + 1;
+
+			newCells.AddRange(group.Select(e => new KeyValuePair<HexCell, HexCell>(PlaceNewCellInstant(toSpawn, e.position),e)));
+
+			/*foreach(var cell in group) {
+				HexCell newCell;
+				StartCoroutine(GrowNewCell(toSpawn, cell, animLength, out newCell));
+				newCells.Add(newCell);
+			}*/
+		}
+		yield return StartCoroutine(GrowNewCells(newCells, animLength));
+
+		if (!CheckMatches(newCells.Select(e => e.Key).ToList())) {
+			canDrag = true;
+		}
+	}
 
 	void SnapInstant() {
 		foreach (var cell in draggedCellsLine) {
