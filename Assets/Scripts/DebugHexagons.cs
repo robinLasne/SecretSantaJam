@@ -28,7 +28,6 @@ public class DebugHexagons : MonoBehaviour {
 
 	Vector2[] directionByIndex;
 
-	// Start is called before the first frame update
 	void Start() {
 		directionByIndex = new Vector2[] { Vector2.right, rotate(Vector2.right, Mathf.PI / 3), rotate(Vector2.right, 2 * Mathf.PI / 3) };
 
@@ -74,7 +73,6 @@ public class DebugHexagons : MonoBehaviour {
 
 	}
 
-	// Update is called once per frame
 	void Update() {
 		var pos = Input.mousePosition;
 		pos = cam.ScreenToWorldPoint(pos);
@@ -282,7 +280,7 @@ public class DebugHexagons : MonoBehaviour {
 	}
 
 	IEnumerator RespawnPreviousMatches(float animLength) {
-		Debug.Log("Start respawn");
+		// This should never happen
 		if (lastMatches.Any(g => g.Any(e => e.type != 0))) Debug.Break();
 
 		if (lastMatches == null) {
@@ -323,7 +321,6 @@ public class DebugHexagons : MonoBehaviour {
 	}
 
 	bool inBounds(Vector3Int v) {
-		//return v.x >= minX && v.x <= maxX && v.y >= minY && v.y <= maxY;
 		try {
 			var c = cells[v.y + hexagonRadius][v.x - lineOffset(v.y)];
 		}
