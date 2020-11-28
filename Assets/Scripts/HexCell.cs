@@ -45,4 +45,8 @@ public abstract class HexCell : MonoBehaviour
 	public abstract int type { get; }
 	public abstract bool Matching(HexCell[] neighbours, out HashSet<HexCell> otherCells);
 	public abstract bool ApplyMatch(float dur);
+
+	private void Update() {
+		//transform.GetChild(0).GetComponent<TMPro.TextMeshPro>().text = position.x + ";" + position.y;
+	}
 }

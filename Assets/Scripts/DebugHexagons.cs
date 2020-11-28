@@ -4,8 +4,7 @@ using UnityEngine;
 using System.Linq;
 using static Utils;
 
-public class DebugHexagons : MonoBehaviour
-{
+public class DebugHexagons : MonoBehaviour {
 	public HexCell[] prefabs;
 
 	public int hexagonRadius = 4;
@@ -23,24 +22,23 @@ public class DebugHexagons : MonoBehaviour
 	List<Vector3Int> draggedIndices = new List<Vector3Int>();
 	HexCell[] ghostWrapCells = new HexCell[2];
 
-	IEnumerable<IEnumerable<HexCell>> lastMatches;
+	List<IEnumerable<HexCell>> lastMatches;
 
 	Coroutine snapAnim;
 
 	Vector2[] directionByIndex;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-		directionByIndex = new Vector2[]{ Vector2.right,rotate(Vector2.right, Mathf.PI / 3),rotate(Vector2.right, 2 * Mathf.PI / 3)};
+	// Start is called before the first frame update
+	void Start() {
+		directionByIndex = new Vector2[] { Vector2.right, rotate(Vector2.right, Mathf.PI / 3), rotate(Vector2.right, 2 * Mathf.PI / 3) };
 
-		cells = new HexCell[hexagonRadius*2+1][];
+		cells = new HexCell[hexagonRadius * 2 + 1][];
 		cam = Camera.main;
 		grid = GetComponent<Grid>();
 
-        for(int j = -hexagonRadius; j <= hexagonRadius; ++j) {
-			int minX = -hexagonRadius + Mathf.Abs(j)/2, maxX = hexagonRadius - (Mathf.Abs(j)+1) / 2;
-			cells[j + hexagonRadius] = new HexCell[maxX - minX +1];
+		for (int j = -hexagonRadius; j <= hexagonRadius; ++j) {
+			int minX = -hexagonRadius + Mathf.Abs(j) / 2, maxX = hexagonRadius - (Mathf.Abs(j) + 1) / 2;
+			cells[j + hexagonRadius] = new HexCell[maxX - minX + 1];
 			for (int i = minX; i <= maxX; ++i) {
 				var position = new Vector3Int(i, j, 0);
 
@@ -52,8 +50,8 @@ public class DebugHexagons : MonoBehaviour
 			}
 		}
 
-		CheckMatches(draggedCellsLine);
-    }
+		CheckMatches(draggedCellsLine, false);
+	}
 
 	HexCell PlaceNewCellInstant(int type, Vector3Int position) {
 		var instance = Instantiate(prefabs[type], grid.CellToWorld(position), Quaternion.identity, transform);
@@ -62,9 +60,9 @@ public class DebugHexagons : MonoBehaviour
 		return instance;
 	}
 
-	IEnumerator GrowNewCells(List<KeyValuePair<HexCell,HexCell>> cells, float dur) {
-		for(float t=0; t<1; t += Time.deltaTime / dur) {
-			foreach(var cell in cells) {
+	IEnumerator GrowNewCells(List<KeyValuePair<HexCell, HexCell>> cells, float dur) {
+		for (float t = 0; t < 1; t += Time.deltaTime / dur) {
+			foreach (var cell in cells) {
 				cell.Key.transform.localScale = t * Vector3.one;
 			}
 			yield return null;
@@ -77,14 +75,13 @@ public class DebugHexagons : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
-    {
+	void Update() {
 		var pos = Input.mousePosition;
 		pos = cam.ScreenToWorldPoint(pos);
 		pos.z = 0;
 
 		var hoveredCell = grid.WorldToCell(pos);
-    }
+	}
 
 	public void StartDrag(Vector2 position, Vector3 direction) {
 		if (!canDrag) return;
@@ -97,12 +94,12 @@ public class DebugHexagons : MonoBehaviour
 
 		draggedCellStartPos.z = 0;
 		draggedCell = getCell(draggedCellStartPos);
-		
+
 		dragDir = getDirectionIdx(direction);
 
 		isDragging = true;
 
-		if(snapAnim != null) {
+		if (snapAnim != null) {
 			StopCoroutine(snapAnim);
 			SnapInstant();
 		}
@@ -118,10 +115,10 @@ public class DebugHexagons : MonoBehaviour
 		}
 
 		//Get all cells in opposite direction
-		tmpCell = GetAdjacentCell(draggedCellStartPos, dragDir+3);
+		tmpCell = GetAdjacentCell(draggedCellStartPos, dragDir + 3);
 		while (inBounds(tmpCell)) {
-			draggedIndices.Insert(0,tmpCell);
-			tmpCell = GetAdjacentCell(tmpCell, dragDir+3);
+			draggedIndices.Insert(0, tmpCell);
+			tmpCell = GetAdjacentCell(tmpCell, dragDir + 3);
 		}
 
 		draggedCellsLine = draggedIndices.Select(getCell).ToList();
@@ -136,11 +133,11 @@ public class DebugHexagons : MonoBehaviour
 		if (!isDragging) return;
 		Vector3 dirVector = directionByIndex[dragDir];
 
-		var scaledDelta = cam.ScreenToWorldPoint(Vector3.forward+new Vector3(delta.x, delta.y,0))- cam.ScreenToWorldPoint(Vector3.forward);
+		var scaledDelta = cam.ScreenToWorldPoint(Vector3.forward + new Vector3(delta.x, delta.y, 0)) - cam.ScreenToWorldPoint(Vector3.forward);
 
 		float dragDist = Vector2.Dot(scaledDelta, dirVector);
 
-		foreach(var cell in draggedCellsLine) {
+		foreach (var cell in draggedCellsLine) {
 			cell.transform.position += dirVector * dragDist;
 		}
 
@@ -150,7 +147,7 @@ public class DebugHexagons : MonoBehaviour
 	public IEnumerator StopDrag(Vector2 delta) {
 		if (!isDragging) yield break;
 		isDragging = false;
-		if (CheckMatches(draggedCellsLine)) {
+		if (CheckMatches(draggedCellsLine, true)) {
 			for (int i = 0; i < draggedIndices.Count; ++i) {
 				draggedCellsLine[i].goalPosition = draggedIndices[i];
 			}
@@ -165,11 +162,11 @@ public class DebugHexagons : MonoBehaviour
 	}
 
 	IEnumerator SnapToSlots(float dur) {
-		Vector3[] startPos = draggedCellsLine.Select(e=>e.transform.position).ToArray();
-		Vector3[] goalPos = startPos.Select(e=> grid.CellToWorld(grid.WorldToCell(e))).ToArray();
-		for(float t=0; t<1; t += Time.deltaTime / dur) {
+		Vector3[] startPos = draggedCellsLine.Select(e => e.transform.position).ToArray();
+		Vector3[] goalPos = startPos.Select(e => grid.CellToWorld(grid.WorldToCell(e))).ToArray();
+		for (float t = 0; t < 1; t += Time.deltaTime / dur) {
 			for (int i = 0; i < draggedCellsLine.Count; ++i) {
-				draggedCellsLine[i].transform.position = Vector3.Lerp(startPos[i], goalPos[i], t*t);
+				draggedCellsLine[i].transform.position = Vector3.Lerp(startPos[i], goalPos[i], t * t);
 			}
 			yield return null;
 		}
@@ -230,19 +227,19 @@ public class DebugHexagons : MonoBehaviour
 		ghostWrapCells[1].transform.position = draggedCellsLine.Last().transform.position + dirVector;
 	}
 
-	bool CheckMatches(List<HexCell> toCheck) {
+	bool CheckMatches(List<HexCell> toCheck, bool reGrow) {
 		var cellsToRemove = new HashSet<HexCell>();
 		bool hasMatches = false;
-		for(int i=0;i< toCheck.Count;++i) {
+		for (int i = 0; i < toCheck.Count; ++i) {
 			var tmpCells = new HashSet<HexCell>();
 
 			var neighboursIdx = GetAllAdjacentCells(toCheck[i].position);
 			var neighbourCells = new HexCell[neighboursIdx.Length];
-			for(int j = 0; j < neighboursIdx.Length; ++j) {
+			for (int j = 0; j < neighboursIdx.Length; ++j) {
 				if (inBounds(neighboursIdx[j])) neighbourCells[j] = getCell(neighboursIdx[j]);
 			}
 
-			if(toCheck[i].Matching(neighbourCells,out tmpCells)) {
+			if (toCheck[i].Matching(neighbourCells, out tmpCells)) {
 				hasMatches = true;
 
 				cellsToRemove.Add(toCheck[i]);
@@ -254,7 +251,7 @@ public class DebugHexagons : MonoBehaviour
 			canDrag = false;
 			var lastMatchesPos = cellsToRemove.GroupBy(e => e.match, e => e.position);
 
-			foreach(var cell in cellsToRemove) {
+			foreach (var cell in cellsToRemove) {
 				if (cell.ApplyMatch(.3f)) {
 					var newCell = PlaceNewCellInstant(0, cell.position);
 					newCell.transform.position = cell.transform.position;
@@ -267,45 +264,49 @@ public class DebugHexagons : MonoBehaviour
 						draggedCellsLine[i] = newCell;
 					}
 				}
-				
+
 			}
 
-			StartCoroutine(RespawnPreviousMatches(.3f));
-			lastMatches = lastMatchesPos.Select(g => g.Select(getCell));
+			if (reGrow) {
+				StartCoroutine(RespawnPreviousMatches(.3f));
+				lastMatches = lastMatchesPos.Select(g => g.Select(getCell)).ToList();
+			}
+			else {
+				if (lastMatches == null) lastMatches = new List<IEnumerable<HexCell>>();
+				lastMatches.AddRange(lastMatchesPos.Select(g => g.Select(getCell).ToList()));
+				canDrag = true;
+			}
 		}
 
 		return hasMatches;
 	}
 
 	IEnumerator RespawnPreviousMatches(float animLength) {
+		Debug.Log("Start respawn");
+		if (lastMatches.Any(g => g.Any(e => e.type != 0))) Debug.Break();
+
 		if (lastMatches == null) {
 			canDrag = true;
 			yield break;
 		}
 
-		var newCells = new List<KeyValuePair<HexCell,HexCell>>();
+		var newCells = new List<KeyValuePair<HexCell, HexCell>>();
 
-		foreach(var group in lastMatches) {
+		foreach (var group in lastMatches) {
 			//figuring out what is the least common material in the grid:
 			int[] counting = new int[prefabs.Length - 1];
-			foreach(var line in cells) {
-				foreach(var hex in line) {
-					if(hex.type>0) counting[hex.type - 1]++;
+			foreach (var line in cells) {
+				foreach (var hex in line) {
+					if (hex.type > 0) counting[hex.type - 1]++;
 				}
 			}
 			int toSpawn = counting.IndexOfMin() + 1;
 
-			newCells.AddRange(group.Select(e => new KeyValuePair<HexCell, HexCell>(PlaceNewCellInstant(toSpawn, e.position),e)));
-
-			/*foreach(var cell in group) {
-				HexCell newCell;
-				StartCoroutine(GrowNewCell(toSpawn, cell, animLength, out newCell));
-				newCells.Add(newCell);
-			}*/
+			newCells.AddRange(group.Select(e => new KeyValuePair<HexCell, HexCell>(PlaceNewCellInstant(toSpawn, e.position), e)));
 		}
 		yield return StartCoroutine(GrowNewCells(newCells, animLength));
 
-		if (!CheckMatches(newCells.Select(e => e.Key).ToList())) {
+		if (!CheckMatches(newCells.Select(e => e.Key).ToList(), false)) {
 			canDrag = true;
 		}
 	}
@@ -345,7 +346,7 @@ public class DebugHexagons : MonoBehaviour
 	}
 
 	void setCell(int x, int y, HexCell cell) {
-		cells[y + hexagonRadius][x - lineOffset(y)] =cell;
+		cells[y + hexagonRadius][x - lineOffset(y)] = cell;
 		cell.position = new Vector3Int(x, y, 0);
 	}
 
@@ -358,7 +359,7 @@ public class DebugHexagons : MonoBehaviour
 	}
 
 	void RefreshDraggedCells() {
-		for(int i=0; i< draggedCellsLine.Count; ++i) {
+		for (int i = 0; i < draggedCellsLine.Count; ++i) {
 			setCell(draggedIndices[i], draggedCellsLine[i]);
 		}
 		DestroyGhostCells();
@@ -377,7 +378,7 @@ public class DebugHexagons : MonoBehaviour
 
 	Vector3Int[] GetAllAdjacentCells(Vector3Int cell) {
 		var res = new Vector3Int[6];
-		for(int i = 0; i < 6; ++i) {
+		for (int i = 0; i < 6; ++i) {
 			res[i] = GetAdjacentCell(cell, i);
 		}
 
