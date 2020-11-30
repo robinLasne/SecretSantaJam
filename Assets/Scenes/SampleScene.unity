@@ -286,7 +286,9 @@ MonoBehaviour:
   - {fileID: 4597735932855001558, guid: 024e5f6f08256bf458cdfaefbebc546d, type: 3}
   - {fileID: 8637118498842895638, guid: 497f5c23ac479a04aac0c7285c2a49a3, type: 3}
   - {fileID: 7893740294804701323, guid: 7651573cc0d6b494187800ebc58aa7c3, type: 3}
-  hexagonRadius: 6
+  maskPrefab: {fileID: 2085657729481966432, guid: 0b99afe37835a4d4e9acb92e911e6347,
+    type: 3}
+  hexagonRadius: 5
 --- !u!1 &449460364
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,6 +366,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -379,6 +382,20 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea461c59527a62d45ad2bb29ff53b4a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 353593069}
+  space: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
