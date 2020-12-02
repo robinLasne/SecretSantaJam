@@ -72,7 +72,7 @@ public abstract class HexCell : MonoBehaviour
 
     private void Awake()
     {
-        content.transform.localScale = Vector3.zero;
+        //content.transform.localScale = Vector3.zero;
         bgOrder = backGround.sortingOrder;
         frontOrder = content.sortingOrder;
 

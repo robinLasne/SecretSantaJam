@@ -61,6 +61,7 @@ public class DebugHexagons : MonoBehaviour {
 
 	HexCell PlaceNewCellInstant(int type, Vector3Int position) {
 		var instance = Instantiate(prefabs[type], grid.CellToWorld(position), Quaternion.identity, transform);
+        instance.Grow(0);
 		setCell(position, instance);
 		instance.goalPosition = position;
 		return instance;
@@ -303,11 +304,11 @@ public class DebugHexagons : MonoBehaviour {
 
 			if (reGrow) {
 				StartCoroutine(RespawnPreviousMatches(lastMatches,.3f));
-                lastMatches = lastMatchPos.Select(g => g.ToList()).SelectMany(x=>x.Select(getCell)).ToList();
+                lastMatches = lastMatchPos.SelectMany(g => g.Select(getCell)).ToList();
 			}
 			else {
 				if (lastMatches == null) lastMatches = new List<HexCell>();
-				lastMatches.AddRange(lastMatchPos.Select(g => g.ToList()).SelectMany(x => x.Select(getCell)).ToList());
+				lastMatches.AddRange(lastMatchPos.SelectMany(g => g.Select(getCell)).ToList());
 				canDrag = true;
             }
 		}
