@@ -303,6 +303,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreDisplay: {fileID: 1742292308}
+  popupPrefab: {fileID: 3050780519008532741, guid: be3b248c6c1f3484694d443bd7091247,
+    type: 3}
 --- !u!1 &449460364
 GameObject:
   m_ObjectHideFlags: 0
