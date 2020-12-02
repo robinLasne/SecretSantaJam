@@ -11,11 +11,6 @@ public class ScoreManager : MonoBehaviour
 
     int currentScore=0;
 
-    void Start()
-    {
-        scoreDisplay.text = "0";
-    }
-
     public void AddScore(List<CellMatch> matches)
     {
         int thisScore = 0;

@@ -20,7 +20,7 @@ public class BaseCell : HexCell
 		for(int i = 0; i < neighbours.Length; ++i) {
 			HexCell a = neighbours[i], b = neighbours[(i + 1) % neighbours.Length];
 
-			if (a == null || b == null) continue;
+			if (!grown || (a == null||!a.grown) || (b == null || !b.grown)) continue;
 
 			List<int> types = new List<int>() { a.type, b.type, type };
 			types.Sort();

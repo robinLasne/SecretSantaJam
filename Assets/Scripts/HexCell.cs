@@ -47,26 +47,46 @@ public abstract class HexCell : MonoBehaviour
 	public Vector3Int goalPosition { get; set; }
 
 	public CellMatch match;
+    protected bool m_grown;
+    public bool grown {
+        get {
+            return m_grown;
+        }
+    }
 
-    SpriteRenderer myRend;
-    TMPro.TextMeshPro myContent;
+    public SpriteRenderer backGround;
+    public SpriteRenderer content;
+    public SpriteRenderer debug;
+    Color debugColor;
     int bgOrder, frontOrder;
 
 	public abstract int type { get; }
 	public abstract bool Matching(HexCell[] neighbours, out HashSet<HexCell> otherCells);
 	public abstract bool ApplyMatch(float dur);
 
+    public void Grow(float t)
+    {
+        if (t > 0) { m_grown = true; debug.color = debugColor; }
+        content.transform.localScale = t * Vector3.one;
+    }
+
     private void Awake()
     {
-        myRend = GetComponent<SpriteRenderer>();
-        myContent = GetComponentInChildren<TMPro.TextMeshPro>();
-        bgOrder = myRend.sortingOrder;
-        frontOrder = myContent.sortingOrder;
+        content.transform.localScale = Vector3.zero;
+        bgOrder = backGround.sortingOrder;
+        frontOrder = content.sortingOrder;
+
+        debugColor = debug.color;
+        debug.color = Color.white;
     }
 
     public void SetInFront(bool state)
     {
-        myRend.sortingOrder = bgOrder + (state ? 2 : 0);
-        myContent.sortingOrder = frontOrder + (state ? 2 : 0);
+        if (backGround == null) {
+            Debug.Log("null renderer", this);
+            return;
+        }
+        backGround.sortingOrder = bgOrder + (state ? 2 : 0);
+        content.sortingOrder = frontOrder + (state ? 2 : 0);
     }
 }
