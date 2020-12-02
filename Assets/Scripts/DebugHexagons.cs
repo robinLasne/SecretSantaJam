@@ -6,7 +6,7 @@ using static Utils;
 
 public class DebugHexagons : MonoBehaviour {
 	public HexCell[] prefabs;
-	public GameObject maskPrefab;
+    public SpriteMask spriteMask;
 
 	public int hexagonRadius = 4;
 
@@ -40,9 +40,6 @@ public class DebugHexagons : MonoBehaviour {
 		cam = Camera.main;
 		grid = GetComponent<Grid>();
 
-		var maskParent = new GameObject("Mask").transform;
-		maskParent.parent = transform;
-
 		for (int j = -hexagonRadius; j <= hexagonRadius; ++j) {
 			int minX = -hexagonRadius + Mathf.Abs(j) / 2, maxX = hexagonRadius - (Mathf.Abs(j) + 1) / 2;
 			cells[j + hexagonRadius] = new HexCell[maxX - minX + 1];
@@ -57,24 +54,7 @@ public class DebugHexagons : MonoBehaviour {
 			}
 		}
 
-		// Hexagonal mask, BAD
-		//for (int j = -hexagonRadius - 2; j <= hexagonRadius + 2; ++j) {
-		//	int minX = -hexagonRadius + Mathf.Abs(j) / 2, maxX = hexagonRadius - (Mathf.Abs(j) + 1) / 2;
-		//	for (int i = minX-2; i <= maxX+2; ++i) {
-		//		var position = new Vector3Int(i, j, 0);
-		//		if (!inBounds(position)) {
-		//			Instantiate(maskPrefab, grid.CellToWorld(position), Quaternion.identity, maskParent);
-		//		}
-		//	}
-		//}
-
-		float maskDist = (hexagonRadius * 1.5f + 0.5f)/Mathf.Sqrt(3);
-		for(int i = 0; i < 6; ++i) {
-			var mask = Instantiate(maskPrefab, maskParent);
-			mask.transform.position = maskDist * rotate(Vector2.up, i * Mathf.PI / 3);
-			mask.transform.eulerAngles = Vector3.forward * i * 60;
-			mask.transform.localScale = new Vector3(hexagonRadius+2, 2, 1);
-		}
+        spriteMask.transform.localScale = Vector3.one * (2*hexagonRadius + 2f / 3);
 
 		CheckMatches(draggedCellsLine, false);
 	}
