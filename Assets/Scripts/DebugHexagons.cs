@@ -23,7 +23,7 @@ public class DebugHexagons : MonoBehaviour {
 	List<Vector3Int> draggedIndices = new List<Vector3Int>();
 	HexCell[] ghostWrapCells = new HexCell[2];
 
-	List<HexCell> lastMatches;
+	List<HexCell> toRegrowNext;
 
 	Coroutine snapAnim;
 
@@ -261,11 +261,13 @@ public class DebugHexagons : MonoBehaviour {
 
 		if (hasMatches) {
 			canDrag = false;
-			var lastMatchPos = cellsToRemove.GroupBy(e => e.match, e => e.position);
+			var lastMatchCells = cellsToRemove.GroupBy(e => e.match);
 
-            scoreMng.AddScore(lastMatchPos.Select(g => g.Key).ToList());
+            scoreMng.AddScore(lastMatchCells.Select(g => g.Key).ToList());
 
-            foreach (var match in lastMatchPos)
+            var newCells = new List<HexCell>();
+
+            foreach (var match in lastMatchCells)
             {
                 // Calculate least occuring cell type
                 int[] counting = new int[prefabs.Length - 1];
@@ -278,13 +280,14 @@ public class DebugHexagons : MonoBehaviour {
                 }
                 int toSpawn = counting.IndexOfMin() + 1;
 
-                foreach (var cellPos in match)
+                foreach (var cell in match)
                 {
-                    var cell = getCell(cellPos);
-                    if (cell.ApplyMatch(.3f))
+                    if (cell.ApplyMatch(.3f)) // Some cells don't disappear after their first match
                     {
                         var newCell = PlaceNewCellInstant(toSpawn, cell.position);
                         newCell.transform.position = cell.transform.position;
+
+                        newCells.Add(newCell);
 
                         if (cell == draggedCell)
                         {
@@ -303,12 +306,12 @@ public class DebugHexagons : MonoBehaviour {
             }
 
 			if (reGrow) {
-				StartCoroutine(RespawnPreviousMatches(lastMatches,.3f));
-                lastMatches = lastMatchPos.SelectMany(g => g.Select(getCell)).ToList();
+                StartCoroutine(RespawnPreviousMatches(toRegrowNext,.3f));
+                toRegrowNext = newCells;
 			}
 			else {
-				if (lastMatches == null) lastMatches = new List<HexCell>();
-				lastMatches.AddRange(lastMatchPos.SelectMany(g => g.Select(getCell)).ToList());
+				if (toRegrowNext == null) toRegrowNext = new List<HexCell>();
+				toRegrowNext.AddRange(newCells);
 				canDrag = true;
             }
 		}
