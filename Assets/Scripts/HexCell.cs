@@ -7,6 +7,12 @@ public class CellMatch{
 	Vector3 center;
 	bool centerInit = false;
 
+    public int score {
+        get {
+            return cellsInMatch.Count - 2;
+        }
+    }
+
 	public Vector3 getCenter() {
 		if (!centerInit) {
 			centerInit = true;

@@ -29,7 +29,11 @@ public class DebugHexagons : MonoBehaviour {
 
 	Vector2[] directionByIndex;
 
+    ScoreManager scoreMng;
+
 	void Start() {
+        scoreMng = GetComponent<ScoreManager>();
+
 		directionByIndex = new Vector2[] { Vector2.right, rotate(Vector2.right, Mathf.PI / 3), rotate(Vector2.right, 2 * Mathf.PI / 3) };
 
 		cells = new HexCell[hexagonRadius * 2 + 1][];
@@ -271,6 +275,8 @@ public class DebugHexagons : MonoBehaviour {
 		if (hasMatches) {
 			canDrag = false;
 			var lastMatchesPos = cellsToRemove.GroupBy(e => e.match, e => e.position);
+
+            scoreMng.AddScore(lastMatchesPos.Select(g => g.Key).ToList());
 
 			foreach (var cell in cellsToRemove) {
 				if (cell.ApplyMatch(.3f)) {
