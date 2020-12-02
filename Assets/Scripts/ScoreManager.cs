@@ -27,15 +27,18 @@ public class ScoreManager : MonoBehaviour
             popup.InitAnim(match.score.ToString(), Color.white, Color.black);
         }
 
-        currentScore += (thisScore * matches.Count + 1) / 2;
-
         if (matches.Count > 1)
         {
+            thisScore = (thisScore * (matches.Count + 1) + 1) / 2;
+
             var center = matches.Aggregate(Vector3.zero, (e, v) => e + v.getCenter()/matches.Count);
             var popup = Instantiate(popupPrefab, center, Quaternion.identity);
             var message = string.Format("×{0}", .5f + .5f * matches.Count);
-            popup.InitAnim(message, Color.white, Color.black);
+            popup.InitAnim(message, Color.red, Color.green);
         }
+
+        currentScore += thisScore;
+        
 
         scoreDisplay.text = currentScore.ToString();
     }
