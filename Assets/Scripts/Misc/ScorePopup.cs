@@ -7,6 +7,8 @@ public class ScorePopup : MonoBehaviour
 {
     public float animDur;
     public float animDist;
+
+    public Material myMaterial;
     
     TextMeshPro text;
     
@@ -14,9 +16,11 @@ public class ScorePopup : MonoBehaviour
     {
         text = GetComponent<TextMeshPro>();
 
+        text.renderer.material = myMaterial;
+
         text.text = content;
         text.color = inside;
-        text.outlineColor = outside;
+        text.renderer.material.SetColor("_UnderlayColor", outside);
 
         StartCoroutine(Anim());
     }
