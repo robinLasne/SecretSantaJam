@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AutoResize : MonoBehaviour
 {
-	public DebugHexagons grid;
+	public GridData grid;
 	public float space = 0;
 
 	Camera cam;

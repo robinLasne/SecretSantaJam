@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using static Utils;
 
-public class DebugHexagons : MonoBehaviour {
+public class GridData : MonoBehaviour {
 	public HexCell[] prefabs;
     public SpriteMask spriteMask;
 
@@ -46,7 +46,7 @@ public class DebugHexagons : MonoBehaviour {
 			for (int i = minX; i <= maxX; ++i) {
 				var position = new Vector3Int(i, j, 0);
 
-				var instance = PlaceNewCellInstant(Random.Range(1, prefabs.Length), position);
+				var instance = PlaceNewCellInstant(Random.Range(0, prefabs.Length), position);
                 instance.Grow(1);
 				// For Initial Check :
 				draggedIndices.Add(position);
@@ -275,7 +275,7 @@ public class DebugHexagons : MonoBehaviour {
             foreach (var match in lastMatchCells)
             {
                 // Calculate least occuring cell type
-                int[] counting = new int[prefabs.Length - 1];
+                int[] counting = new int[prefabs.Length];
                 foreach (var line in cells)
                 {
                     foreach (var hex in line)
@@ -283,7 +283,7 @@ public class DebugHexagons : MonoBehaviour {
                         if (!hex.soonConsumed) counting[hex.type - 1]++;
                     }
                 }
-                int toSpawn = counting.IndexOfMin() + 1;
+                int toSpawn = counting.IndexOfMin();
 
                 foreach (var cell in match)
                 {

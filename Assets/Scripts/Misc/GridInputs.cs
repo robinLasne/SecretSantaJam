@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class GridInputs : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
-	public DebugHexagons grid;
+	public GridData grid;
 	public void OnBeginDrag(PointerEventData eventData) {
 		grid.StartDrag(eventData.position, eventData.delta);
 	}

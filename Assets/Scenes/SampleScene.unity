@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 353593069}
-  space: 0
+  space: 0.1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
