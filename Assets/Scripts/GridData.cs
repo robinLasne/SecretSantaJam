@@ -12,32 +12,27 @@ public class GridData : MonoBehaviour {
 
 	HexCell[][] cells;
 
-	Grid grid;
-	Camera cam;
-
-	bool canDrag = true, isDragging = false;
-	int dragDir;
-	HexCell draggedCell;
-	Vector3Int draggedCellStartPos;
-	List<HexCell> draggedCellsLine = new List<HexCell>();
-	List<Vector3Int> draggedIndices = new List<Vector3Int>();
-	HexCell[] ghostWrapCells = new HexCell[2];
+	public Grid grid { get; private set; }
 
 	List<HexCell> toRegrowNext;
 
-	Coroutine snapAnim;
-
-	Vector2[] directionByIndex;
+	public Vector2[] directionByIndex { get; private set; }
 
     ScoreManager scoreMng;
 
-	void Start() {
+    GridMovements movements;
+
+    private void Awake()
+    {
+        movements = GetComponent<GridMovements>();
         scoreMng = GetComponent<ScoreManager>();
+    }
+
+    void Start() {
 
 		directionByIndex = new Vector2[] { Vector2.right, rotate(Vector2.right, Mathf.PI / 3), rotate(Vector2.right, 2 * Mathf.PI / 3) };
 
 		cells = new HexCell[hexagonRadius * 2 + 1][];
-		cam = Camera.main;
 		grid = GetComponent<Grid>();
 
 		for (int j = -hexagonRadius; j <= hexagonRadius; ++j) {
@@ -48,15 +43,13 @@ public class GridData : MonoBehaviour {
 
 				var instance = PlaceNewCellInstant(Random.Range(0, prefabs.Length), position);
                 instance.Grow(1);
-				// For Initial Check :
-				draggedIndices.Add(position);
-				draggedCellsLine.Add(instance);
 			}
 		}
 
         spriteMask.transform.localScale = Vector3.one * (2*hexagonRadius + 2f / 3);
 
-		CheckMatches(draggedCellsLine, false);
+        //Initial check
+		CheckMatches(cells.SelectMany(x=>x).ToList(), false);
 	}
 
 	HexCell PlaceNewCellInstant(int type, Vector3Int position) {
@@ -78,165 +71,9 @@ public class GridData : MonoBehaviour {
             cell.Grow(1);
 		}
 	}
+	
 
-	void Update() {
-		var pos = Input.mousePosition;
-		pos = cam.ScreenToWorldPoint(pos);
-		pos.z = 0;
-
-		var hoveredCell = grid.WorldToCell(pos);
-	}
-
-	public void StartDrag(Vector2 position, Vector3 direction) {
-		if (!canDrag) return;
-		draggedCellStartPos = grid.WorldToCell(cam.ScreenToWorldPoint(position));
-
-		if (!inBounds(draggedCellStartPos)) {
-			Debug.LogError("Drag dehors");
-			return;
-		}
-
-		draggedCellStartPos.z = 0;
-		draggedCell = getCell(draggedCellStartPos);
-
-		dragDir = getDirectionIdx(direction);
-
-		isDragging = true;
-
-		if (snapAnim != null) {
-			StopCoroutine(snapAnim);
-			SnapInstant();
-		}
-
-		draggedIndices.Clear();
-		draggedIndices.Add(draggedCellStartPos);
-
-		// Get all cells in drag direction
-		var tmpCell = GetAdjacentCell(draggedCellStartPos, dragDir);
-		while (inBounds(tmpCell)) {
-			draggedIndices.Add(tmpCell);
-			tmpCell = GetAdjacentCell(tmpCell, dragDir);
-		}
-
-		//Get all cells in opposite direction
-		tmpCell = GetAdjacentCell(draggedCellStartPos, dragDir + 3);
-		while (inBounds(tmpCell)) {
-			draggedIndices.Insert(0, tmpCell);
-			tmpCell = GetAdjacentCell(tmpCell, dragDir + 3);
-		}
-
-        // Place the old line in the back
-        foreach (var cell in draggedCellsLine)if(cell!=null) cell.SetInFront(false);
-
-        draggedCellsLine = draggedIndices.Select(getCell).ToList();
-
-        foreach (var cell in draggedCellsLine) cell.SetInFront(true);
-
-		DestroyGhostCells();
-		GenerateGhostCells();
-
-		UpdateDrag(direction);
-	}
-
-	public void UpdateDrag(Vector2 delta) {
-		if (!isDragging) return;
-		Vector3 dirVector = directionByIndex[dragDir];
-
-		var scaledDelta = cam.ScreenToWorldPoint(Vector3.forward + new Vector3(delta.x, delta.y, 0)) - cam.ScreenToWorldPoint(Vector3.forward);
-
-		float dragDist = Vector2.Dot(scaledDelta, dirVector);
-
-		foreach (var cell in draggedCellsLine) {
-			cell.transform.position += dirVector * dragDist;
-		}
-
-		WrapDraggedCells(dirVector);
-	}
-
-	public IEnumerator StopDrag(Vector2 delta) {
-		if (!isDragging) yield break;
-		isDragging = false;
-		if (CheckMatches(draggedCellsLine, true)) {
-			for (int i = 0; i < draggedIndices.Count; ++i) {
-				draggedCellsLine[i].goalPosition = draggedIndices[i];
-			}
-
-			snapAnim = StartCoroutine(SnapToSlots(.2f));
-		}
-		else {
-			snapAnim = StartCoroutine(SnapToStart(.2f));
-		}
-		yield return snapAnim;
-		DestroyGhostCells();
-	}
-
-	IEnumerator SnapToSlots(float dur) {
-		Vector3[] startPos = draggedCellsLine.Select(e => e.transform.position).ToArray();
-		Vector3[] goalPos = startPos.Select(e => grid.CellToWorld(grid.WorldToCell(e))).ToArray();
-		for (float t = 0; t < 1; t += Time.deltaTime / dur) {
-			for (int i = 0; i < draggedCellsLine.Count; ++i) {
-				draggedCellsLine[i].transform.position = Vector3.Lerp(startPos[i], goalPos[i], t * t);
-			}
-			yield return null;
-		}
-		for (int i = 0; i < draggedCellsLine.Count; ++i) {
-			draggedCellsLine[i].transform.position = goalPos[i];
-		}
-		snapAnim = null;
-	}
-
-	IEnumerator SnapToStart(float dur) {
-		Vector3 startPos = draggedCell.transform.position;
-		Vector3 goalPos = grid.CellToWorld(draggedCellStartPos);
-		goalPos.z = 0;
-		Vector2 direction = directionByIndex[dragDir];
-		for (float t = 0; t < 1; t += Time.deltaTime / dur) {
-			MoveDraggedCellTo(Vector3.Lerp(startPos, goalPos, t * t), direction);
-			yield return null;
-		}
-		MoveDraggedCellTo(goalPos, direction);
-		snapAnim = null;
-	}
-
-	void MoveDraggedCellTo(Vector3 position, Vector2 direction) {
-		Vector3 delta = draggedCell.transform.position;
-		draggedCell.transform.position = position;
-		delta -= draggedCell.transform.position;
-		for (int i = 0; i < draggedCellsLine.Count; ++i) {
-			if (draggedCellsLine[i] != draggedCell) draggedCellsLine[i].transform.position -= delta;
-		}
-		WrapDraggedCells(direction);
-	}
-
-	void WrapDraggedCells(Vector3 dirVector) {
-		while (!inBounds(grid.WorldToCell(draggedCellsLine[0].transform.position))) {
-			// Failsafe to be sure we're wrapping in the right direction
-			if (!inBounds(grid.WorldToCell(draggedCellsLine.Last().transform.position + dirVector))) break;
-
-			var toMove = draggedCellsLine[0];
-			toMove.transform.position = draggedCellsLine.Last().transform.position + dirVector;
-			draggedCellsLine.RemoveAt(0);
-			draggedCellsLine.Add(toMove);
-
-			RefreshDraggedCells();
-		}
-		while (!inBounds(grid.WorldToCell(draggedCellsLine.Last().transform.position))) {
-			// Failsafe to be sure we're wrapping in the right direction
-			if (!inBounds(grid.WorldToCell(draggedCellsLine[0].transform.position - dirVector))) break;
-
-			var toMove = draggedCellsLine.Last();
-			toMove.transform.position = draggedCellsLine[0].transform.position - dirVector;
-			draggedCellsLine.RemoveAt(draggedCellsLine.Count - 1);
-			draggedCellsLine.Insert(0, toMove);
-
-			RefreshDraggedCells();
-		}
-
-		ghostWrapCells[0].transform.position = draggedCellsLine[0].transform.position - dirVector;
-		ghostWrapCells[1].transform.position = draggedCellsLine.Last().transform.position + dirVector;
-	}
-
-	bool CheckMatches(List<HexCell> toCheck, bool reGrow) {
+	public bool CheckMatches(List<HexCell> toCheck, bool reGrow) {
 		var cellsToRemove = new HashSet<HexCell>();
 		bool hasMatches = false;
 		for (int i = 0; i < toCheck.Count; ++i) {
@@ -260,7 +97,7 @@ public class GridData : MonoBehaviour {
 		}
 
 		if (hasMatches) {
-			canDrag = false;
+			movements.canDrag = false;
 			var lastMatchCells = cellsToRemove.GroupBy(e => e.match);
 
             scoreMng.AddScore(lastMatchCells.Select(g => g.Key).ToList());
@@ -294,17 +131,7 @@ public class GridData : MonoBehaviour {
 
                         newCells.Add(newCell);
 
-                        if (cell == draggedCell)
-                        {
-                            draggedCell = newCell;
-                            newCell.SetInFront(true);
-                        }
-                        var i = draggedCellsLine.IndexOf(cell);
-                        if (i >= 0)
-                        {
-                            draggedCellsLine[i] = newCell;
-                            newCell.SetInFront(true);
-                        }
+                        movements.CellHasBeenReplaced(cell, newCell);
                     }
 
                 }
@@ -317,7 +144,7 @@ public class GridData : MonoBehaviour {
 			else {
 				if (toRegrowNext == null) toRegrowNext = new List<HexCell>();
 				toRegrowNext.AddRange(newCells);
-				canDrag = true;
+				movements.canDrag = true;
             }
 		}
 
@@ -332,7 +159,7 @@ public class GridData : MonoBehaviour {
         }
 
 		if (toGrow == null) {
-			canDrag = true;
+            movements.canDrag = true;
 			yield break;
 		}
 
@@ -340,22 +167,17 @@ public class GridData : MonoBehaviour {
 
         if (!CheckMatches(toGrow, false))
         {
-            canDrag = true;
+            movements.canDrag = true;
         }
     }
 
-	void SnapInstant() {
-		foreach (var cell in draggedCellsLine) {
-			setCell(cell.goalPosition, cell);
-			cell.transform.position = grid.CellToWorld(cell.goalPosition);
-		}
-	}
+	
 
 	int lineOffset(int j) {
 		return -hexagonRadius + Mathf.Abs(j) / 2;
 	}
 
-	bool inBounds(Vector3Int v) {
+	public bool inBounds(Vector3Int v) {
 		try {
 			var c = cells[v.y + hexagonRadius][v.x - lineOffset(v.y)];
 		}
@@ -365,50 +187,32 @@ public class GridData : MonoBehaviour {
 		return true;
 	}
 
-	HexCell getCell(int x, int y) {
+	public HexCell getCell(int x, int y) {
 		return cells[y + hexagonRadius][x - lineOffset(y)];
 	}
 
-	HexCell getCell(Vector2Int v) {
+    public HexCell getCell(Vector2Int v) {
 		return getCell(v.x, v.y);
 	}
 
-	HexCell getCell(Vector3Int v) {
+    public HexCell getCell(Vector3Int v) {
 		return getCell(v.x, v.y);
 	}
 
-	void setCell(int x, int y, HexCell cell) {
+    public void setCell(int x, int y, HexCell cell) {
 		cells[y + hexagonRadius][x - lineOffset(y)] = cell;
 		cell.position = new Vector3Int(x, y, 0);
 	}
 
-	void setCell(Vector2Int v, HexCell cell) {
+    public void setCell(Vector2Int v, HexCell cell) {
 		setCell(v.x, v.y, cell);
 	}
 
-	void setCell(Vector3Int v, HexCell cell) {
+    public void setCell(Vector3Int v, HexCell cell) {
 		setCell(v.x, v.y, cell);
 	}
 
-	void RefreshDraggedCells() {
-		for (int i = 0; i < draggedCellsLine.Count; ++i) {
-			setCell(draggedIndices[i], draggedCellsLine[i]);
-		}
-		DestroyGhostCells();
-		GenerateGhostCells();
-	}
-
-	void DestroyGhostCells() {
-		if (ghostWrapCells[0] != null) Destroy(ghostWrapCells[0].gameObject);
-		if (ghostWrapCells[1] != null) Destroy(ghostWrapCells[1].gameObject);
-	}
-
-	void GenerateGhostCells() {
-		ghostWrapCells[0] = Instantiate(draggedCellsLine.Last());
-		ghostWrapCells[1] = Instantiate(draggedCellsLine[0]);
-	}
-
-	Vector3Int[] GetAllAdjacentCells(Vector3Int cell) {
+    public Vector3Int[] GetAllAdjacentCells(Vector3Int cell) {
 		var res = new Vector3Int[6];
 		for (int i = 0; i < 6; ++i) {
 			res[i] = GetAdjacentCell(cell, i);
@@ -417,7 +221,7 @@ public class GridData : MonoBehaviour {
 		return res;
 	}
 
-	Vector3Int GetAdjacentCell(Vector3Int cell, int idx) {
+    public Vector3Int GetAdjacentCell(Vector3Int cell, int idx) {
 		while (idx < 0) idx += 6;
 		idx = idx % 6;
 
@@ -452,7 +256,7 @@ public class GridData : MonoBehaviour {
 		throw new System.Exception("WHAT THE FUCK THO");
 	}
 
-	int getDirectionIdx(Vector2 direction) {
+    public int getDirectionIdx(Vector2 direction) {
 		int res;
 		var pi = Mathf.PI;
 		var angle = Mathf.Atan2(direction.y, direction.x);

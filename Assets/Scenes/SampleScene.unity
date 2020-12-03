@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1026728e08442514ca8e7e03e04f4b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 353593069}
+  grid: {fileID: 353593071}
 --- !u!1 &353593065
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 353593066}
   - component: {fileID: 353593069}
   - component: {fileID: 353593070}
+  - component: {fileID: 353593071}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -281,7 +282,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: -2459412207295319291, guid: e89ed28a81072a94ba828369c59f1f50, type: 3}
   - {fileID: 4597735932855001558, guid: 15e962392512d884c887c4cab5f79502, type: 3}
   - {fileID: 8637118498842895638, guid: c20b33e8184df494a8fe8c7e983d5120, type: 3}
   - {fileID: 7893740294804701323, guid: d25864ec5364d4f4f957423fc441695c, type: 3}
@@ -305,6 +305,18 @@ MonoBehaviour:
   scoreDisplay: {fileID: 1742292308}
   popupPrefab: {fileID: 3050780519008532741, guid: be3b248c6c1f3484694d443bd7091247,
     type: 3}
+--- !u!114 &353593071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353593065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5160fb09f60654f857a9cb671f5d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &449460364
 GameObject:
   m_ObjectHideFlags: 0
