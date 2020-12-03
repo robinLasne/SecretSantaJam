@@ -267,6 +267,11 @@ public class DebugHexagons : MonoBehaviour {
 
             var newCells = new List<HexCell>();
 
+            foreach(var cell in cellsToRemove)
+            {
+                cell.soonConsumed = true;
+            }
+
             foreach (var match in lastMatchCells)
             {
                 // Calculate least occuring cell type
@@ -275,7 +280,7 @@ public class DebugHexagons : MonoBehaviour {
                 {
                     foreach (var hex in line)
                     {
-                        if (hex.type > 0) counting[hex.type - 1]++;
+                        if (!hex.soonConsumed) counting[hex.type - 1]++;
                     }
                 }
                 int toSpawn = counting.IndexOfMin() + 1;

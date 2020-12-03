@@ -46,6 +46,8 @@ public abstract class HexCell : MonoBehaviour
 	public Vector3Int position { get; set; }
 	public Vector3Int goalPosition { get; set; }
 
+    public bool soonConsumed { get; set; }
+
 	public CellMatch match;
     protected bool m_grown;
     public bool grown {
