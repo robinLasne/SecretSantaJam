@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backGround: {fileID: 1788476944503016155}
-  content: {fileID: 4639407566525575862}
+  toGrow: {fileID: 1602906830552307267}
   debug: {fileID: 10379845908694012}
   m_type: 6
+  content: {fileID: 4639407566525575862}
 --- !u!1001 &6949722137103951818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -157,6 +158,12 @@ GameObject:
 --- !u!212 &1788476944503016155 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8692982162920303889, guid: 2bf6b6a6163a0a7478a9bd4a1152e9d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6949722137103951818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1602906830552307267 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8524456696576340361, guid: 2bf6b6a6163a0a7478a9bd4a1152e9d5,
     type: 3}
   m_PrefabInstance: {fileID: 6949722137103951818}
   m_PrefabAsset: {fileID: 0}

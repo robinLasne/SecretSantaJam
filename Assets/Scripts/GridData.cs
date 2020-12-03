@@ -5,8 +5,11 @@ using System.Linq;
 using static Utils;
 
 public class GridData : MonoBehaviour {
-	public HexCell[] prefabs;
+    public NeedyCell needyPrefab;
+	public BaseCell[] prefabs;
     public SpriteMask spriteMask;
+
+    public NeedyPlantsData needyPlantsData;
 
 	public int hexagonRadius = 4;
 
@@ -41,6 +44,13 @@ public class GridData : MonoBehaviour {
 			for (int i = minX; i <= maxX; ++i) {
 				var position = new Vector3Int(i, j, 0);
 
+                if (i == 0 && j == 0)
+                {
+                    var needy = PlaceNewCellInstant(needyPrefab, position);
+                    needy.Grow(1);
+                    continue;
+                }
+
 				var instance = PlaceNewCellInstant(Random.Range(0, prefabs.Length), position);
                 instance.Grow(1);
 			}
@@ -53,14 +63,19 @@ public class GridData : MonoBehaviour {
 	}
 
 	HexCell PlaceNewCellInstant(int type, Vector3Int position) {
-		var instance = Instantiate(prefabs[type], grid.CellToWorld(position), Quaternion.identity, transform);
-        instance.Grow(0);
-		setCell(position, instance);
-		instance.goalPosition = position;
-		return instance;
+        return PlaceNewCellInstant(prefabs[type], position);
 	}
 
-	IEnumerator GrowNewCells(List<HexCell> cells, float dur) {
+    HexCell PlaceNewCellInstant(HexCell prefab, Vector3Int position)
+    {
+        var instance = Instantiate(prefab, grid.CellToWorld(position), Quaternion.identity, transform);
+        instance.Grow(0);
+        setCell(position, instance);
+        instance.goalPosition = position;
+        return instance;
+    }
+
+    IEnumerator GrowNewCells(List<HexCell> cells, float dur) {
 		for (float t = 0; t < 1; t += Time.deltaTime / dur) {
 			foreach (var cell in cells) {
                 cell.Grow(t);
@@ -74,10 +89,11 @@ public class GridData : MonoBehaviour {
 	
     public void PreviewMatches()
     {
+        StopPreviewMatches();
         var toCheck = cells.SelectMany(x => x).ToList();
-        for (int i = 0; i < toCheck.Count; ++i)
+        foreach (var cell in toCheck)
         {
-            var neighboursIdx = GetAllAdjacentCells(toCheck[i].position);
+            var neighboursIdx = GetAllAdjacentCells(cell.position);
             var neighbourCells = new HexCell[neighboursIdx.Length];
             for (int j = 0; j < neighboursIdx.Length; ++j)
             {
@@ -87,7 +103,16 @@ public class GridData : MonoBehaviour {
                 }
             }
 
-            toCheck[i].PreviewMatch(neighbourCells);
+            cell.PreviewMatch(neighbourCells);
+        }
+    }
+
+    public void StopPreviewMatches()
+    {
+        foreach (var cell in cells.SelectMany(x => x))
+        {
+            cell.StopAnim();
+            cell.gonnaMatch = false;
         }
     }
 
@@ -126,7 +151,7 @@ public class GridData : MonoBehaviour {
 
             foreach(var cell in cellsToRemove)
             {
-                cell.soonConsumed = true;
+                cell.justMatched = true;
             }
 
             foreach (var match in lastMatchCells)
@@ -137,7 +162,7 @@ public class GridData : MonoBehaviour {
                 {
                     foreach (var hex in line)
                     {
-                        if (!hex.soonConsumed) counting[hex.type - 1]++;
+                        if (!hex.justMatched && hex.type>0 && hex.type<=prefabs.Length) counting[hex.type - 1]++;
                     }
                 }
                 int toSpawn = counting.IndexOfMin();

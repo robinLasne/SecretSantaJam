@@ -281,6 +281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c786900ccb6758a448c79de5eead338a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needyPrefab: {fileID: 7700552906028794323, guid: e50f3cf9ff6e83d4c9bce1a13af5a259,
+    type: 3}
   prefabs:
   - {fileID: 4597735932855001558, guid: 15e962392512d884c887c4cab5f79502, type: 3}
   - {fileID: 8637118498842895638, guid: c20b33e8184df494a8fe8c7e983d5120, type: 3}
@@ -289,6 +291,7 @@ MonoBehaviour:
   - {fileID: 8637118498842895638, guid: 497f5c23ac479a04aac0c7285c2a49a3, type: 3}
   - {fileID: 7893740294804701323, guid: 7651573cc0d6b494187800ebc58aa7c3, type: 3}
   spriteMask: {fileID: 845939046}
+  needyPlantsData: {fileID: 11400000, guid: 1436968c7593d5d4da458370b01916dc, type: 2}
   hexagonRadius: 4
 --- !u!114 &353593070
 MonoBehaviour:

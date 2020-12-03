@@ -103,6 +103,9 @@ public class GridMovements : MonoBehaviour
     {
         if (!isDragging) yield break;
         isDragging = false;
+
+        data.StopPreviewMatches();
+
         if (data.CheckMatches(true))
         {
             for (int i = 0; i < draggedIndices.Count; ++i)
@@ -211,7 +214,7 @@ public class GridMovements : MonoBehaviour
         ghostWrapCells[0].transform.position = draggedCellsLine[0].transform.position - dirVector;
         ghostWrapCells[1].transform.position = draggedCellsLine.Last().transform.position + dirVector;
 
-        if (hasChanged)
+        if (hasChanged && isDragging)
         {
             data.PreviewMatches();
         }
