@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Utils;
 
 public class GridMovements : MonoBehaviour
 {
@@ -142,11 +143,25 @@ public class GridMovements : MonoBehaviour
     {
         Vector3 startPos = draggedCell.transform.position;
         Vector3 goalPos = data.grid.CellToWorld(draggedCellStartPos);
+        bool gottaWarp = false;
+        if(Vector2.SqrMagnitude(goalPos-startPos) > Square(draggedCellsLine.Count / 2))
+        {
+            gottaWarp = true;
+            goalPos += (startPos - goalPos).normalized * draggedCellsLine.Count;
+        }
+
         goalPos.z = 0;
         Vector2 direction = data.directionByIndex[dragDir];
         for (float t = 0; t < 1; t += Time.deltaTime / dur)
         {
-            MoveDraggedCellTo(Vector3.Lerp(startPos, goalPos, t * t), direction);
+            Vector3 toGo = Vector3.Lerp(startPos, goalPos, t * t);
+            MoveDraggedCellTo(toGo, direction);
+            if(draggedCell.transform.position != toGo)
+            {
+                Debug.LogFormat("warped from {0} to {1}", draggedCell.position, toGo);
+                startPos += (startPos - goalPos).normalized * draggedCellsLine.Count;
+                goalPos = data.grid.CellToWorld(draggedCellStartPos);
+            }
             yield return null;
         }
         MoveDraggedCellTo(goalPos, direction);
@@ -167,6 +182,8 @@ public class GridMovements : MonoBehaviour
 
     void WrapDraggedCells(Vector3 dirVector)
     {
+        bool hasChanged = false;
+
         while (!data.inBounds(data.grid.WorldToCell(draggedCellsLine[0].transform.position)))
         {
             // Failsafe to be sure we're wrapping in the right direction
@@ -178,6 +195,7 @@ public class GridMovements : MonoBehaviour
             draggedCellsLine.Add(toMove);
 
             RefreshDraggedCells();
+            hasChanged = true;
         }
         while (!data.inBounds(data.grid.WorldToCell(draggedCellsLine.Last().transform.position)))
         {
@@ -190,10 +208,16 @@ public class GridMovements : MonoBehaviour
             draggedCellsLine.Insert(0, toMove);
 
             RefreshDraggedCells();
+            hasChanged = true;
         }
 
         ghostWrapCells[0].transform.position = draggedCellsLine[0].transform.position - dirVector;
         ghostWrapCells[1].transform.position = draggedCellsLine.Last().transform.position + dirVector;
+
+        if (hasChanged)
+        {
+            data.PreviewMatches();
+        }
     }
 
     void DestroyGhostCells()

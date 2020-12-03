@@ -72,6 +72,24 @@ public class GridData : MonoBehaviour {
 		}
 	}
 	
+    public void PreviewMatches()
+    {
+        var toCheck = cells.SelectMany(x => x).ToList();
+        for (int i = 0; i < toCheck.Count; ++i)
+        {
+            var neighboursIdx = GetAllAdjacentCells(toCheck[i].position);
+            var neighbourCells = new HexCell[neighboursIdx.Length];
+            for (int j = 0; j < neighboursIdx.Length; ++j)
+            {
+                if (inBounds(neighboursIdx[j]))
+                {
+                    neighbourCells[j] = getCell(neighboursIdx[j]);
+                }
+            }
+
+            toCheck[i].PreviewMatch(neighbourCells);
+        }
+    }
 
 	public bool CheckMatches(bool reGrow) {
         var toCheck = cells.SelectMany(x => x).ToList();

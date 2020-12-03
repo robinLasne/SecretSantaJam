@@ -64,6 +64,7 @@ public abstract class HexCell : MonoBehaviour
 
 	public abstract int type { get; }
 	public abstract bool Matching(HexCell[] neighbours, out HashSet<HexCell> otherCells);
+    public abstract void PreviewMatch(HexCell[] neighbours);
 	public abstract bool ApplyMatch(float dur);
 
     public void Grow(float t)

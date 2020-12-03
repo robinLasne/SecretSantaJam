@@ -35,4 +35,9 @@ public static class Utils
 		return minIndex;
 	}
 
+    public static int Square(int x)
+    {
+        return x * x;
+    }
+
 }
