@@ -49,7 +49,7 @@ public class GridData : MonoBehaviour {
         spriteMask.transform.localScale = Vector3.one * (2*hexagonRadius + 2f / 3);
 
         //Initial check
-		CheckMatches(cells.SelectMany(x=>x).ToList(), false);
+		CheckMatches(false);
 	}
 
 	HexCell PlaceNewCellInstant(int type, Vector3Int position) {
@@ -73,7 +73,9 @@ public class GridData : MonoBehaviour {
 	}
 	
 
-	public bool CheckMatches(List<HexCell> toCheck, bool reGrow) {
+	public bool CheckMatches(bool reGrow) {
+        var toCheck = cells.SelectMany(x => x).ToList();
+
 		var cellsToRemove = new HashSet<HexCell>();
 		bool hasMatches = false;
 		for (int i = 0; i < toCheck.Count; ++i) {
@@ -165,7 +167,7 @@ public class GridData : MonoBehaviour {
 
         yield return StartCoroutine(GrowNewCells(toGrow, animLength));
 
-        if (!CheckMatches(toGrow, false))
+        if (!CheckMatches(false))
         {
             movements.canDrag = true;
         }

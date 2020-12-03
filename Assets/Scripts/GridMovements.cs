@@ -102,7 +102,7 @@ public class GridMovements : MonoBehaviour
     {
         if (!isDragging) yield break;
         isDragging = false;
-        if (data.CheckMatches(draggedCellsLine, true))
+        if (data.CheckMatches(true))
         {
             for (int i = 0; i < draggedIndices.Count; ++i)
             {
