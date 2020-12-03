@@ -10,7 +10,14 @@ public class CellMatch{
 
     public int score {
         get {
-            return cellsInMatch.Count - 2;
+            int needyModifier = 0;
+            var needies = cellsInMatch.Where(x => x is NeedyCell).Select(x => (NeedyCell)x);
+            foreach (var needy in needies)
+            {
+                if (needy.complete) needyModifier += 9;
+                else needyModifier -= 1;
+            }
+            return cellsInMatch.Count - 2 + needyModifier;
         }
     }
 
@@ -101,7 +108,6 @@ public abstract class HexCell : MonoBehaviour
     {
         if (gonnaMatch)
         {
-            Debug.Log("must anim");
             if (gonnaMatchAnim == null) LaunchAnim();
         }
         else

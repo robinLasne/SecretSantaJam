@@ -18,6 +18,12 @@ public class NeedyCell : HexCell {
         }
     }
 
+    public bool complete {
+        get {
+            return couplesDone.All(c => c);
+        }
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -41,14 +47,15 @@ public class NeedyCell : HexCell {
             }
         }
 
-        bool complete = couplesDone.All(c => c);
-
         if (complete)
         {
             StartCoroutine(matchAnim(.3f));
+            return true;
         }
 
-        return complete;
+        match = new CellMatch();
+
+        return false;
     }
 
     public override bool Matching(HexCell[] neighbours, out HashSet<HexCell> otherCells)
@@ -59,6 +66,7 @@ public class NeedyCell : HexCell {
 
         for(int i=0; i < 3; ++i)
         {
+            if (couplesDone[i]) continue;
             HexCell a = neighbours[i * 2], b = neighbours[i * 2 + 1];
             if (MatchesWith(a, b, i))
             {
