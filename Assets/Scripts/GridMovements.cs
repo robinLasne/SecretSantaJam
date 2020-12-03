@@ -143,10 +143,8 @@ public class GridMovements : MonoBehaviour
     {
         Vector3 startPos = draggedCell.transform.position;
         Vector3 goalPos = data.grid.CellToWorld(draggedCellStartPos);
-        bool gottaWarp = false;
         if(Vector2.SqrMagnitude(goalPos-startPos) > Square(draggedCellsLine.Count / 2))
         {
-            gottaWarp = true;
             goalPos += (startPos - goalPos).normalized * draggedCellsLine.Count;
         }
 
@@ -158,7 +156,6 @@ public class GridMovements : MonoBehaviour
             MoveDraggedCellTo(toGo, direction);
             if(draggedCell.transform.position != toGo)
             {
-                Debug.LogFormat("warped from {0} to {1}", draggedCell.position, toGo);
                 startPos += (startPos - goalPos).normalized * draggedCellsLine.Count;
                 goalPos = data.grid.CellToWorld(draggedCellStartPos);
             }
