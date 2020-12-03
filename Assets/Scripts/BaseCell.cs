@@ -62,6 +62,7 @@ public class BaseCell : HexCell
         {
             StopCoroutine(gonnaMatchAnim);
             backGround.color=Color.clear;
+            transform.eulerAngles = Vector3.zero;
         }
     }
 
@@ -73,11 +74,17 @@ public class BaseCell : HexCell
             for(float t = 0; t < 1; t += Time.deltaTime / halfPeriod)
             {
                 backGround.color = new Color(1, 1, 1, t*maxIntensity);
+
+                transform.localEulerAngles = 4*Vector3.forward * Mathf.Sin(t * 2 * Mathf.PI);
+                
                 yield return null;
             }
             for (float t = 1; t > 0; t -= Time.deltaTime / halfPeriod)
             {
                 backGround.color = new Color(1, 1, 1, t * maxIntensity);
+
+                transform.localEulerAngles = 4*Vector3.forward * Mathf.Sin(-t * 2 * Mathf.PI);
+
                 yield return null;
             }
         }
