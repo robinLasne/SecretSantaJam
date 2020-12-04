@@ -26,6 +26,8 @@ public class NeedyCell : HexCell {
     {
         base.Awake();
 
+        needs = needs.OrderBy(x => Random.value).ToArray();
+
         for(int i = 0; i < 6; ++i)
         {
             leaves[i].sprite = NeedyPlantsData.Instance.data.First(x => x.type == needs[i]).leafSprite;
