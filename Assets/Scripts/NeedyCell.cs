@@ -47,6 +47,7 @@ public class NeedyCell : HexCell {
 
         if (complete)
         {
+			StartCoroutine(NeedySuccessAnim(dur));
             StartCoroutine(matchAnim(dur));
             return true;
         }
@@ -104,4 +105,15 @@ public class NeedyCell : HexCell {
 
         return (a != null && b != null && a.type == a_need && b.type == b_need);
     }
+
+	IEnumerator NeedySuccessAnim(float dur) {
+		centerIcon.transform.parent = null;
+		var initialScale = centerIcon.transform.localScale;
+		for (float t = 0; t < 1; t += Time.deltaTime / dur) {
+			centerIcon.color = new Color(1, 1, 1, 1 - t);
+			centerIcon.transform.localScale = initialScale * (1 + t*3);
+			yield return null;
+		}
+		Destroy(centerIcon.gameObject);
+	}
 }
