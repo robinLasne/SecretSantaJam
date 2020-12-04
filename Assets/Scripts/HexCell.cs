@@ -33,11 +33,14 @@ public class CellMatch{
             else
             {
                 Vector3 sum = Vector3.zero;
+                float minZ = float.PositiveInfinity;
                 foreach (var cell in cellsInMatch)
                 {
                     sum += cell.transform.position;
+                    if (cell.transform.position.z < minZ) minZ = cell.transform.position.z;
                 }
                 center = sum / cellsInMatch.Count;
+                center.z = minZ;
             }
 		}
 		return center;
@@ -78,7 +81,6 @@ public abstract class HexCell : MonoBehaviour
     public Transform toGrow;
     public SpriteRenderer debug;
     Color debugColor;
-    int bgOrder;
 
     [HideInInspector]
     public bool gonnaMatch;
@@ -98,7 +100,6 @@ public abstract class HexCell : MonoBehaviour
     protected virtual void Awake()
     {
         //content.transform.localScale = Vector3.zero;
-        bgOrder = backGround.sortingOrder;
 
         debugColor = debug.color;
         debug.color = Color.white;
@@ -122,7 +123,9 @@ public abstract class HexCell : MonoBehaviour
             Debug.Log("null renderer", this);
             return;
         }
-        backGround.sortingOrder = bgOrder + (state ? 10 : 0);
+        var pos = transform.position;
+        pos.z = state ? -1 : 0;
+        transform.position = pos;
     }
 
     void LaunchAnim()
@@ -170,11 +173,12 @@ public abstract class HexCell : MonoBehaviour
     {
         var startPos = transform.position;
         var goalPos = match.getCenter();
+        startPos.z = goalPos.z;
         for (float t = 0; t < 1; t += Time.deltaTime / dur)
         {
+            yield return null;
             transform.position = Vector3.Lerp(startPos, goalPos, t);
             transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, t);
-            yield return null;
         }
         Destroy(gameObject);
     }

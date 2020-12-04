@@ -146,12 +146,11 @@ public class GridMovements : MonoBehaviour
     {
         Vector3 startPos = draggedCell.transform.position;
         Vector3 goalPos = data.grid.CellToWorld(draggedCellStartPos);
+        goalPos.z = startPos.z;
         if(Vector2.SqrMagnitude(goalPos-startPos) > Square(draggedCellsLine.Count / 2))
         {
             goalPos += (startPos - goalPos).normalized * draggedCellsLine.Count;
         }
-
-        goalPos.z = 0;
         Vector2 direction = data.directionByIndex[dragDir];
         for (float t = 0; t < 1; t += Time.deltaTime / dur)
         {

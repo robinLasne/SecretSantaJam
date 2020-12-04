@@ -8,8 +8,6 @@ public class NeedyCell : HexCell {
     public SpriteRenderer centerIcon;
     public SpriteRenderer[] leaves = new SpriteRenderer[6];
 
-    int centerIconOrder, leavesOrder;
-
     bool[] couplesDone = new bool[3];
 
     public override int type {
@@ -27,8 +25,6 @@ public class NeedyCell : HexCell {
     protected override void Awake()
     {
         base.Awake();
-        centerIconOrder = centerIcon.sortingOrder;
-        leavesOrder = leaves[0].sortingOrder;
 
         for(int i = 0; i < 6; ++i)
         {
@@ -49,7 +45,7 @@ public class NeedyCell : HexCell {
 
         if (complete)
         {
-            StartCoroutine(matchAnim(.3f));
+            StartCoroutine(matchAnim(dur));
             return true;
         }
 
@@ -105,12 +101,5 @@ public class NeedyCell : HexCell {
         int a_need = needs[i * 2], b_need = needs[i * 2 + 1];
 
         return (a != null && b != null && a.type == a_need && b.type == b_need);
-    }
-
-    public override void SetInFront(bool state)
-    {
-        base.SetInFront(state);
-        foreach(var leaf in leaves)leaf.sortingOrder = leavesOrder + (state ? 10 : 0);
-        centerIcon.sortingOrder = centerIconOrder + (state ? 10 : 0);
     }
 }

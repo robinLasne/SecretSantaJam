@@ -7,28 +7,11 @@ public class BaseCell : HexCell
 	[SerializeField]
 	private int m_type;
 
-    [SerializeField]
-    private SpriteRenderer content;
-
 	public override int type {
 		get {
 			return m_type;
 		}
 	}
-
-    int frontOrder;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        frontOrder = content.sortingOrder;
-    }
-
-    public override void SetInFront(bool state)
-    {
-        base.SetInFront(state);
-        content.sortingOrder = frontOrder + (state ? 10 : 0);
-    }
 
     public override bool Matching(HexCell[] neighbours, out HashSet<HexCell> otherCells) {
 		otherCells = new HashSet<HexCell>();
