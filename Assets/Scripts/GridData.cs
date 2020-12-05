@@ -223,13 +223,18 @@ public class GridData : MonoBehaviour {
 	}
 
 	public bool inBounds(Vector3Int v) {
-		try {
-			var c = cells[v.y + hexagonRadius][v.x - lineOffset(v.y)];
-		}
-		catch {
-			return false;
-		}
-		return true;
+        var y = v.y + hexagonRadius;
+        var x = v.x - lineOffset(v.y);
+
+        if(y>=0 && y < cells.Length)
+        {
+            if(x>=0 && x < cells[y].Length)
+            {
+                return true;
+            }
+        }
+
+        return false;
 	}
 
 	public HexCell getCell(int x, int y) {
