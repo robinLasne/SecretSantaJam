@@ -15,6 +15,9 @@ public class BaseCell : HexCell
 
     public override bool Matching(HexCell[] neighbours, out HashSet<HexCell> otherCells) {
 		otherCells = new HashSet<HexCell>();
+
+        if (!grown) return false;
+
 		bool res = false;
 
 		for(int i = 0; i < neighbours.Length; ++i) {
@@ -33,7 +36,7 @@ public class BaseCell : HexCell
 
     bool MatchesWith(HexCell a, HexCell b)
     {
-        if (!grown || (a == null || !a.grown) || (b == null || !b.grown)) return false;
+        if ((a == null || !a.grown) || (b == null || !b.grown)) return false;
 
         List<int> types = new List<int>() { a.type, b.type, type };
         types.Sort();
@@ -42,6 +45,7 @@ public class BaseCell : HexCell
 
     public override void PreviewMatch(HexCell[] neighbours)
     {
+        if (!grown) return;
         for (int i = 0; i < neighbours.Length; ++i)
         {
             HexCell a = neighbours[i], b = neighbours[(i + 1) % neighbours.Length];

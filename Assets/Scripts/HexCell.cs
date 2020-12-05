@@ -8,6 +8,8 @@ public class CellMatch{
 	Vector3 center;
 	bool centerInit = false;
 
+    public bool bonusUsed;
+
     public int score {
         get {
             int needyModifier = 0;
@@ -17,7 +19,7 @@ public class CellMatch{
                 if (needy.complete) needyModifier += 9;
                 else needyModifier -= 1;
             }
-            return cellsInMatch.Count - 2 + needyModifier;
+            return cellsInMatch.Count - 2 + needyModifier + (bonusUsed?1:0);
         }
     }
 
@@ -53,7 +55,11 @@ public class CellMatch{
 		}
 
 		foreach (var cell in thisMatch) {
-			if(cell.match != null) finalMatch.cellsInMatch.UnionWith(cell.match.cellsInMatch);
+            if (cell.match != null)
+            {
+                finalMatch.cellsInMatch.UnionWith(cell.match.cellsInMatch);
+                finalMatch.bonusUsed |= cell.match.bonusUsed;
+            }
 		}
 
 		foreach(var cell in finalMatch.cellsInMatch) {

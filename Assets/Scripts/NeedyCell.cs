@@ -83,8 +83,44 @@ public class NeedyCell : HexCell {
         return hasMatched;
     }
 
+    public bool MatchingWithBonus(int bonusType, HexCell[] neighbours, out HashSet<HexCell> otherCells)
+    {
+        otherCells = new HashSet<HexCell>();
+
+        bool hasMatched = false;
+
+        for (int i = 0; i < 3; ++i)
+        {
+            if (couplesDone[i]) continue;
+            HexCell a = neighbours[i * 2], b = neighbours[i * 2 + 1];
+            if (HalfMatchesWith(a, i * 2) && BonusMatches(bonusType, i * 2 + 1))
+            {
+                hasMatched = true;
+                couplesDone[i] = true;
+
+                otherCells.Add(a);
+
+                CellMatch.Match(this, a);
+                match.bonusUsed = true;
+            }
+            else if (BonusMatches(bonusType, i * 2) && HalfMatchesWith(b, i * 2 + 1))
+            {
+                hasMatched = true;
+                couplesDone[i] = true;
+
+                otherCells.Add(b);
+
+                CellMatch.Match(this, b);
+                match.bonusUsed = true;
+            }
+        }
+
+        return hasMatched;
+    }
+
     public override void PreviewMatch(HexCell[] neighbours)
     {
+        if (!grown) return;
         for (int i = 0; i < 3; ++i)
         {
             if (couplesDone[i]) continue;
@@ -98,13 +134,39 @@ public class NeedyCell : HexCell {
         }
     }
 
-    bool MatchesWith(HexCell a, HexCell b, int i)
+    public void PreviewMatchWithBonus(int bonusType, HexCell[] neighbours)
     {
-        if (!grown || a == null || b == null || !a.grown || !b.grown) return false;
+        if (!grown) return;
+        for (int i = 0; i < 3; ++i)
+        {
+            if (couplesDone[i]) continue;
+            HexCell a = neighbours[i * 2], b = neighbours[i * 2 + 1];
+            if (HalfMatchesWith(a,i*2) && BonusMatches(bonusType, i*2+1))
+            {
+                gonnaMatch = true;
+                a.gonnaMatch = true;
+            }
+            else if (BonusMatches(bonusType, i * 2) && HalfMatchesWith(b, i * 2 + 1))
+            {
+                gonnaMatch = true;
+                b.gonnaMatch = true;
+            }
+        }
+    }
 
-        int a_need = needs[i * 2], b_need = needs[i * 2 + 1];
+    bool MatchesWith(HexCell a, HexCell b, int coupleIdx)
+    {
+        return HalfMatchesWith(a,coupleIdx*2) && HalfMatchesWith(b,coupleIdx*2+1);
+    }
 
-        return (a != null && b != null && a.type == a_need && b.type == b_need);
+    bool HalfMatchesWith(HexCell other, int i)
+    {
+        return other != null && other.grown && other.type == needs[i];
+    }
+
+    bool BonusMatches(int bonusType, int i)
+    {
+        return bonusType == needs[i];
     }
 
 	IEnumerator NeedySuccessAnim(float dur) {
