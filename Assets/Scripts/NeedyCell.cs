@@ -47,7 +47,8 @@ public class NeedyCell : HexCell {
 
         if (complete)
         {
-			StartCoroutine(NeedySuccessAnim(dur));
+            var cR = centerIcon.gameObject.AddComponent<CoroutineRunner>();
+			cR.StartCoroutine(NeedySuccessAnim(dur*5));
             StartCoroutine(matchAnim(dur));
             return true;
         }
@@ -108,10 +109,11 @@ public class NeedyCell : HexCell {
 
 	IEnumerator NeedySuccessAnim(float dur) {
 		centerIcon.transform.parent = null;
+        centerIcon.sortingLayerName = "SpritesInFront";
 		var initialScale = centerIcon.transform.localScale;
 		for (float t = 0; t < 1; t += Time.deltaTime / dur) {
 			centerIcon.color = new Color(1, 1, 1, 1 - t);
-			centerIcon.transform.localScale = initialScale * (1 + t*3);
+			centerIcon.transform.localScale = initialScale * (1 + t*5);
 			yield return null;
 		}
 		Destroy(centerIcon.gameObject);
