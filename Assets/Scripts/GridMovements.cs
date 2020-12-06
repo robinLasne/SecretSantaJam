@@ -119,7 +119,7 @@ public class GridMovements : MonoBehaviour
             snapAnim = StartCoroutine(SnapToStart(.2f));
         }
         yield return snapAnim;
-        RefreshGhostCells();
+        RefreshGhostCells(false);
     }
 
     IEnumerator SnapToSlots(float dur)
@@ -218,12 +218,18 @@ public class GridMovements : MonoBehaviour
         }
     }
 
-    void RefreshGhostCells()
+    void RefreshGhostCells(bool reCreate = true)
     {
         if (ghostWrapCells[0] != null) Destroy(ghostWrapCells[0].gameObject);
         if (ghostWrapCells[1] != null) Destroy(ghostWrapCells[1].gameObject);
-        ghostWrapCells[0] = Instantiate(draggedCellsLine.Last());
-        ghostWrapCells[1] = Instantiate(draggedCellsLine[0]);
+        if (reCreate)
+        {
+            ghostWrapCells[0] = Instantiate(draggedCellsLine.Last());
+            ghostWrapCells[1] = Instantiate(draggedCellsLine[0]);
+
+            ghostWrapCells[0].ForceStopAnim();
+            ghostWrapCells[1].ForceStopAnim();
+        }
     }
 
     void RefreshDraggedCells()

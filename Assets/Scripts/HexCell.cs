@@ -142,6 +142,7 @@ public abstract class HexCell : MonoBehaviour
 
     public void StopAnim()
     {
+        gonnaMatch = false;
         if (gonnaMatchAnim != null)
         {
             StopCoroutine(gonnaMatchAnim);
@@ -149,6 +150,13 @@ public abstract class HexCell : MonoBehaviour
             backGround.color = Color.clear;
             transform.eulerAngles = Vector3.zero;
         }
+    }
+
+    public void ForceStopAnim()
+    {
+        StopAnim();
+        backGround.color = Color.clear;
+        transform.eulerAngles = Vector3.zero;
     }
 
     IEnumerator HighLight()
