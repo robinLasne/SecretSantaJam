@@ -29,14 +29,56 @@ public class GridData : MonoBehaviour {
     {
         movements = GetComponent<GridMovements>();
         scoreMng = GetComponent<ScoreManager>();
+        grid = GetComponent<Grid>();
+
+        directionByIndex = new Vector2[] { Vector2.right, rotate(Vector2.right, Mathf.PI / 3), rotate(Vector2.right, 2 * Mathf.PI / 3) };
     }
 
-    void Start() {
+    private void Start()
+    {
+        InitRandomGrid();
+    }
 
-		directionByIndex = new Vector2[] { Vector2.right, rotate(Vector2.right, Mathf.PI / 3), rotate(Vector2.right, 2 * Mathf.PI / 3) };
+    public void InitGrid(LevelStartData level)
+    {
+        DestroyGrid();
+        hexagonRadius = level.hexagonRadius;
+        cells = new HexCell[hexagonRadius * 2 + 1][];
 
+        for (int j = -hexagonRadius; j <= hexagonRadius; ++j)
+        {
+            int minX = -hexagonRadius + Mathf.Abs(j) / 2, maxX = hexagonRadius - (Mathf.Abs(j) + 1) / 2;
+            cells[j + hexagonRadius] = new HexCell[maxX - minX + 1];
+
+            int jj = j + hexagonRadius;
+
+            for (int i = minX; i <= maxX; ++i)
+            {
+                int ii = i - minX;
+
+                var position = new Vector3Int(i, j, 0);
+                if (level.cells[jj][ii] > 0 && level.cells[jj][ii] <= prefabs.Length)
+                {
+                    var cell = PlaceNewCellInstant(level.cells[jj][ii]-1, position);
+                    cell.Grow(1);
+                }
+                else
+                {
+                    PlaceNewCellInstant(Random.Range(0,prefabs.Length), position);
+                }
+            }
+        }
+
+        spriteMask.transform.localScale = Vector3.one * (2 * hexagonRadius + 2f / 3);
+
+        //Initial check
+        CheckMatches(false);
+    }
+
+    public void InitRandomGrid(int size = -1) {
+        DestroyGrid();
+        if (size > 0) hexagonRadius = size;
 		cells = new HexCell[hexagonRadius * 2 + 1][];
-		grid = GetComponent<Grid>();
 
 		for (int j = -hexagonRadius; j <= hexagonRadius; ++j) {
 			int minX = -hexagonRadius + Mathf.Abs(j) / 2, maxX = hexagonRadius - (Mathf.Abs(j) + 1) / 2;
@@ -61,6 +103,21 @@ public class GridData : MonoBehaviour {
         //Initial check
 		CheckMatches(false);
 	}
+
+    void DestroyGrid()
+    {
+        if(cells != null)
+        {
+            foreach(var l in cells)
+            {
+                foreach(var c in l)
+                {
+                    Destroy(c.gameObject);
+                }
+            }
+        }
+        toRegrowNext = new List<HexCell>();
+    }
 
 	HexCell PlaceNewCellInstant(int type, Vector3Int position) {
         return PlaceNewCellInstant(prefabs[type], position);
