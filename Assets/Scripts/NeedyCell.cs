@@ -22,13 +22,11 @@ public class NeedyCell : HexCell {
         }
     }
 
-    protected override void Awake()
+    public void InitLeaves()
     {
-        base.Awake();
-
         needs = needs.OrderBy(x => Random.value).ToArray();
 
-        for(int i = 0; i < 6; ++i)
+        for (int i = 0; i < 6; ++i)
         {
             leaves[i].sprite = NeedyPlantsData.Instance.data.First(x => x.type == needs[i]).leafSprite;
         }

@@ -72,6 +72,12 @@ public class GridData : MonoBehaviour {
         instance.Grow(0);
         setCell(position, instance);
         instance.goalPosition = position;
+
+        if(instance is NeedyCell)
+        {
+            (instance as NeedyCell).InitLeaves();
+        }
+
         return instance;
     }
 
