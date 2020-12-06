@@ -76,8 +76,7 @@ public class GridMovements : MonoBehaviour
 
         foreach (var cell in draggedCellsLine) cell.SetInFront(true);
 
-        DestroyGhostCells();
-        GenerateGhostCells();
+        RefreshGhostCells();
 
         UpdateDrag(direction);
     }
@@ -120,7 +119,7 @@ public class GridMovements : MonoBehaviour
             snapAnim = StartCoroutine(SnapToStart(.2f));
         }
         yield return snapAnim;
-        DestroyGhostCells();
+        RefreshGhostCells();
     }
 
     IEnumerator SnapToSlots(float dur)
@@ -219,14 +218,10 @@ public class GridMovements : MonoBehaviour
         }
     }
 
-    void DestroyGhostCells()
+    void RefreshGhostCells()
     {
         if (ghostWrapCells[0] != null) Destroy(ghostWrapCells[0].gameObject);
         if (ghostWrapCells[1] != null) Destroy(ghostWrapCells[1].gameObject);
-    }
-
-    void GenerateGhostCells()
-    {
         ghostWrapCells[0] = Instantiate(draggedCellsLine.Last());
         ghostWrapCells[1] = Instantiate(draggedCellsLine[0]);
     }
@@ -237,8 +232,7 @@ public class GridMovements : MonoBehaviour
         {
             data.setCell(draggedIndices[i], draggedCellsLine[i]);
         }
-        DestroyGhostCells();
-        GenerateGhostCells();
+        RefreshGhostCells();
     }
 
     void SnapInstant()
