@@ -69,7 +69,7 @@ public class GridData : MonoBehaviour {
             }
         }
 
-        spriteMask.transform.localScale = Vector3.one * (2 * hexagonRadius + 2f / 3);
+		RefreshGridScale();
 
         //Initial check
         CheckMatches(false);
@@ -98,7 +98,7 @@ public class GridData : MonoBehaviour {
 			}
 		}
 
-        spriteMask.transform.localScale = Vector3.one * (2*hexagonRadius + 2f / 3);
+		RefreshGridScale();
 
         //Initial check
 		CheckMatches(false);
@@ -137,6 +137,14 @@ public class GridData : MonoBehaviour {
 
         return instance;
     }
+
+	void RefreshGridScale() {
+		float gridHeight = (2 * hexagonRadius + 2f / 3)/1.1f;
+
+		transform.localScale = (20 / gridHeight)*Vector3.one;
+
+		spriteMask.transform.localScale = Vector3.one * (2 * hexagonRadius + 2f / 3);
+	}
 
     IEnumerator GrowNewCells(List<HexCell> cells, float dur) {
 		for (float t = 0; t < 1; t += Time.deltaTime / dur) {

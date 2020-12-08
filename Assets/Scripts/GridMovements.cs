@@ -143,8 +143,8 @@ public class GridMovements : MonoBehaviour
 
     IEnumerator SnapToStart(float dur)
     {
-        Vector3 startPos = draggedCell.transform.position;
-        Vector3 goalPos = data.grid.CellToWorld(draggedCellStartPos);
+        Vector3 startPos = draggedCell.transform.localPosition;
+        Vector3 goalPos = data.grid.CellToLocal(draggedCellStartPos);
         goalPos.z = startPos.z;
         if(Vector2.SqrMagnitude(goalPos-startPos) > SpeedSquareHalf(draggedCellsLine.Count))
         {
@@ -155,10 +155,10 @@ public class GridMovements : MonoBehaviour
         {
             Vector3 toGo = Vector3.Lerp(startPos, goalPos, t * t);
             MoveDraggedCellTo(toGo, direction);
-            if(draggedCell.transform.position != toGo)
+            if(draggedCell.transform.localPosition != toGo)
             {
                 startPos += (startPos - goalPos).normalized * draggedCellsLine.Count;
-                goalPos = data.grid.CellToWorld(draggedCellStartPos);
+                goalPos = data.grid.CellToLocal(draggedCellStartPos);
             }
             yield return null;
         }
@@ -168,12 +168,12 @@ public class GridMovements : MonoBehaviour
 
     void MoveDraggedCellTo(Vector3 position, Vector2 direction)
     {
-        Vector3 delta = draggedCell.transform.position;
-        draggedCell.transform.position = position;
-        delta -= draggedCell.transform.position;
+        Vector3 delta = draggedCell.transform.localPosition;
+        draggedCell.transform.localPosition = position;
+        delta -= draggedCell.transform.localPosition;
         for (int i = 0; i < draggedCellsLine.Count; ++i)
         {
-            if (draggedCellsLine[i] != draggedCell) draggedCellsLine[i].transform.position -= delta;
+            if (draggedCellsLine[i] != draggedCell) draggedCellsLine[i].transform.localPosition -= delta;
         }
         WrapDraggedCells(direction);
     }
@@ -182,26 +182,30 @@ public class GridMovements : MonoBehaviour
     {
         bool hasChanged = false;
 
-        while (!data.inBounds(data.grid.WorldToCell(draggedCellsLine[0].transform.position)))
+        while (!data.inBounds(data.grid.LocalToCell(draggedCellsLine[0].transform.localPosition)))
         {
-            // Failsafe to be sure we're wrapping in the right direction
-            if (!data.inBounds(data.grid.WorldToCell(draggedCellsLine.Last().transform.position + dirVector))) break;
+			var warpPos = draggedCellsLine.Last().transform.localPosition + dirVector;
+
+			// Failsafe to be sure we're wrapping in the right direction
+			if (!data.inBounds(data.grid.LocalToCell(warpPos))) break;
 
             var toMove = draggedCellsLine[0];
-            toMove.transform.position = draggedCellsLine.Last().transform.position + dirVector;
+            toMove.transform.localPosition = warpPos;
             draggedCellsLine.RemoveAt(0);
             draggedCellsLine.Add(toMove);
 
             RefreshDraggedCells();
             hasChanged = true;
         }
-        while (!data.inBounds(data.grid.WorldToCell(draggedCellsLine.Last().transform.position)))
+        while (!data.inBounds(data.grid.LocalToCell(draggedCellsLine.Last().transform.localPosition)))
         {
-            // Failsafe to be sure we're wrapping in the right direction
-            if (!data.inBounds(data.grid.WorldToCell(draggedCellsLine[0].transform.position - dirVector))) break;
+			var warpPos = draggedCellsLine[0].transform.localPosition - dirVector;
+
+			// Failsafe to be sure we're wrapping in the right direction
+			if (!data.inBounds(data.grid.LocalToCell(warpPos))) break;
 
             var toMove = draggedCellsLine.Last();
-            toMove.transform.position = draggedCellsLine[0].transform.position - dirVector;
+			toMove.transform.localPosition = warpPos;
             draggedCellsLine.RemoveAt(draggedCellsLine.Count - 1);
             draggedCellsLine.Insert(0, toMove);
 
@@ -209,8 +213,8 @@ public class GridMovements : MonoBehaviour
             hasChanged = true;
         }
 
-        ghostWrapCells[0].transform.position = draggedCellsLine[0].transform.position - dirVector;
-        ghostWrapCells[1].transform.position = draggedCellsLine.Last().transform.position + dirVector;
+        ghostWrapCells[0].transform.localPosition = draggedCellsLine[0].transform.localPosition - dirVector;
+        ghostWrapCells[1].transform.localPosition = draggedCellsLine.Last().transform.localPosition + dirVector;
 
         if (hasChanged && isDragging)
         {
@@ -224,8 +228,8 @@ public class GridMovements : MonoBehaviour
         if (ghostWrapCells[1] != null) Destroy(ghostWrapCells[1].gameObject);
         if (reCreate)
         {
-            ghostWrapCells[0] = Instantiate(draggedCellsLine.Last());
-            ghostWrapCells[1] = Instantiate(draggedCellsLine[0]);
+            ghostWrapCells[0] = Instantiate(draggedCellsLine.Last(), this.transform);
+            ghostWrapCells[1] = Instantiate(draggedCellsLine[0], this.transform);
 
             ghostWrapCells[0].ForceStopAnim();
             ghostWrapCells[1].ForceStopAnim();
