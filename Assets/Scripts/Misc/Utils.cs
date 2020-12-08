@@ -35,9 +35,10 @@ public static class Utils
 		return minIndex;
 	}
 
-    public static int Square(int x)
+    public static float SpeedSquareHalf(int x)
     {
-        return x * x;
+		if (x % 2 == 0) return x * x / 4;
+		else return x * x / 4 + .25f;
     }
 
 }
