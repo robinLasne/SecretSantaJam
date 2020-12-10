@@ -11,7 +11,11 @@ public class ScoreManager : MonoBehaviour
 
     int currentScore=0;
 
-    public void AddScore(List<CellMatch> matches)
+	public void ResetScore() {
+		currentScore = 0;
+	}
+
+	public void AddScore(List<CellMatch> matches)
     {
         int thisScore = 0;
         foreach (var match in matches)

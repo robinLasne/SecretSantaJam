@@ -21,14 +21,15 @@ public class GridData : MonoBehaviour {
 
 	public Vector2[] directionByIndex { get; private set; }
 
-    ScoreManager scoreMng;
-
     GridMovements movements;
+
+	public delegate void MatchEventHandler (List<CellMatch> matches);
+
+	public event MatchEventHandler matchEvent;
 
     private void Awake()
     {
         movements = GetComponent<GridMovements>();
-        scoreMng = GetComponent<ScoreManager>();
         grid = GetComponent<Grid>();
 
         directionByIndex = new Vector2[] { Vector2.right, rotate(Vector2.right, Mathf.PI / 3), rotate(Vector2.right, 2 * Mathf.PI / 3) };
@@ -216,7 +217,7 @@ public class GridData : MonoBehaviour {
 			movements.canDrag = false;
 			var lastMatchCells = cellsToRemove.GroupBy(e => e.match);
 
-            scoreMng.AddScore(lastMatchCells.Select(g => g.Key).ToList());
+			matchEvent.Invoke(lastMatchCells.Select(g => g.Key).ToList());
 
             var newCells = new List<HexCell>();
 
