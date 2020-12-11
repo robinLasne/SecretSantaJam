@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 public class CellMatch{
-	HashSet<HexCell> cellsInMatch = new HashSet<HexCell>();
+	public HashSet<HexCell> cellsInMatch = new HashSet<HexCell>();
 	Vector3 center;
 	bool centerInit = false;
 

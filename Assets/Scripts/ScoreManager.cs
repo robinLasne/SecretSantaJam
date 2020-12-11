@@ -13,6 +13,7 @@ public class ScoreManager : MonoBehaviour
 
 	public void ResetScore() {
 		currentScore = 0;
+		scoreDisplay.text = currentScore.ToString();
 	}
 
 	public void AddScore(List<CellMatch> matches)

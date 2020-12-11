@@ -217,7 +217,7 @@ public class GridData : MonoBehaviour {
 			movements.canDrag = false;
 			var lastMatchCells = cellsToRemove.GroupBy(e => e.match);
 
-			matchEvent.Invoke(lastMatchCells.Select(g => g.Key).ToList());
+			if(matchEvent != null) matchEvent.Invoke(lastMatchCells.Select(g => g.Key).ToList());
 
             var newCells = new List<HexCell>();
 
