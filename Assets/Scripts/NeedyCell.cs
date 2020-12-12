@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using System;
 
 public class NeedyCell : HexCell {
     public int[] needs = new int[6];
@@ -13,6 +12,8 @@ public class NeedyCell : HexCell {
 
 	public int health = 10;
 	public TMPro.TextMeshPro healthDisplay;
+
+	bool[] leafGonnaMatch = new bool[6];
 
     public override int type {
         get {
@@ -46,10 +47,11 @@ public class NeedyCell : HexCell {
 	public void InitLeaves() {
 		GridData.matchEvent += MatchDone;
 
-		needs = needs.OrderBy(x => UnityEngine.Random.value).ToArray();
+		needs = needs.OrderBy(x => Random.value).ToArray();
 
         for (int i = 0; i < 6; ++i)
         {
+			needs[i] = Random.Range(1, 7);
             leaves[i].sprite = NeedyPlantsData.Instance.data.First(x => x.type == needs[i]).leafSprite;
         }
     }
@@ -150,7 +152,10 @@ public class NeedyCell : HexCell {
                 gonnaMatch = true;
                 a.gonnaMatch = true;
                 b.gonnaMatch = true;
-            }
+
+				leafGonnaMatch[i * 2] = leafGonnaMatch[i * 2 + 1] = true;
+
+			}
         }
     }
 
@@ -176,7 +181,7 @@ public class NeedyCell : HexCell {
 
     bool MatchesWith(HexCell a, HexCell b, int coupleIdx)
     {
-        return HalfMatchesWith(a,coupleIdx*2) && HalfMatchesWith(b,coupleIdx*2+1);
+        return (HalfMatchesWith(a,coupleIdx*2) && HalfMatchesWith(b,coupleIdx*2+1)) || (HalfMatchesWith(b, coupleIdx * 2) && HalfMatchesWith(a, coupleIdx * 2 + 1));
     }
 
     bool HalfMatchesWith(HexCell other, int i)
@@ -199,6 +204,26 @@ public class NeedyCell : HexCell {
 			yield return null;
 		}
 		Destroy(centerIcon.gameObject);
+	}
+
+	protected override IEnumerator HighLight() {
+		float halfPeriod = .5f;
+		while (true) {
+			for (float t = 0; t < 1; t += Time.deltaTime / halfPeriod) {
+				for (int i = 0; i < 6; ++i) {
+					if (leafGonnaMatch[i]) leaves[i].transform.eulerAngles = 6 * Vector3.forward * Mathf.Sin(t * 2 * Mathf.PI);
+					else leaves[i].transform.eulerAngles = Vector3.zero;
+				}
+
+				yield return null;
+			}
+		}
+	}
+
+	public override void StopAnim() {
+		base.StopAnim();
+		foreach (var leaf in leaves) leaf.transform.eulerAngles = Vector3.zero;
+		leafGonnaMatch = new bool[6];
 	}
 
 	private void OnDestroy() {

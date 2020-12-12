@@ -231,8 +231,8 @@ public class GridMovements : MonoBehaviour
             ghostWrapCells[0] = Instantiate(draggedCellsLine.Last(), this.transform);
             ghostWrapCells[1] = Instantiate(draggedCellsLine[0], this.transform);
 
-            ghostWrapCells[0].ForceStopAnim();
-            ghostWrapCells[1].ForceStopAnim();
+            ghostWrapCells[0].StopAnim();
+            ghostWrapCells[1].StopAnim();
         }
     }
 

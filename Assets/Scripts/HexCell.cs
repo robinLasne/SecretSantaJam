@@ -142,43 +142,25 @@ public abstract class HexCell : MonoBehaviour
         gonnaMatchAnim = StartCoroutine(HighLight());
     }
 
-    public void StopAnim()
+    public virtual void StopAnim()
     {
         gonnaMatch = false;
         if (gonnaMatchAnim != null)
         {
             StopCoroutine(gonnaMatchAnim);
             gonnaMatchAnim = null;
-            backGround.color = Color.clear;
-            transform.eulerAngles = Vector3.zero;
         }
+		transform.eulerAngles = Vector3.zero;
     }
 
-    public void ForceStopAnim()
+    protected virtual IEnumerator HighLight()
     {
-        StopAnim();
-        backGround.color = Color.clear;
-        transform.eulerAngles = Vector3.zero;
-    }
-
-    IEnumerator HighLight()
-    {
-        float halfPeriod = .5f, maxIntensity = .2f;
+        float period = .5f;
         while (true)
         {
-            for (float t = 0; t < 1; t += Time.deltaTime / halfPeriod)
+            for (float t = 0; t < 1; t += Time.deltaTime / period)
             {
-                backGround.color = new Color(1, 1, 1, t * maxIntensity);
-
                 transform.localEulerAngles = 4 * Vector3.forward * Mathf.Sin(t * 2 * Mathf.PI);
-
-                yield return null;
-            }
-            for (float t = 1; t > 0; t -= Time.deltaTime / halfPeriod)
-            {
-                backGround.color = new Color(1, 1, 1, t * maxIntensity);
-
-                transform.localEulerAngles = 4 * Vector3.forward * Mathf.Sin(-t * 2 * Mathf.PI);
 
                 yield return null;
             }
