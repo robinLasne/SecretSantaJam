@@ -92,7 +92,9 @@ public abstract class HexCell : MonoBehaviour
     public bool gonnaMatch;
     Coroutine gonnaMatchAnim;
 
-    public abstract int type { get; }
+	public static GridData grid;
+
+	public abstract int type { get; }
 	public abstract bool Matching(HexCell[] neighbours, out HashSet<HexCell> otherCells);
     public abstract void PreviewMatch(HexCell[] neighbours);
 	public abstract bool ApplyMatch(float dur);
@@ -185,15 +187,18 @@ public abstract class HexCell : MonoBehaviour
 
     protected IEnumerator matchAnim(float dur)
     {
-        var startPos = transform.position;
-        var goalPos = match.getCenter();
-        startPos.z = goalPos.z;
-        for (float t = 0; t < 1; t += Time.deltaTime / dur)
-        {
-            yield return null;
-            transform.position = Vector3.Lerp(startPos, goalPos, t);
-            transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, t);
-        }
-        Destroy(gameObject);
+		yield return StartCoroutine(DisAppearAnim(dur, match.getCenter()));
     }
+
+	protected IEnumerator DisAppearAnim(float dur, Vector3 goalPos) {
+
+		var startPos = transform.position;
+		startPos.z = goalPos.z;
+		for (float t = 0; t < 1; t += Time.deltaTime / dur) {
+			yield return null;
+			transform.position = Vector3.Lerp(startPos, goalPos, t);
+			transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, t);
+		}
+		Destroy(gameObject);
+	}
 }

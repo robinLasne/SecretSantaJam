@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class NeedyCell : HexCell {
     public int[] needs = new int[6];
@@ -9,6 +10,9 @@ public class NeedyCell : HexCell {
     public SpriteRenderer[] leaves = new SpriteRenderer[6];
 
     bool[] couplesDone = new bool[3];
+
+	public int health = 10;
+	public TMPro.TextMeshPro healthDisplay;
 
     public override int type {
         get {
@@ -22,9 +26,27 @@ public class NeedyCell : HexCell {
         }
     }
 
-    public void InitLeaves()
+	protected override void Awake() {
+		base.Awake();
+		GridData.matchEvent += MatchDone;
+		healthDisplay.text = health.ToString();
+	}
+
+	private void MatchDone(List<CellMatch> matches, bool fromMovement) {
+		if (fromMovement && !complete) {
+			health--;
+			healthDisplay.text = health.ToString();
+
+			if(health <= 0) {
+				grid.ReplaceNeedy(this);
+				StartCoroutine(DisAppearAnim(.3f, transform.position));
+			}
+		}
+	}
+
+	public void InitLeaves()
     {
-        needs = needs.OrderBy(x => Random.value).ToArray();
+        needs = needs.OrderBy(x => UnityEngine.Random.value).ToArray();
 
         for (int i = 0; i < 6; ++i)
         {
@@ -177,5 +199,9 @@ public class NeedyCell : HexCell {
 			yield return null;
 		}
 		Destroy(centerIcon.gameObject);
+	}
+
+	private void OnDestroy() {
+		GridData.matchEvent -= MatchDone;
 	}
 }

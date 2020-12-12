@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 		// Will check here if the tutorial needs to be played
 
 		gameCanvasRaycasts.enabled = false;
-		grid.matchEvent += (e) => { if (gameReady) scoreMnG.AddScore(e); };
+		GridData.matchEvent += (e,fromMove) => { if (gameReady) scoreMnG.AddScore(e); };
     }
 
 	public void SelectLevel(LevelStartData level, bool instant = false) {

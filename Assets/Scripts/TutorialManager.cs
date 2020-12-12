@@ -26,10 +26,10 @@ public class TutorialManager : MonoBehaviour {
 
 	public void StartTutorial() {
 		SetTutorialStep(0);
-		gameMng.grid.matchEvent += CheckMatch;
+		GridData.matchEvent += CheckMatch;
 	}
 
-	private void CheckMatch(List<CellMatch> matches) {
+	private void CheckMatch(List<CellMatch> matches, bool fromMovement) {
 		var step = tutorialData[currentTutorialStep];
 		if (step.needyTutorial) {
 			var needyCells = matches.SelectMany(match => match.cellsInMatch).Where(cell => cell is NeedyCell).Select(cell => cell as NeedyCell).Where(cell => cell.complete);
@@ -60,7 +60,7 @@ public class TutorialManager : MonoBehaviour {
 			gameMng.SelectLevel(step.level, true);
 		}
 		else {
-			gameMng.grid.matchEvent -= CheckMatch;
+			GridData.matchEvent -= CheckMatch;
 			gameMng.BackToWelcome(true);
 		}
 	}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using static Utils;
+using System;
 
 public class GridData : MonoBehaviour {
     public NeedyCell needyPrefab;
@@ -23,21 +24,18 @@ public class GridData : MonoBehaviour {
 
     GridMovements movements;
 
-	public delegate void MatchEventHandler (List<CellMatch> matches);
+	public delegate void MatchEventHandler (List<CellMatch> matches, bool fromMovement);
+	public static event MatchEventHandler matchEvent;
 
-	public event MatchEventHandler matchEvent;
 
-    private void Awake()
+	private void Awake()
     {
         movements = GetComponent<GridMovements>();
         grid = GetComponent<Grid>();
 
-        directionByIndex = new Vector2[] { Vector2.right, rotate(Vector2.right, Mathf.PI / 3), rotate(Vector2.right, 2 * Mathf.PI / 3) };
-    }
+		HexCell.grid = this;
 
-    private void Start()
-    {
-        InitRandomGrid();
+        directionByIndex = new Vector2[] { Vector2.right, rotate(Vector2.right, Mathf.PI / 3), rotate(Vector2.right, 2 * Mathf.PI / 3) };
     }
 
     public void InitGrid(LevelStartData level)
@@ -65,7 +63,7 @@ public class GridData : MonoBehaviour {
                 }
                 else
                 {
-                    PlaceNewCellInstant(Random.Range(0,prefabs.Length), position);
+                    PlaceNewCellInstant(UnityEngine.Random.Range(0,prefabs.Length), position);
                 }
             }
         }
@@ -94,7 +92,7 @@ public class GridData : MonoBehaviour {
                     continue;
                 }
 
-				var instance = PlaceNewCellInstant(Random.Range(0, prefabs.Length), position);
+				var instance = PlaceNewCellInstant(UnityEngine.Random.Range(0, prefabs.Length), position);
                 instance.Grow(1);
 			}
 		}
@@ -188,7 +186,7 @@ public class GridData : MonoBehaviour {
         }
     }
 
-	public bool CheckMatches(bool reGrow) {
+	public bool CheckMatches(bool fromMovement) {
         var toCheck = cells.SelectMany(x => x).ToList();
 
 		var cellsToRemove = new HashSet<HexCell>();
@@ -215,9 +213,7 @@ public class GridData : MonoBehaviour {
 
 		if (hasMatches) {
 			movements.canDrag = false;
-			var lastMatchCells = cellsToRemove.GroupBy(e => e.match);
-
-			if(matchEvent != null) matchEvent.Invoke(lastMatchCells.Select(g => g.Key).ToList());
+			var lastMatchCells = cellsToRemove.GroupBy(e => e.match).ToList();
 
             var newCells = new List<HexCell>();
 
@@ -228,16 +224,7 @@ public class GridData : MonoBehaviour {
 
             foreach (var match in lastMatchCells)
             {
-                // Calculate least occuring cell type
-                int[] counting = new int[prefabs.Length];
-                foreach (var line in cells)
-                {
-                    foreach (var hex in line)
-                    {
-                        if (!hex.justMatched && hex.type>0 && hex.type<=prefabs.Length) counting[hex.type - 1]++;
-                    }
-                }
-                int toSpawn = counting.IndexOfMin();
+				int toSpawn = LeastOccuringType();
 
                 foreach (var cell in match)
                 {
@@ -254,18 +241,30 @@ public class GridData : MonoBehaviour {
                 }
             }
 
-			if (reGrow) {
+			if (fromMovement) { // Regrow previous matches
                 StartCoroutine(RespawnPreviousMatches(toRegrowNext,.3f));
                 toRegrowNext = newCells;
 			}
-			else {
+			else { // Wait for the next movement to regrow
 				if (toRegrowNext == null) toRegrowNext = new List<HexCell>();
 				toRegrowNext.AddRange(newCells);
 				movements.canDrag = true;
-            }
+			}
+
+			if (matchEvent != null) matchEvent.Invoke(lastMatchCells.Select(g => g.Key).ToList(), fromMovement);
 		}
 
 		return hasMatches;
+	}
+
+	int LeastOccuringType() {
+		int[] counting = new int[prefabs.Length];
+		foreach (var line in cells) {
+			foreach (var hex in line) {
+				if (!hex.justMatched && hex.type > 0 && hex.type <= prefabs.Length) counting[hex.type - 1]++;
+			}
+		}
+		return counting.IndexOfMin();
 	}
 
 	IEnumerator RespawnPreviousMatches(List<HexCell> toGrow, float animLength) {
@@ -288,7 +287,17 @@ public class GridData : MonoBehaviour {
         }
     }
 
-	
+	public void ReplaceNeedy(HexCell old) {
+		var newCell = PlaceNewCellInstant(LeastOccuringType(), old.position);
+		newCell.transform.position = old.transform.position;
+
+		if (toRegrowNext == null) toRegrowNext = new List<HexCell>();
+		toRegrowNext.Add(newCell);
+
+		movements.CellHasBeenReplaced(old, newCell);
+	}
+
+	#region Data Access
 
 	int lineOffset(int j) {
 		return -hexagonRadius + Mathf.Abs(j) / 2;
@@ -404,4 +413,5 @@ public class GridData : MonoBehaviour {
 
 		return res;
 	}
+	#endregion
 }
