@@ -28,7 +28,6 @@ public class NeedyCell : HexCell {
 
 	protected override void Awake() {
 		base.Awake();
-		GridData.matchEvent += MatchDone;
 		healthDisplay.text = health.ToString();
 	}
 
@@ -44,9 +43,10 @@ public class NeedyCell : HexCell {
 		}
 	}
 
-	public void InitLeaves()
-    {
-        needs = needs.OrderBy(x => UnityEngine.Random.value).ToArray();
+	public void InitLeaves() {
+		GridData.matchEvent += MatchDone;
+
+		needs = needs.OrderBy(x => UnityEngine.Random.value).ToArray();
 
         for (int i = 0; i < 6; ++i)
         {
