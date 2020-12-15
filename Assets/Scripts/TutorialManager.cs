@@ -14,8 +14,13 @@ public class TutorialManager : MonoBehaviour {
 	public GameObject StepDoneScreen;
 
 	public TutorialStep[] tutorialData;
-	int currentTutorialStep, currentStepProgress;
+	int currentTutorialStep = -1, currentStepProgress;
 
+    public bool InTutorial {
+        get {
+            return currentTutorialStep >= 0 && currentTutorialStep < tutorialData.Length;
+        }
+    }
 
 	GameManager gameMng;
 
@@ -72,4 +77,8 @@ public class TutorialManager : MonoBehaviour {
 		}
 	}
 
+    public void ExitTutorial()
+    {
+        SetTutorialStep(int.MaxValue);
+    }
 }

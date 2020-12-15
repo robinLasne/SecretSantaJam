@@ -3,15 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.UI;
+
+[System.Serializable]
+public class LevelReward {
+    public int expNeeded = 150;
+    public GameObject reward, gameBonus;
+}
 
 public class ScoreManager : MonoBehaviour
 {
+    [Header("In-Game Score")]
     public TextMeshProUGUI scoreDisplay;
     public ScorePopup popupPrefab;
 
     int currentScore=0;
 
-	public void ResetScore() {
+    [Header("Overall Score")]
+    public LevelReward[] levelRewards;
+    public Image levelBar;
+    int overallScore;
+    int curLevel;
+
+    #region In-Game
+    public void ResetScore() {
 		currentScore = 0;
 		scoreDisplay.text = currentScore.ToString();
 	}
@@ -42,4 +57,76 @@ public class ScoreManager : MonoBehaviour
 
         scoreDisplay.text = currentScore.ToString();
     }
+    #endregion
+
+    #region Overall
+    private void Start()
+    {
+        overallScore = PlayerPrefs.GetInt("score");
+        CheckScore(true);
+    }
+
+    void CheckScore(bool rewardsInstant)
+    {
+        int remainingScore = overallScore;
+        int lastLevel=-1;
+        for(int i=0;i < levelRewards.Length; ++i)
+        {
+            int afterLevel = remainingScore - levelRewards[i].expNeeded;
+            if(afterLevel >= 0)
+            {
+                remainingScore = afterLevel;
+                lastLevel = i;
+            }
+        }
+        lastLevel++;
+
+        float progress = lastLevel>=levelRewards.Length?1 : remainingScore / (float)levelRewards[lastLevel].expNeeded;
+
+        curLevel = lastLevel;
+        levelBar.fillAmount = progress;
+        for (int i = 0; i < curLevel; ++i)
+        {
+            if(rewardsInstant && levelRewards[i].reward != null)levelRewards[i].reward.SetActive(true);
+            if(levelRewards[i].gameBonus!=null) levelRewards[i].gameBonus.SetActive(true);
+        }
+    }
+
+    public IEnumerator AddCurrentScoreToOverAll(float delay, float dur)
+    {
+        int startScore = overallScore, endScore = overallScore + currentScore;
+        int oldLevel = curLevel;
+
+        PlayerPrefs.SetInt("score", endScore);
+
+        yield return new WaitForSeconds(delay);
+        for(float t = 0; t < 1; t += Time.deltaTime / dur)
+        {
+            overallScore = (int)Mathf.Lerp(startScore, endScore, t);
+            CheckScore(false);
+            if(curLevel > oldLevel)
+            {
+                for(int i= oldLevel; i< curLevel; ++i)
+                {
+                    // Replace this with animation maybe
+                    if (levelRewards[i].reward != null) levelRewards[i].reward.SetActive(true);
+                }
+                oldLevel = curLevel;
+            }
+            yield return null;
+        }
+        overallScore = endScore;
+        CheckScore(false);
+        if (curLevel > oldLevel)
+        {
+            for (int i = oldLevel; i < curLevel; ++i)
+            {
+                // Replace this with animation maybe
+                if (levelRewards[i].reward != null) levelRewards[i].reward.SetActive(true);
+            }
+        }
+    }
+
+
+    #endregion
 }

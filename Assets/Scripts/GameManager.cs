@@ -14,8 +14,12 @@ public class GameManager : MonoBehaviour
 
 	bool gameReady;
 
+    TutorialManager tutorial;
+
     void Start()
     {
+        tutorial = GetComponent<TutorialManager>();
+
 		// Will check here if the tutorial needs to be played
 
 		gameCanvasRaycasts.enabled = false;
@@ -48,6 +52,16 @@ public class GameManager : MonoBehaviour
 		if(instant)StartCoroutine(SwipeFromTo(gameScreen, welcomeScreen, false, 0));
 		else StartCoroutine(SwipeFromTo(gameScreen, welcomeScreen, false));
 	}
+
+    public void OnClickBackButton()
+    {
+        if (tutorial.InTutorial) tutorial.ExitTutorial();
+        else
+        {
+            BackToWelcome();
+            StartCoroutine(scoreMnG.AddCurrentScoreToOverAll(.5f,1));
+        }
+    }
 
 	IEnumerator SwipeFromTo(Transform fromT, Transform toT, bool enableCanvas, float dur = .5f) {
 		Vector3 from = fromT.position, to = toT.position;

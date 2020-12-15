@@ -24,6 +24,7 @@ public class GridMovements : MonoBehaviour
     {
         data = GetComponent<GridData>();
         cam = Camera.main;
+        canDrag = true;
     }
 
     public void StartDrag(Vector2 position, Vector3 direction)
