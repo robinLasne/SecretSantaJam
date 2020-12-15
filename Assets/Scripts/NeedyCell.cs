@@ -33,7 +33,7 @@ public class NeedyCell : HexCell {
 	}
 
 	private void MatchDone(List<CellMatch> matches, bool fromMovement) {
-		if (fromMovement && !complete) {
+		if (fromMovement && grown && !complete) {
 			health--;
 			healthDisplay.text = health.ToString();
 
