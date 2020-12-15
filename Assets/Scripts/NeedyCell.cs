@@ -197,6 +197,7 @@ public class NeedyCell : HexCell {
 	IEnumerator NeedySuccessAnim(float dur) {
 		centerIcon.transform.parent = null;
         centerIcon.maskInteraction = SpriteMaskInteraction.None;
+        healthDisplay.gameObject.SetActive(false);
 		var initialScale = centerIcon.transform.localScale;
 		for (float t = 0; t < 1; t += Time.deltaTime / dur) {
 			centerIcon.color = new Color(1, 1, 1, 1 - t);
