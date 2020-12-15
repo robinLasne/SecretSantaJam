@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using static Utils;
-using System;
 
 public class GridData : MonoBehaviour {
+    [Header("Cells")]
     public NeedyCell needyPrefab;
 	public BaseCell[] prefabs;
-    public SpriteMask spriteMask;
 
+    [Header("Life & Death")]
+    public Transform livesContainer;
+    public GameObject deathScreen;
+    int livesCount;
+
+    [Header("Other")]
+    public SpriteMask spriteMask;
     public NeedyPlantsData needyPlantsData;
 
+
+    [HideInInspector]
 	public int hexagonRadius = 4;
 
 	HexCell[][] cells;
@@ -41,6 +49,7 @@ public class GridData : MonoBehaviour {
     public void InitGrid(LevelStartData level)
     {
         DestroyGrid();
+        ResetLives();
         hexagonRadius = level.hexagonRadius;
         cells = new HexCell[hexagonRadius * 2 + 1][];
 
@@ -76,6 +85,7 @@ public class GridData : MonoBehaviour {
 
     public void InitRandomGrid(int size = -1) {
         DestroyGrid();
+        ResetLives();
         if (size > 0) hexagonRadius = size;
 		cells = new HexCell[hexagonRadius * 2 + 1][];
 
@@ -116,6 +126,16 @@ public class GridData : MonoBehaviour {
             }
         }
         toRegrowNext = new List<HexCell>();
+    }
+
+    void ResetLives()
+    {
+        deathScreen.SetActive(false);
+        foreach(Transform t in livesContainer)
+        {
+            t.gameObject.SetActive(true);
+        }
+        livesCount = livesContainer.childCount;
     }
 
 	HexCell PlaceNewCellInstant(int type, Vector3Int position) {
@@ -230,7 +250,7 @@ public class GridData : MonoBehaviour {
                 {
                     if (cell.ApplyMatch(.3f)) // Some cells don't disappear after their first match
                     {
-                        var newCell = PlaceNewCellInstant(toSpawn, cell.position);
+                        var newCell = Random.Range(0,30)==0? PlaceNewCellInstant(needyPrefab, cell.position) : PlaceNewCellInstant(toSpawn, cell.position);
                         newCell.transform.position = cell.transform.position;
 
                         newCells.Add(newCell);
@@ -295,7 +315,21 @@ public class GridData : MonoBehaviour {
 		toRegrowNext.Add(newCell);
 
 		movements.CellHasBeenReplaced(old, newCell);
+
+        livesCount--;
+        if(livesCount>=0)livesContainer.GetChild(livesCount).gameObject.SetActive(false);
+
+        if(livesCount <= 0) deathScreen.SetActive(true);
 	}
+
+    public void AddHealth()
+    {
+        if(livesCount < livesContainer.childCount)
+        {
+            livesContainer.GetChild(livesCount).gameObject.SetActive(true);
+            livesCount++;
+        }
+    }
 
 	#region Data Access
 
