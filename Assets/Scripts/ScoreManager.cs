@@ -56,6 +56,8 @@ public class ScoreManager : MonoBehaviour
         
 
         scoreDisplay.text = currentScore.ToString();
+
+        PlayerPrefs.SetInt("score", overallScore+currentScore);
     }
     #endregion
 
