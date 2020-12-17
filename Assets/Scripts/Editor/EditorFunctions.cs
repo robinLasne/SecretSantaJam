@@ -7,6 +7,6 @@ public class EditorFunctions
 {
 	[MenuItem("Game/ResetProgress")]
 	public static void ResetProgress() {
-		PlayerPrefs.SetInt("total_score", 0);
+		PlayerPrefs.DeleteAll();
 	}
 }
