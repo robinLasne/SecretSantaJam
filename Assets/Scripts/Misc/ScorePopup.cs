@@ -7,16 +7,12 @@ public class ScorePopup : MonoBehaviour
 {
     public float animDur;
     public float animDist;
-
-    public Material myMaterial;
     
     TextMeshPro text;
     
     public void InitAnim(string content, Color inside, Color outside)
     {
         text = GetComponent<TextMeshPro>();
-
-        text.renderer.material = myMaterial;
 
         text.text = content;
         text.color = inside;

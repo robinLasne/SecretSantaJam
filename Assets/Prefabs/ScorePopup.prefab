@@ -190,4 +190,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animDur: 1
   animDist: 1
-  myMaterial: {fileID: 2100000, guid: cdd65822e0e61ea42bec834d5e29deb6, type: 2}
