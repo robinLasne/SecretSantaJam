@@ -50,7 +50,7 @@ public class GridData : MonoBehaviour {
     public void InitGrid(LevelStartData level)
     {
         DestroyGrid();
-        ResetLives();
+        ResetLivesAndBonuses();
         hexagonRadius = level.hexagonRadius;
         cells = new HexCell[hexagonRadius * 2 + 1][];
 
@@ -86,7 +86,7 @@ public class GridData : MonoBehaviour {
 
     public void InitRandomGrid(int size = -1) {
         DestroyGrid();
-        ResetLives();
+        ResetLivesAndBonuses();
         if (size > 0) hexagonRadius = size;
 		cells = new HexCell[hexagonRadius * 2 + 1][];
 
@@ -129,7 +129,7 @@ public class GridData : MonoBehaviour {
         toRegrowNext = new List<HexCell>();
     }
 
-    void ResetLives()
+    void ResetLivesAndBonuses()
     {
         deathScreen.SetActive(false);
         foreach(Transform t in livesContainer)
@@ -137,6 +137,8 @@ public class GridData : MonoBehaviour {
             t.gameObject.SetActive(true);
         }
         livesCount = livesContainer.childCount;
+
+		BonusPool.StartGame();
     }
 
 	HexCell PlaceNewCellInstant(int type, Vector3Int position) {

@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         {
             BackToWelcome();
             StartCoroutine(scoreMnG.AddCurrentScoreToOverAll(.5f,1));
+			StartCoroutine(BonusPool.AddCollectedToStored(.6f));
         }
     }
 

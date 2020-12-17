@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 public class NeedyCell : HexCell {
+	public int needyType;
     public int[] needs = new int[6];
     public SpriteRenderer centerIcon;
     public SpriteRenderer[] leaves = new SpriteRenderer[6];
@@ -17,7 +18,7 @@ public class NeedyCell : HexCell {
 
     public override int type {
         get {
-            return 0;
+            return -needyType;
         }
     }
 
@@ -72,6 +73,9 @@ public class NeedyCell : HexCell {
 
         if (complete)
         {
+			if (type < 0) BonusPool.CollectBonus(needyType);
+			else grid.AddHealth();
+
             var cR = centerIcon.gameObject.AddComponent<CoroutineRunner>();
 			cR.StartCoroutine(NeedySuccessAnim(dur*5));
             StartCoroutine(matchAnim(dur));

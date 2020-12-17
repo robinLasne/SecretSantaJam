@@ -28,11 +28,15 @@ public class ScoreManager : MonoBehaviour
 
 	public int highScore { get; private set; }
 
+	public static ScorePopup ScorePopup;
+
 	private void Start() {
 		overallScore = PlayerPrefs.GetInt("total_score");
 		CheckScore(true);
 
 		highScore = PlayerPrefs.GetInt("highscore");
+
+		ScorePopup = popupPrefab;
 	}
 
 	#region In-Game
