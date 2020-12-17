@@ -19,7 +19,7 @@ public class CellMatch{
                 if (needy.complete) needyModifier += 9;
                 else needyModifier -= 1;
             }
-            return cellsInMatch.Count - 2 + needyModifier + (bonusUsed?1:0);
+            return (cellsInMatch.Count - 2 + needyModifier + (bonusUsed?1:0))*10;
         }
     }
 

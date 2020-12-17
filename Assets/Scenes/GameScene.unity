@@ -2830,22 +2830,22 @@ MonoBehaviour:
     type: 3}
   highScoreDisplay: {fileID: 1085915831}
   levelRewards:
-  - expNeeded: 150
+  - expNeeded: 1500
     reward: {fileID: 1426989590}
     gameBonus: {fileID: 1482873176}
-  - expNeeded: 150
+  - expNeeded: 1500
     reward: {fileID: 0}
     gameBonus: {fileID: 0}
-  - expNeeded: 150
+  - expNeeded: 1500
     reward: {fileID: 0}
     gameBonus: {fileID: 0}
-  - expNeeded: 150
+  - expNeeded: 1500
     reward: {fileID: 0}
     gameBonus: {fileID: 0}
-  - expNeeded: 150
+  - expNeeded: 1500
     reward: {fileID: 0}
     gameBonus: {fileID: 0}
-  - expNeeded: 150
+  - expNeeded: 1500
     reward: {fileID: 0}
     gameBonus: {fileID: 0}
   levelBar: {fileID: 990341122}
