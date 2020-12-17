@@ -97,9 +97,9 @@ public class BonusPool : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
 		foreach(var pool in instances) {
 			pool.storageDisplay.text = (pool.storedAmount + pool.currentAmount).ToString();
 
-			if (pool.currentAmount > 0) {
+			if (pool.storedAmount > 0) {
 				var popup = Instantiate(ScoreManager.ScorePopup, pool.storageDisplay.transform.position, Quaternion.identity);
-				popup.InitAnim("+" + pool.currentAmount, pool.storageDisplay.color);
+				popup.InitAnim("+" + pool.storedAmount, pool.storageDisplay.color);
 			}
 		}
 	}
