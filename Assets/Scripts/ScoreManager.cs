@@ -54,6 +54,7 @@ public class ScoreManager : MonoBehaviour
 		globalMultiplyer = 1;
 		multiplyerDisplay.text = string.Format("×{0:0.00}", globalMultiplyer);
 		currentScore = 0;
+		displayedScore = 0;
 		scoreDisplay.text = currentScore.ToString();
 
 		highScoreNotification.SetActive(false);
