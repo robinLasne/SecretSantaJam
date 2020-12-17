@@ -2500,6 +2500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pagesParent: {fileID: 1303972811}
+  prevButton: {fileID: 540543459}
+  nextButton: {fileID: 1998582162}
 --- !u!1 &790689596
 GameObject:
   m_ObjectHideFlags: 0
