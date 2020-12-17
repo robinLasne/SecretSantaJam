@@ -34,6 +34,7 @@ public class GridData : MonoBehaviour {
 
 	public delegate void MatchEventHandler (List<CellMatch> matches, bool fromMovement);
 	public static event MatchEventHandler matchEvent;
+	public static System.Action postMatchEvent;
 
 
 	private void Awake()
@@ -305,6 +306,8 @@ public class GridData : MonoBehaviour {
         {
             movements.canDrag = true;
         }
+
+		postMatchEvent.Invoke();
     }
 
 	public void ReplaceNeedy(HexCell old) {

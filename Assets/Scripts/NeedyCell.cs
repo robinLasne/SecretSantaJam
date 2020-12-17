@@ -36,16 +36,19 @@ public class NeedyCell : HexCell {
 		if (fromMovement && grown && !complete) {
 			health--;
 			healthDisplay.text = health.ToString();
+		}
+	}
 
-			if(health <= 0) {
-				grid.ReplaceNeedy(this);
-				StartCoroutine(DisAppearAnim(.3f, transform.position));
-			}
+	private void CheckDeath() {
+		if (!complete && health <= 0) {
+			grid.ReplaceNeedy(this);
+			StartCoroutine(DisAppearAnim(.3f, transform.position));
 		}
 	}
 
 	public void InitLeaves() {
 		GridData.matchEvent += MatchDone;
+		GridData.postMatchEvent += CheckDeath;
 
 		needs = needs.OrderBy(x => Random.value).ToArray();
 
@@ -229,5 +232,6 @@ public class NeedyCell : HexCell {
 
 	private void OnDestroy() {
 		GridData.matchEvent -= MatchDone;
+		GridData.postMatchEvent -= CheckDeath;
 	}
 }
