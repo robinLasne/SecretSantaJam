@@ -13,10 +13,12 @@ public class LevelReward {
 
 public class ScoreManager : MonoBehaviour
 {
+	public TextMeshProUGUI highScoreDisplay;
+
     [Header("In-Game Score")]
     public ScorePopup popupPrefab;
     public TextMeshProUGUI scoreDisplay, multiplyerDisplay;
-	public GameObject highScoreDisplay;
+	public GameObject highScoreNotification;
 
     int currentScore=0;
 	float displayedScore = 0;
@@ -42,6 +44,7 @@ public class ScoreManager : MonoBehaviour
 		CheckScore(true);
 
 		highScore = PlayerPrefs.GetInt("highscore");
+		highScoreDisplay.text = highScore.ToString();
 
 		ScorePopup = popupPrefab;
 	}
@@ -53,7 +56,7 @@ public class ScoreManager : MonoBehaviour
 		currentScore = 0;
 		scoreDisplay.text = currentScore.ToString();
 
-		highScoreDisplay.SetActive(false);
+		highScoreNotification.SetActive(false);
 	}
 
 	public void AddScore(List<CellMatch> matches, bool fromMove)
@@ -93,7 +96,7 @@ public class ScoreManager : MonoBehaviour
 
 		thisScore = Mathf.CeilToInt(thisScore * globalMultiplyer);
 
-		globalMultiplyer += 0.05f;
+		globalMultiplyer += 0.01f;
 		multiplyerDisplay.text = string.Format("×{0:0.00}",globalMultiplyer);
 
 		currentScore += thisScore;
@@ -103,9 +106,10 @@ public class ScoreManager : MonoBehaviour
         PlayerPrefs.SetInt("total_score", overallScore+currentScore);
 
 		if(currentScore > highScore) {
-			highScoreDisplay.SetActive(true);
+			highScoreNotification.SetActive(true);
 			highScore = currentScore;
 			PlayerPrefs.SetInt("highscore", highScore);
+			highScoreDisplay.text = highScore.ToString();
 		}
     }
 
