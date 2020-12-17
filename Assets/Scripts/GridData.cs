@@ -198,6 +198,29 @@ public class GridData : MonoBehaviour {
         }
     }
 
+	public void PreviewBonus(int type, Vector3 position) {
+		Vector3Int cellPos = grid.WorldToCell(position);
+		if (cellPos == BonusPool.lastCellPos) return;
+		BonusPool.lastCellPos = cellPos;
+		StopPreviewMatches();
+		if (inBounds(cellPos)) {
+			var cell = getCell(cellPos);
+			if(cell is NeedyCell) {
+				var needy = (NeedyCell)cell;
+
+				var neighboursIdx = GetAllAdjacentCells(cell.position);
+				var neighbourCells = new HexCell[neighboursIdx.Length];
+				for (int j = 0; j < neighboursIdx.Length; ++j) {
+					if (inBounds(neighboursIdx[j])) {
+						neighbourCells[j] = getCell(neighboursIdx[j]);
+					}
+				}
+
+				needy.PreviewMatchWithBonus(type, neighbourCells);
+			}
+		}
+	}
+
     public void StopPreviewMatches()
     {
         foreach (var cell in cells.SelectMany(x => x))
@@ -234,33 +257,8 @@ public class GridData : MonoBehaviour {
 
 		if (hasMatches) {
 			movements.canDrag = false;
-			var lastMatchCells = cellsToRemove.GroupBy(e => e.match).ToList();
 
-            var newCells = new List<HexCell>();
-
-            foreach(var cell in cellsToRemove)
-            {
-                cell.justMatched = true;
-            }
-
-            foreach (var match in lastMatchCells)
-            {
-				int toSpawn = LeastOccuringType();
-
-                foreach (var cell in match)
-                {
-                    if (cell.ApplyMatch(.3f)) // Some cells don't disappear after their first match
-                    {
-                        var newCell = Random.Range(0,30)==0? PlaceNewCellInstant(needyPrefab, cell.position) : PlaceNewCellInstant(toSpawn, cell.position);
-                        newCell.transform.position = cell.transform.position;
-
-                        newCells.Add(newCell);
-
-                        movements.CellHasBeenReplaced(cell, newCell);
-                    }
-
-                }
-            }
+			(var newCells, var lastMatchCells) = ApplyMatches(cellsToRemove);
 
 			if (fromMovement) { // Regrow previous matches
                 StartCoroutine(RespawnPreviousMatches(toRegrowNext,.3f));
@@ -276,6 +274,73 @@ public class GridData : MonoBehaviour {
 		}
 
 		return hasMatches;
+	}
+
+	public bool TryBonusMatch(int type, Vector3 position) {
+		Vector3Int cellPos = grid.WorldToCell(position);
+
+		BonusPool.lastCellPos = cellPos;
+
+		if (inBounds(cellPos)) {
+			var reciever = getCell(cellPos);
+			if (reciever is NeedyCell) {
+				var needy = (NeedyCell)reciever;
+
+				var neighboursIdx = GetAllAdjacentCells(reciever.position);
+				var neighbourCells = new HexCell[neighboursIdx.Length];
+				for (int j = 0; j < neighboursIdx.Length; ++j) {
+					if (inBounds(neighboursIdx[j])) {
+						neighbourCells[j] = getCell(neighboursIdx[j]);
+					}
+				}
+
+				var cellsToRemove = new HashSet<HexCell>();
+
+				if (needy.MatchingWithBonus(type, neighbourCells, out cellsToRemove)) {
+					cellsToRemove.Add(needy);
+
+					(var newCells, var lastMatchCells) = ApplyMatches(cellsToRemove);
+
+					if (toRegrowNext == null) toRegrowNext = new List<HexCell>();
+					toRegrowNext.AddRange(newCells);
+
+					if (matchEvent != null) matchEvent.Invoke(lastMatchCells.Select(g => g.Key).ToList(), false);
+
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	(List<HexCell>, List<IGrouping<CellMatch,HexCell>>) ApplyMatches(HashSet<HexCell> cellsToRemove) {
+		var lastMatchCells = cellsToRemove.GroupBy(e => e.match).ToList();
+
+		var newCells = new List<HexCell>();
+
+		foreach (var cell in cellsToRemove) {
+			cell.justMatched = true;
+		}
+
+		foreach (var match in lastMatchCells) {
+			int toSpawn = LeastOccuringType();
+
+			foreach (var cell in match) {
+				if (cell.ApplyMatch(.3f)) // Some cells don't disappear after their first match
+				{
+					var newCell = Random.Range(0, 30) == 0 ? PlaceNewCellInstant(needyPrefab, cell.position) : PlaceNewCellInstant(toSpawn, cell.position);
+					newCell.transform.position = cell.transform.position;
+
+					newCells.Add(newCell);
+
+					movements.CellHasBeenReplaced(cell, newCell);
+				}
+
+			}
+		}
+
+		return (newCells, lastMatchCells);
 	}
 
 	int LeastOccuringType() {

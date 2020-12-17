@@ -7,7 +7,7 @@ using static Utils;
 public class GridMovements : MonoBehaviour
 {
     GridData data;
-    Camera cam;
+    public static Camera cam { get; private set; }
 
     public bool canDrag { get; set; }
     bool isDragging = false;
