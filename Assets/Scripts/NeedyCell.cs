@@ -159,17 +159,14 @@ public class NeedyCell : HexCell {
         {
             if (couplesDone[i]) continue;
             HexCell a = neighbours[i * 2], b = neighbours[i * 2 + 1];
-            if (HalfMatchesWith(a,i*2) && BonusMatches(bonusType, i*2+1))
-            {
-                gonnaMatch = true;
-                a.gonnaMatch = true;
-            }
-            else if (BonusMatches(bonusType, i * 2) && HalfMatchesWith(b, i * 2 + 1))
-            {
-                gonnaMatch = true;
-                b.gonnaMatch = true;
-            }
-        }
+			(bool matching, HexCell otherHalf) = MatchesWithBonus(a, b, bonusType, i);
+			if (matching) {
+				gonnaMatch = true;
+				otherHalf.gonnaMatch = true;
+
+				leafGonnaMatch[i * 2] = leafGonnaMatch[i * 2 + 1] = true;
+			}
+		}
     }
 
     bool MatchesWith(HexCell a, HexCell b, int coupleIdx)
