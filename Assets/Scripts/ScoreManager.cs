@@ -32,7 +32,7 @@ public class ScoreManager : MonoBehaviour
 		overallScore = PlayerPrefs.GetInt("total_score");
 		CheckScore(true);
 
-		highScore = PlayerPrefs.GetInt("highScore");
+		highScore = PlayerPrefs.GetInt("highscore");
 	}
 
 	#region In-Game
