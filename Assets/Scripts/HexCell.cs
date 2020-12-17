@@ -16,7 +16,7 @@ public class CellMatch{
             var needies = cellsInMatch.Where(x => x is NeedyCell).Select(x => (NeedyCell)x);
             foreach (var needy in needies)
             {
-                if (needy.complete) needyModifier += 9;
+                if (needy.complete) needyModifier += 9+needy.health;
                 else needyModifier -= 1;
             }
             return (cellsInMatch.Count - 2 + needyModifier + (bonusUsed?1:0))*10;
