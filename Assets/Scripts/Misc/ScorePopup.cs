@@ -10,13 +10,12 @@ public class ScorePopup : MonoBehaviour
     
     TextMeshPro text;
     
-    public void InitAnim(string content, Color inside, Color outside)
+    public void InitAnim(string content, Color color)
     {
         text = GetComponent<TextMeshPro>();
 
         text.text = content;
-        text.color = inside;
-        text.renderer.material.SetColor("_UnderlayColor", outside);
+        text.color = color;
 
         StartCoroutine(Anim());
     }

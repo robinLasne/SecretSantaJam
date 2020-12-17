@@ -96,12 +96,12 @@ public class GridData : MonoBehaviour {
 			for (int i = minX; i <= maxX; ++i) {
 				var position = new Vector3Int(i, j, 0);
 
-                if (i == 0 && j == 0)
-                {
-                    var needy = PlaceNewCellInstant(needyPrefab, position);
-                    needy.Grow(1);
-                    continue;
-                }
+                //if (i == 0 && j == 0)
+                //{
+                //    var needy = PlaceNewCellInstant(needyPrefab, position);
+                //    needy.Grow(1);
+                //    continue;
+                //}
 
 				var instance = PlaceNewCellInstant(UnityEngine.Random.Range(0, prefabs.Length), position);
                 instance.Grow(1);
@@ -331,7 +331,7 @@ public class GridData : MonoBehaviour {
 			foreach (var cell in match) {
 				if (cell.ApplyMatch(.3f)) // Some cells don't disappear after their first match
 				{
-					var newCell = Random.Range(0, 30) == 0 ? PlaceNewCellInstant(needyPrefab, cell.position) : PlaceNewCellInstant(toSpawn, cell.position);
+					var newCell = Random.Range(0, 50) == 0 ? PlaceNewCellInstant(needyPrefab, cell.position) : PlaceNewCellInstant(toSpawn, cell.position);
 					newCell.transform.position = cell.transform.position;
 
 					newCells.Add(newCell);
@@ -374,7 +374,7 @@ public class GridData : MonoBehaviour {
             movements.canDrag = true;
         }
 
-		postMatchEvent.Invoke();
+		if(postMatchEvent != null)postMatchEvent.Invoke();
     }
 
 	public void ReplaceNeedy(HexCell old) {

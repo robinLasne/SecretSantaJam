@@ -14,13 +14,20 @@ public class LevelReward {
 public class ScoreManager : MonoBehaviour
 {
     [Header("In-Game Score")]
-    public TextMeshProUGUI scoreDisplay;
     public ScorePopup popupPrefab;
+    public TextMeshProUGUI scoreDisplay, multiplyerDisplay;
 	public GameObject highScoreDisplay;
 
     int currentScore=0;
+	float displayedScore = 0;
 
-    [Header("Overall Score")]
+	float globalMultiplyer;
+
+	readonly string[] multiMatchNames = { "Zero", "Simple", "Double", "Triple", "Quadruple" };
+
+	public Color[] multiMatchColors;
+
+	[Header("Overall Score")]
     public LevelReward[] levelRewards;
     public Image levelBar;
     int overallScore;
@@ -41,37 +48,57 @@ public class ScoreManager : MonoBehaviour
 
 	#region In-Game
 	public void ResetScore() {
+		globalMultiplyer = 1;
+		multiplyerDisplay.text = string.Format("×{0:0.00}", globalMultiplyer);
 		currentScore = 0;
 		scoreDisplay.text = currentScore.ToString();
 
 		highScoreDisplay.SetActive(false);
 	}
 
-	public void AddScore(List<CellMatch> matches)
+	public void AddScore(List<CellMatch> matches, bool fromMove)
     {
         int thisScore = 0;
         foreach (var match in matches)
         {
             thisScore += match.score;
 
-            var popup = Instantiate(popupPrefab, match.getCenter(), Quaternion.identity);
-            popup.InitAnim(match.score.ToString(), Color.white, Color.black);
+			if (match.score > 0) {
+				var popup = Instantiate(popupPrefab, match.getCenter(), Quaternion.identity);
+				popup.InitAnim(match.score.ToString(), Color.white);
+			}
         }
 
         if (matches.Count > 1)
         {
-            thisScore = (thisScore * (matches.Count + 1) + 1) / 2;
+			float multiplier = (matches.Count + 1) / 2f;
+
+            thisScore = Mathf.CeilToInt(thisScore * multiplier);
 
             var center = matches.Aggregate(Vector3.zero, (e, v) => e + v.getCenter()/matches.Count);
             var popup = Instantiate(popupPrefab, center, Quaternion.identity);
-            var message = string.Format("×{0}", .5f + .5f * matches.Count);
-            popup.InitAnim(message, Color.red, Color.green);
+
+            var message = string.Format("Match ×{0}", .5f + .5f * matches.Count);
+			if(matches.Count < multiMatchNames.Length) {
+				message = multiMatchNames[matches.Count] + " match";
+			}
+
+			Color color;
+
+			if (matches.Count < multiMatchColors.Length) color = multiMatchColors[matches.Count];
+			else color = multiMatchColors.Last();
+
+			popup.InitAnim(message, color);
         }
 
-        currentScore += thisScore;
-        
+		thisScore = Mathf.CeilToInt(thisScore * globalMultiplyer);
 
-        scoreDisplay.text = currentScore.ToString();
+		globalMultiplyer += 0.05f;
+		multiplyerDisplay.text = string.Format("×{0:0.00}",globalMultiplyer);
+
+		currentScore += thisScore;
+
+		StartCoroutine(AddScore(thisScore, 1, fromMove));
 
         PlayerPrefs.SetInt("total_score", overallScore+currentScore);
 
@@ -81,6 +108,21 @@ public class ScoreManager : MonoBehaviour
 			PlayerPrefs.SetInt("highscore", highScore);
 		}
     }
+
+	IEnumerator AddScore(int toAdd, float dur, bool fromMove) {
+		float added = 0;
+		for(float t=0; t < 1; t += Time.deltaTime / dur) {
+			float tmp = toAdd * (Time.deltaTime / dur);
+			added += tmp;
+			displayedScore += tmp;
+			scoreDisplay.text = displayedScore.ToString("0");
+			yield return null;
+		}
+		displayedScore += toAdd - added;
+		if (!fromMove) displayedScore = Mathf.Round(displayedScore);
+		scoreDisplay.text = displayedScore.ToString("0");
+	}
+
     #endregion
 
     #region Overall

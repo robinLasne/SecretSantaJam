@@ -6,10 +6,7 @@
 	}
 	SubShader
 	{
-		Tags 
-		{ 
-			"Queue"="Transparent"
-		}
+		Tags { "QUEUE" = "Transparent" "IGNOREPROJECTOR" = "true" "RenderType" = "Transparent" "CanUseSpriteAtlas" = "true" "PreviewType" = "Plane" }
 
 		Cull Off
         Lighting Off
@@ -53,6 +50,7 @@
 			{
 				half4 col = tex2D(_MainTex, i.uv);
 				col.rgb = lerp(col.rgb, i.color.rgb, i.color.a);
+				col.a *= i.color.a;
 				return col;
 			}
 			ENDCG
