@@ -16,6 +16,7 @@ public class ScoreManager : MonoBehaviour
     [Header("In-Game Score")]
     public TextMeshProUGUI scoreDisplay;
     public ScorePopup popupPrefab;
+	public GameObject highScoreDisplay;
 
     int currentScore=0;
 
@@ -25,10 +26,21 @@ public class ScoreManager : MonoBehaviour
     int overallScore;
     int curLevel;
 
-    #region In-Game
-    public void ResetScore() {
+	public int highScore { get; private set; }
+
+	private void Start() {
+		overallScore = PlayerPrefs.GetInt("total_score");
+		CheckScore(true);
+
+		highScore = PlayerPrefs.GetInt("highScore");
+	}
+
+	#region In-Game
+	public void ResetScore() {
 		currentScore = 0;
 		scoreDisplay.text = currentScore.ToString();
+
+		highScoreDisplay.SetActive(false);
 	}
 
 	public void AddScore(List<CellMatch> matches)
@@ -57,16 +69,17 @@ public class ScoreManager : MonoBehaviour
 
         scoreDisplay.text = currentScore.ToString();
 
-        PlayerPrefs.SetInt("score", overallScore+currentScore);
+        PlayerPrefs.SetInt("total_score", overallScore+currentScore);
+
+		if(currentScore > highScore) {
+			highScoreDisplay.SetActive(true);
+			highScore = currentScore;
+			PlayerPrefs.SetInt("highscore", highScore);
+		}
     }
     #endregion
 
     #region Overall
-    private void Start()
-    {
-        overallScore = PlayerPrefs.GetInt("score");
-        CheckScore(true);
-    }
 
     void CheckScore(bool rewardsInstant)
     {
@@ -99,7 +112,7 @@ public class ScoreManager : MonoBehaviour
         int startScore = overallScore, endScore = overallScore + currentScore;
         int oldLevel = curLevel;
 
-        PlayerPrefs.SetInt("score", endScore);
+        PlayerPrefs.SetInt("total_score", endScore);
 
         yield return new WaitForSeconds(delay);
         for(float t = 0; t < 1; t += Time.deltaTime / dur)
