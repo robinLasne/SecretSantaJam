@@ -91,6 +91,8 @@ public class NeedyCell : HexCell {
     {
         otherCells = new HashSet<HexCell>();
 
+		if (!grown) return false;
+
         bool hasMatched = false;
 
         for(int i=0; i < 3; ++i)
@@ -115,6 +117,8 @@ public class NeedyCell : HexCell {
     public bool MatchingWithBonus(int bonusType, HexCell[] neighbours, out HashSet<HexCell> otherCells)
     {
         otherCells = new HashSet<HexCell>();
+
+		if (!grown) return false;
 
         bool hasMatched = false;
 
