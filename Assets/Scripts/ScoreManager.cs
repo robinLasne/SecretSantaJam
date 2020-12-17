@@ -81,7 +81,7 @@ public class ScoreManager : MonoBehaviour
 
     #region Overall
 
-    void CheckScore(bool rewardsInstant)
+    void CheckScore(bool rewardsInstant, float extraPrecision = 0)
     {
         int remainingScore = overallScore;
         int lastLevel=-1;
@@ -96,8 +96,8 @@ public class ScoreManager : MonoBehaviour
         }
         lastLevel++;
 
-        float progress = lastLevel>=levelRewards.Length?1 : remainingScore / (float)levelRewards[lastLevel].expNeeded;
-
+        float progress = lastLevel>=levelRewards.Length?1 : (remainingScore + extraPrecision) / (float)levelRewards[lastLevel].expNeeded;
+		
         curLevel = lastLevel;
         levelBar.fillAmount = progress;
         for (int i = 0; i < curLevel; ++i)
@@ -117,8 +117,9 @@ public class ScoreManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         for(float t = 0; t < 1; t += Time.deltaTime / dur)
         {
-            overallScore = (int)Mathf.Lerp(startScore, endScore, t);
-            CheckScore(false);
+			var floatScore = Mathf.Lerp(startScore, endScore, t);
+			overallScore = (int)floatScore;
+            CheckScore(false, floatScore-overallScore);
             if(curLevel > oldLevel)
             {
                 for(int i= oldLevel; i< curLevel; ++i)
