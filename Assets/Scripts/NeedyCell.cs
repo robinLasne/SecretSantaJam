@@ -118,26 +118,16 @@ public class NeedyCell : HexCell {
         {
             if (couplesDone[i]) continue;
             HexCell a = neighbours[i * 2], b = neighbours[i * 2 + 1];
-            if (HalfMatchesWith(a, i * 2) && BonusMatches(bonusType, i * 2 + 1))
-            {
-                hasMatched = true;
-                couplesDone[i] = true;
+			(bool matching, HexCell otherHalf) = MatchesWithBonus(a, b, bonusType, i);
+			if (matching) {
+				hasMatched = true;
+				couplesDone[i] = true;
 
-                otherCells.Add(a);
+				otherCells.Add(otherHalf);
 
-                CellMatch.Match(this, a);
-                match.bonusUsed = true;
-            }
-            else if (BonusMatches(bonusType, i * 2) && HalfMatchesWith(b, i * 2 + 1))
-            {
-                hasMatched = true;
-                couplesDone[i] = true;
-
-                otherCells.Add(b);
-
-                CellMatch.Match(this, b);
-                match.bonusUsed = true;
-            }
+				CellMatch.Match(this, otherHalf);
+				match.bonusUsed = true;
+			}
         }
 
         return hasMatched;
@@ -186,6 +176,24 @@ public class NeedyCell : HexCell {
     {
         return (HalfMatchesWith(a,coupleIdx*2) && HalfMatchesWith(b,coupleIdx*2+1)) || (HalfMatchesWith(b, coupleIdx * 2) && HalfMatchesWith(a, coupleIdx * 2 + 1));
     }
+
+	(bool, HexCell) MatchesWithBonus(HexCell a, HexCell b, int bonus, int coupleIdx) {
+		bool a1 = HalfMatchesWith(a, coupleIdx * 2), a2 = HalfMatchesWith(a, coupleIdx * 2 + 1);
+		bool b1 = HalfMatchesWith(b, coupleIdx * 2), b2 = HalfMatchesWith(b, coupleIdx * 2 + 1);
+
+		if (a1||b1) {
+			if(BonusMatches(bonus, coupleIdx * 2 + 1)) {
+				return (true, a1 ? a : b);
+			}
+		}
+		if(a2 || b2) {
+			if (BonusMatches(bonus, coupleIdx * 2)) {
+				return (true, a2 ? a : b);
+			}
+		}
+
+		return (false, null);
+	}
 
     bool HalfMatchesWith(HexCell other, int i)
     {
