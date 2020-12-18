@@ -22,7 +22,11 @@ MonoBehaviour:
   - array: 00000000000000000000000000000000
   needyTutorial: 0
   matchesNeeded: 5
-  nextSteptext: For every match you make, the multiplyer at the upper  right corner
-    of the screen increases. Longer games mean higher scores!
+  nextSteptext: 'For every match you make, the multiplier at the
+
+    upper  right
+    corner of the screen increases.
+
+    Longer games mean higher scores!'
   regrow: 1
   hexagonRadius: 3

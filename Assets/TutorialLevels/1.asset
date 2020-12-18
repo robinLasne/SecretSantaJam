@@ -20,7 +20,9 @@ MonoBehaviour:
   - array: 000000000000000000000000
   needyTutorial: 0
   matchesNeeded: 1
-  nextSteptext: Growing plants makes them turn into empty soil cells and earns you
-    points.
+  nextSteptext: 'Growing plants makes them turn into
+
+    empty soil cells and earns
+    you points.'
   regrow: 0
   hexagonRadius: 2

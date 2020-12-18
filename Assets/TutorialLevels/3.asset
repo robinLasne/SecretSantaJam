@@ -24,7 +24,11 @@ MonoBehaviour:
   - array: 0000000000000000000000000000000000000000
   needyTutorial: 1
   matchesNeeded: 1
-  nextSteptext: Needy plants give you more points the faster you grow them, and later
-    in the game they'll give you useful resources.
+  nextSteptext: 'Needy plants give you more points the faster
+
+    you grow them,
+    and later in the game they will
+
+    give you useful resources.'
   regrow: 1
   hexagonRadius: 4
