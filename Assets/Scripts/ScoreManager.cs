@@ -139,11 +139,11 @@ public class ScoreManager : MonoBehaviour
         for(int i=0;i < levelRewards.Length; ++i)
         {
             int afterLevel = remainingScore - levelRewards[i].expNeeded;
-            if(afterLevel >= 0)
-            {
-                remainingScore = afterLevel;
-                lastLevel = i;
-            }
+			if (afterLevel >= 0) {
+				remainingScore = afterLevel;
+				lastLevel = i;
+			}
+			else break;
         }
         lastLevel++;
 
