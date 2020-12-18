@@ -51,6 +51,8 @@ public class BonusPool : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
 	}
 
 	public void OnDrag(PointerEventData eventData) {
+		if (draggedInstance == null) return;
+
 		var pos = GridMovements.cam.ScreenToWorldPoint(eventData.position);
 		pos.z = 0;
 		draggedInstance.transform.position = pos;
@@ -59,6 +61,8 @@ public class BonusPool : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
 	}
 
 	public void OnEndDrag(PointerEventData eventData) {
+		if (draggedInstance == null) return;
+
 		HexCell.grid.PreviewBonus(type, transform.position);
 
 		bool matched = HexCell.grid.TryBonusMatch(type, draggedInstance.transform.position);
