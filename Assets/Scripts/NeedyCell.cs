@@ -73,7 +73,7 @@ public class NeedyCell : HexCell {
 
         if (complete)
         {
-			if (type < 0) BonusPool.CollectBonus(needyType);
+			if (needyType > 0) BonusPool.CollectBonus(needyType);
 			else grid.AddHealth();
 
             var cR = centerIcon.gameObject.AddComponent<CoroutineRunner>();
