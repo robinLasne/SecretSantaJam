@@ -1259,7 +1259,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 3e3b888280e626b43bd6a1fabd1c1f3c,
+      objectReference: {fileID: 21300000, guid: d4cc5a24b3feef84fbeb9f3bc23f43e7,
         type: 3}
     - target: {fileID: 3389510408157395751, guid: 248d5ea7de217dd409bf4284785f9f1d,
         type: 3}
@@ -3453,9 +3453,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 704996820}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 947388716}
+        m_MethodName: StartTutorial
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6676,7 +6676,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d4cc5a24b3feef84fbeb9f3bc23f43e7,
+      objectReference: {fileID: 21300000, guid: 3e3b888280e626b43bd6a1fabd1c1f3c,
         type: 3}
     - target: {fileID: 3389510408157395751, guid: 248d5ea7de217dd409bf4284785f9f1d,
         type: 3}
