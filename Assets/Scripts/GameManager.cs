@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 		// Will check here if the tutorial needs to be played
 
 		gameCanvasRaycasts.enabled = false;
-		GridData.matchEvent += (e,fromMove) => { if (gameReady) scoreMnG.AddScore(e, fromMove); };
+		GridData.matchEvent += (e,fromMove) => { if (gameReady) scoreMnG.AddScore(e); };
 
 		BackToWelcome(true);
     }

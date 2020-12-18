@@ -22,7 +22,7 @@ public class ScoreManager : MonoBehaviour
 	public GameObject highScoreNotification;
 
     int currentScore=0;
-	float displayedScore = 0;
+	int displayedScore = 0;
 
 	float globalMultiplyer;
 
@@ -62,7 +62,7 @@ public class ScoreManager : MonoBehaviour
 		highScoreNotification.SetActive(false);
 	}
 
-	public void AddScore(List<CellMatch> matches, bool fromMove)
+	public void AddScore(List<CellMatch> matches)
     {
         int thisScore = 0;
         foreach (var match in matches)
@@ -104,7 +104,7 @@ public class ScoreManager : MonoBehaviour
 
 		currentScore += thisScore;
 
-		StartCoroutine(AddScore(thisScore, 1, fromMove));
+		StartCoroutine(AddScore(thisScore, 1));
 
         PlayerPrefs.SetInt("total_score", overallScore+currentScore);
 
@@ -116,18 +116,15 @@ public class ScoreManager : MonoBehaviour
 		}
     }
 
-	IEnumerator AddScore(int toAdd, float dur, bool fromMove) {
-		float added = 0;
-		for(float t=0; t < 1; t += Time.deltaTime / dur) {
-			float tmp = toAdd * (Time.deltaTime / dur);
-			added += tmp;
-			displayedScore += tmp;
-			scoreDisplay.text = displayedScore.ToString("0");
-			yield return null;
+	IEnumerator AddScore(int toAdd, float dur) {
+		float timeStep = dur / toAdd;
+		for(int i=0; i < toAdd; ++i) {
+			++displayedScore;
+			scoreDisplay.text = displayedScore.ToString();
+
+			yield return new WaitForSeconds(timeStep);
 		}
-		displayedScore += toAdd - added;
-		if (!fromMove) displayedScore = Mathf.Round(displayedScore);
-		scoreDisplay.text = displayedScore.ToString("0");
+		scoreDisplay.text = displayedScore.ToString();
 	}
 
     #endregion
