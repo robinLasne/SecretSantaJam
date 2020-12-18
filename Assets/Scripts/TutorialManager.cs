@@ -6,15 +6,18 @@ using UnityEngine;
 public struct TutorialStep {
 	public LevelStartData level;
 	public GameObject TutorialHelp;
-	public bool needyTutorial;
-	public int matchesNeeded;
 }
 
 public class TutorialManager : MonoBehaviour {
 	public GameObject StepDoneScreen;
+	public TMPro.TextMeshProUGUI stepMessage, stepButtonText;
+
+	public GameObject bonuses;
 
 	public TutorialStep[] tutorialData;
 	int currentTutorialStep = -1, currentStepProgress;
+
+	public static TutorialManager Instance;
 
     public bool InTutorial {
         get {
@@ -26,25 +29,35 @@ public class TutorialManager : MonoBehaviour {
 
 	void Start() {
 		gameMng = GetComponent<GameManager>();
+		Instance = this;
 		HideAllTutorial();
+
+		if (PlayerPrefs.GetInt("tutorial_done", 0) == 0) {
+			PlayerPrefs.SetInt("tutorial_done", 1);
+			StartTutorial();
+		}
 	}
 
 	public void StartTutorial() {
 		SetTutorialStep(0);
 		GridData.matchEvent += CheckMatch;
+		bonuses.SetActive(false);
 	}
 
 	private void CheckMatch(List<CellMatch> matches, bool fromMovement) {
 		var step = tutorialData[currentTutorialStep];
-		if (step.needyTutorial) {
+		if (step.level.needyTutorial) {
 			var needyCells = matches.SelectMany(match => match.cellsInMatch).Where(cell => cell is NeedyCell).Select(cell => cell as NeedyCell).Where(cell => cell.complete);
 			currentStepProgress += needyCells.Count();
 		}
 		else {
-			currentStepProgress += matches.Count;
+			if(fromMovement)currentStepProgress++;
 		}
 
-		if(currentStepProgress >= step.matchesNeeded) {
+		if(currentStepProgress >= step.level.matchesNeeded) {
+			HideAllTutorial();
+			stepMessage.text = step.level.nextSteptext;
+			stepButtonText.text = currentTutorialStep == tutorialData.Length - 1 ? "Go to game" : "Next";
 			StepDoneScreen.SetActive(true);
 		}
 	}
@@ -67,6 +80,7 @@ public class TutorialManager : MonoBehaviour {
 		else {
 			GridData.matchEvent -= CheckMatch;
 			gameMng.BackToWelcome(true);
+			bonuses.SetActive(true);
 		}
 	}
 

@@ -35,14 +35,12 @@ public class CellMatch{
             else
             {
                 Vector3 sum = Vector3.zero;
-                float minZ = float.PositiveInfinity;
                 foreach (var cell in cellsInMatch)
                 {
                     sum += cell.transform.position;
-                    if (cell.transform.position.z < minZ) minZ = cell.transform.position.z;
                 }
                 center = sum / cellsInMatch.Count;
-                center.z = minZ;
+                center.z = -1;
             }
 		}
 		return center;

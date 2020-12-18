@@ -42,8 +42,10 @@ public class NeedyCell : HexCell {
 
 	private void CheckDeath() {
 		if (!complete && health <= 0) {
-			grid.ReplaceNeedy(this);
-			StartCoroutine(DisAppearAnim(.3f, transform.position));
+			grid.ReplaceDeadNeedy(this);
+			var goalPos = transform.position;
+			goalPos.z = -1;
+			StartCoroutine(DisAppearAnim(.3f, goalPos));
 		}
 	}
 
@@ -51,11 +53,10 @@ public class NeedyCell : HexCell {
 		GridData.matchEvent += MatchDone;
 		GridData.postMatchEvent += CheckDeath;
 
-		needs = needs.OrderBy(x => Random.value).ToArray();
+		if (!TutorialManager.Instance.InTutorial) needs = needs.OrderBy(x => Random.value).ToArray();
 
         for (int i = 0; i < 6; ++i)
         {
-			needs[i] = Random.Range(1, 7);
             leaves[i].sprite = NeedyPlantsData.Instance.data.First(x => x.type == needs[i]).leafSprite;
         }
     }
@@ -73,8 +74,10 @@ public class NeedyCell : HexCell {
 
         if (complete)
         {
-			if (needyType > 0) BonusPool.CollectBonus(needyType);
-			else grid.AddHealth();
+			if (!TutorialManager.Instance.InTutorial) {
+				if (needyType > 0) BonusPool.CollectBonus(needyType);
+				else grid.AddHealth();
+			}
 
             var cR = centerIcon.gameObject.AddComponent<CoroutineRunner>();
 			cR.StartCoroutine(NeedySuccessAnim(dur*5));

@@ -107,9 +107,9 @@ public class ScoreManager : MonoBehaviour
 
 		StartCoroutine(AddScore(thisScore, 1));
 
-        PlayerPrefs.SetInt("total_score", overallScore+currentScore);
+        if(!TutorialManager.Instance.InTutorial)PlayerPrefs.SetInt("total_score", overallScore+currentScore);
 
-		if(currentScore > highScore) {
+		if(!TutorialManager.Instance.InTutorial && currentScore > highScore) {
 			highScoreNotification.SetActive(true);
 			highScore = currentScore;
 			PlayerPrefs.SetInt("highscore", highScore);

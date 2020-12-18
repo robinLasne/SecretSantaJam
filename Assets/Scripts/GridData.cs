@@ -38,7 +38,7 @@ public class GridData : MonoBehaviour {
 
 	public Grid grid { get; private set; }
 
-	List<HexCell> toRegrowNext;
+	List<HexCell> toRegrowNext = new List<HexCell>();
 
 	public Vector2[] directionByIndex { get; private set; }
 
@@ -83,10 +83,17 @@ public class GridData : MonoBehaviour {
                     var cell = PlaceNewCellInstant(level.cells[jj][ii]-1, position);
                     cell.Grow(1);
                 }
-                else
+                else if(level.cells[jj][ii] == 0)
                 {
-                    PlaceNewCellInstant(UnityEngine.Random.Range(0,baseCells.Length), position);
+                    var cell = PlaceNewCellInstant(UnityEngine.Random.Range(0,baseCells.Length), position);
+					if (level.regrow) {
+						toRegrowNext.Add(cell);
+					}
                 }
+				else {
+					var cell = PlaceNewCellInstant(normalNeedies[0], position);
+					cell.Grow(1);
+				}
             }
         }
 
@@ -279,7 +286,6 @@ public class GridData : MonoBehaviour {
                 toRegrowNext = newCells;
 			}
 			else { // Wait for the next movement to regrow
-				if (toRegrowNext == null) toRegrowNext = new List<HexCell>();
 				toRegrowNext.AddRange(newCells);
 				movements.canDrag = true;
 			}
@@ -315,7 +321,6 @@ public class GridData : MonoBehaviour {
 
 					(var newCells, var lastMatchCells) = ApplyMatches(cellsToRemove);
 
-					if (toRegrowNext == null) toRegrowNext = new List<HexCell>();
 					toRegrowNext.AddRange(newCells);
 
 					if (matchEvent != null) matchEvent.Invoke(lastMatchCells.Select(g => g.Key).ToList(), false);
@@ -343,7 +348,7 @@ public class GridData : MonoBehaviour {
 			foreach (var cell in match) {
 				if (cell.ApplyMatch(.3f)) // Some cells don't disappear after their first match
 				{
-					var newCell = Random.Range(0, 50) == 0 ? PlaceNewCellInstant(randomNeedy, cell.position) : PlaceNewCellInstant(toSpawn, cell.position);
+					var newCell = (!TutorialManager.Instance.InTutorial && Random.Range(0, 50) == 0) ? PlaceNewCellInstant(randomNeedy, cell.position) : PlaceNewCellInstant(toSpawn, cell.position);
 					newCell.transform.position = cell.transform.position;
 
 					newCells.Add(newCell);
@@ -389,19 +394,20 @@ public class GridData : MonoBehaviour {
 		if(postMatchEvent != null)postMatchEvent.Invoke();
     }
 
-	public void ReplaceNeedy(HexCell old) {
-		var newCell = PlaceNewCellInstant(LeastOccuringType(), old.position);
+	public void ReplaceDeadNeedy(HexCell old) {
+		var newCell = TutorialManager.Instance.InTutorial ? PlaceNewCellInstant(normalNeedies[0], old.position) : PlaceNewCellInstant(LeastOccuringType(), old.position);
 		newCell.transform.position = old.transform.position;
 
-		if (toRegrowNext == null) toRegrowNext = new List<HexCell>();
 		toRegrowNext.Add(newCell);
 
 		movements.CellHasBeenReplaced(old, newCell);
-		
-        livesCount--;
-        if(livesCount>=0)livesContainer.GetChild(livesCount).gameObject.SetActive(false);
 
-        if(livesCount <= 0) deathScreen.SetActive(true);
+		if (!TutorialManager.Instance.InTutorial) {
+			livesCount--;
+			if (livesCount >= 0) livesContainer.GetChild(livesCount).gameObject.SetActive(false);
+
+			if (livesCount <= 0) deathScreen.SetActive(true);
+		}
 	}
 
     public void AddHealth()

@@ -19,7 +19,12 @@ public struct intArray {
 [CreateAssetMenu(menuName ="ScriptableObjects/Level Data")]
 public class LevelStartData : ScriptableObject
 {
-    public int hexagonRadius;
     [HideInInspector]
     public intArray[] cells;
+	public bool needyTutorial;
+	public int matchesNeeded;
+	[TextArea]
+	public string nextSteptext;
+	public bool regrow;
+    public int hexagonRadius;
 }
