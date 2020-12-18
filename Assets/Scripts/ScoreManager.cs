@@ -8,7 +8,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public class LevelReward {
     public int expNeeded = 150;
-    public GameObject reward, gameBonus;
+    public GameObject reward, gameBonus, helpWindow;
+	public Sprite rewardPreviewIcon;
 }
 
 public class ScoreManager : MonoBehaviour
@@ -32,6 +33,7 @@ public class ScoreManager : MonoBehaviour
 	[Header("Overall Score")]
     public LevelReward[] levelRewards;
     public Image levelBar;
+	public Image levelSmallIcon;
     int overallScore;
     int curLevel;
 
@@ -155,7 +157,22 @@ public class ScoreManager : MonoBehaviour
         {
             if(rewardsInstant && levelRewards[i].reward != null)levelRewards[i].reward.SetActive(true);
             if(levelRewards[i].gameBonus!=null) levelRewards[i].gameBonus.SetActive(true);
+
+			if(levelRewards[i].helpWindow != null) {
+				string helpKey = string.Format("help_{0}_seen", i);
+
+				if(PlayerPrefs.GetInt(helpKey,0) == 0) {
+					levelRewards[i].helpWindow.SetActive(true);
+					PlayerPrefs.SetInt(helpKey, 1);
+				}
+			}
         }
+
+		if (curLevel < levelRewards.Length && levelRewards[curLevel].rewardPreviewIcon != null) {
+			levelSmallIcon.sprite = levelRewards[curLevel].rewardPreviewIcon;
+			levelSmallIcon.gameObject.SetActive(true);
+		}
+		else levelSmallIcon.gameObject.SetActive(false);
     }
 
     public IEnumerator AddCurrentScoreToOverAll(float delay, float dur)
@@ -170,28 +187,28 @@ public class ScoreManager : MonoBehaviour
         {
 			var floatScore = Mathf.Lerp(startScore, endScore, t);
 			overallScore = (int)floatScore;
-            CheckScore(false, floatScore-overallScore);
-            if(curLevel > oldLevel)
-            {
-                for(int i= oldLevel; i< curLevel; ++i)
-                {
-                    // Replace this with animation maybe
-                    if (levelRewards[i].reward != null) levelRewards[i].reward.SetActive(true);
-                }
-                oldLevel = curLevel;
-            }
+            CheckScore(true, floatScore-overallScore);
+            //if(curLevel > oldLevel)
+            //{
+            //    for(int i= oldLevel; i< curLevel; ++i)
+            //    {
+            //        // Replace this with animation maybe
+            //        if (levelRewards[i].reward != null) levelRewards[i].reward.SetActive(true);
+            //    }
+            //    oldLevel = curLevel;
+            //}
             yield return null;
         }
         overallScore = endScore;
-        CheckScore(false);
-        if (curLevel > oldLevel)
-        {
-            for (int i = oldLevel; i < curLevel; ++i)
-            {
-                // Replace this with animation maybe
-                if (levelRewards[i].reward != null) levelRewards[i].reward.SetActive(true);
-            }
-        }
+        CheckScore(true);
+        //if (curLevel > oldLevel)
+        //{
+        //    for (int i = oldLevel; i < curLevel; ++i)
+        //    {
+        //        // Replace this with animation maybe
+        //        if (levelRewards[i].reward != null) levelRewards[i].reward.SetActive(true);
+        //    }
+        //}
     }
 
 

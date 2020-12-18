@@ -3420,22 +3420,35 @@ MonoBehaviour:
   - expNeeded: 1500
     reward: {fileID: 1426989590}
     gameBonus: {fileID: 1482873176}
+    helpWindow: {fileID: 0}
+    rewardPreviewIcon: {fileID: 0}
   - expNeeded: 1500
     reward: {fileID: 0}
     gameBonus: {fileID: 0}
+    helpWindow: {fileID: 0}
+    rewardPreviewIcon: {fileID: 0}
   - expNeeded: 1500
     reward: {fileID: 0}
     gameBonus: {fileID: 0}
+    helpWindow: {fileID: 0}
+    rewardPreviewIcon: {fileID: 0}
   - expNeeded: 1500
     reward: {fileID: 0}
     gameBonus: {fileID: 0}
+    helpWindow: {fileID: 0}
+    rewardPreviewIcon: {fileID: 0}
   - expNeeded: 1500
     reward: {fileID: 0}
     gameBonus: {fileID: 0}
+    helpWindow: {fileID: 0}
+    rewardPreviewIcon: {fileID: 0}
   - expNeeded: 1500
     reward: {fileID: 0}
     gameBonus: {fileID: 0}
+    helpWindow: {fileID: 0}
+    rewardPreviewIcon: {fileID: 0}
   levelBar: {fileID: 990341122}
+  levelSmallIcon: {fileID: 1715217349}
 --- !u!1 &987657527
 GameObject:
   m_ObjectHideFlags: 0
@@ -4404,7 +4417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1302514146
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5311,7 +5324,7 @@ GameObject:
   - component: {fileID: 1715217350}
   - component: {fileID: 1715217349}
   m_Layer: 0
-  m_Name: Image
+  m_Name: RewardPreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5333,8 +5346,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1171, y: -947}
-  m_SizeDelta: {x: 196.7894, y: 169.87993}
+  m_AnchoredPosition: {x: 1149, y: -896}
+  m_SizeDelta: {x: 196.7894, y: 199.82454}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1715217349
 MonoBehaviour:
@@ -5349,7 +5362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 441762ef071b7594f96f426d61aab3e5, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6077,7 +6090,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -70, y: -947}
+  m_AnchoredPosition: {x: -70, y: -896}
   m_SizeDelta: {x: 2191.32, y: 158.76001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2047598155
