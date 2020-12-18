@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using static Utils;
+using UnityEngine.Serialization;
 
 public class GridData : MonoBehaviour {
     [Header("Cells")]
-    public NeedyCell needyPrefab;
-	public BaseCell[] prefabs;
+    public NeedyCell[] normalNeedies;
+	public NeedyCell specialNeedy;
+	[FormerlySerializedAs("prefabs")]
+	public BaseCell[] baseCells;
+
+	NeedyCell randomNeedy {
+		get {
+			if (ScoreManager.curLevel > normalNeedies.Length) {
+				if (Random.Range(0, normalNeedies.Length * 2) == 0) return specialNeedy;
+			}
+			return normalNeedies[Random.Range(0, normalNeedies.Length)];
+		}
+	}
 
     [Header("Life & Death")]
     public Transform livesContainer;
@@ -66,14 +78,14 @@ public class GridData : MonoBehaviour {
                 int ii = i - minX;
 
                 var position = new Vector3Int(i, j, 0);
-                if (level.cells[jj][ii] > 0 && level.cells[jj][ii] <= prefabs.Length)
+                if (level.cells[jj][ii] > 0 && level.cells[jj][ii] <= baseCells.Length)
                 {
                     var cell = PlaceNewCellInstant(level.cells[jj][ii]-1, position);
                     cell.Grow(1);
                 }
                 else
                 {
-                    PlaceNewCellInstant(UnityEngine.Random.Range(0,prefabs.Length), position);
+                    PlaceNewCellInstant(UnityEngine.Random.Range(0,baseCells.Length), position);
                 }
             }
         }
@@ -103,7 +115,7 @@ public class GridData : MonoBehaviour {
                 //    continue;
                 //}
 
-				var instance = PlaceNewCellInstant(UnityEngine.Random.Range(0, prefabs.Length), position);
+				var instance = PlaceNewCellInstant(UnityEngine.Random.Range(0, baseCells.Length), position);
                 instance.Grow(1);
 			}
 		}
@@ -142,7 +154,7 @@ public class GridData : MonoBehaviour {
     }
 
 	HexCell PlaceNewCellInstant(int type, Vector3Int position) {
-        return PlaceNewCellInstant(prefabs[type], position);
+        return PlaceNewCellInstant(baseCells[type], position);
 	}
 
     HexCell PlaceNewCellInstant(HexCell prefab, Vector3Int position)
@@ -331,7 +343,7 @@ public class GridData : MonoBehaviour {
 			foreach (var cell in match) {
 				if (cell.ApplyMatch(.3f)) // Some cells don't disappear after their first match
 				{
-					var newCell = Random.Range(0, 50) == 0 ? PlaceNewCellInstant(needyPrefab, cell.position) : PlaceNewCellInstant(toSpawn, cell.position);
+					var newCell = Random.Range(0, 50) == 0 ? PlaceNewCellInstant(randomNeedy, cell.position) : PlaceNewCellInstant(toSpawn, cell.position);
 					newCell.transform.position = cell.transform.position;
 
 					newCells.Add(newCell);
@@ -346,10 +358,10 @@ public class GridData : MonoBehaviour {
 	}
 
 	int LeastOccuringType() {
-		int[] counting = new int[prefabs.Length];
+		int[] counting = new int[baseCells.Length];
 		foreach (var line in cells) {
 			foreach (var hex in line) {
-				if (!hex.justMatched && hex.type > 0 && hex.type <= prefabs.Length) counting[hex.type - 1]++;
+				if (!hex.justMatched && hex.type > 0 && hex.type <= baseCells.Length) counting[hex.type - 1]++;
 			}
 		}
 		return counting.IndexOfMin();
@@ -385,7 +397,7 @@ public class GridData : MonoBehaviour {
 		toRegrowNext.Add(newCell);
 
 		movements.CellHasBeenReplaced(old, newCell);
-
+		
         livesCount--;
         if(livesCount>=0)livesContainer.GetChild(livesCount).gameObject.SetActive(false);
 

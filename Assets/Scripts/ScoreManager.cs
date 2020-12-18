@@ -8,7 +8,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public class LevelReward {
     public int expNeeded = 150;
-    public GameObject reward, gameBonus, helpWindow;
+	public SpriteRenderer reward;
+    public GameObject gameBonus, helpWindow;
 	public Sprite rewardPreviewIcon;
 }
 
@@ -35,7 +36,7 @@ public class ScoreManager : MonoBehaviour
     public Image levelBar;
 	public Image levelSmallIcon;
     int overallScore;
-    int curLevel;
+    public static int curLevel { get; private set; }
 
 	public int highScore { get; private set; }
 
@@ -152,25 +153,31 @@ public class ScoreManager : MonoBehaviour
         levelBar.fillAmount = progress;
         for (int i = 0; i < curLevel; ++i)
         {
-            if(rewardsInstant && levelRewards[i].reward != null)levelRewards[i].reward.SetActive(true);
+            if(rewardsInstant && levelRewards[i].reward != null)levelRewards[i].reward.gameObject.SetActive(true);
             if(levelRewards[i].gameBonus!=null) levelRewards[i].gameBonus.SetActive(true);
 
-			if(levelRewards[i].helpWindow != null) {
-				string helpKey = string.Format("help_{0}_seen", i);
-
-				if(PlayerPrefs.GetInt(helpKey,0) == 0) {
-					levelRewards[i].helpWindow.SetActive(true);
-					PlayerPrefs.SetInt(helpKey, 1);
-				}
-			}
+			if(rewardsInstant) CheckHelpWindow(i);
         }
 
-		if (curLevel < levelRewards.Length && levelRewards[curLevel].rewardPreviewIcon != null) {
-			levelSmallIcon.sprite = levelRewards[curLevel].rewardPreviewIcon;
-			levelSmallIcon.gameObject.SetActive(true);
+		if (rewardsInstant) {
+			if (curLevel < levelRewards.Length && levelRewards[curLevel].rewardPreviewIcon != null) {
+				levelSmallIcon.sprite = levelRewards[curLevel].rewardPreviewIcon;
+				levelSmallIcon.gameObject.SetActive(true);
+			}
+			else levelSmallIcon.gameObject.SetActive(false);
 		}
-		else levelSmallIcon.gameObject.SetActive(false);
     }
+
+	void CheckHelpWindow(int i) {
+		if (levelRewards[i].helpWindow != null) {
+			string helpKey = string.Format("help_{0}_seen", i);
+
+			if (PlayerPrefs.GetInt(helpKey, 0) == 0) {
+				levelRewards[i].helpWindow.SetActive(true);
+				PlayerPrefs.SetInt(helpKey, 1);
+			}
+		}
+	}
 
     public IEnumerator AddCurrentScoreToOverAll(float delay, float dur)
     {
@@ -184,29 +191,67 @@ public class ScoreManager : MonoBehaviour
         {
 			var floatScore = Mathf.Lerp(startScore, endScore, t);
 			overallScore = (int)floatScore;
-            CheckScore(true, floatScore-overallScore);
-            //if(curLevel > oldLevel)
-            //{
-            //    for(int i= oldLevel; i< curLevel; ++i)
-            //    {
-            //        // Replace this with animation maybe
-            //        if (levelRewards[i].reward != null) levelRewards[i].reward.SetActive(true);
-            //    }
-            //    oldLevel = curLevel;
-            //}
-            yield return null;
+            CheckScore(false, floatScore-overallScore);
+			if (curLevel > oldLevel) {
+				for (int i = oldLevel; i < curLevel; ++i) {
+					yield return StartCoroutine(ChangeReward(i + 1, .7f));
+				}
+				oldLevel = curLevel;
+			}
+			yield return null;
         }
         overallScore = endScore;
-        CheckScore(true);
-        //if (curLevel > oldLevel)
-        //{
-        //    for (int i = oldLevel; i < curLevel; ++i)
-        //    {
-        //        // Replace this with animation maybe
-        //        if (levelRewards[i].reward != null) levelRewards[i].reward.SetActive(true);
-        //    }
-        //}
-    }
+        CheckScore(false);
+		if (curLevel > oldLevel) {
+			for (int i = oldLevel; i < curLevel; ++i) {
+				yield return StartCoroutine(ChangeReward(i + 1, .7f));
+			}
+		}
+	}
+
+	IEnumerator ChangeReward(int level, float dur) {
+		Color baseCol = levelSmallIcon.color;
+
+		Sprite icon = null;
+		SpriteRenderer reward = null;
+		if (level < levelRewards.Length) {
+			icon = levelRewards[level].rewardPreviewIcon;
+		}
+		if (level - 1 < levelRewards.Length) {
+			reward = levelRewards[level - 1].reward;
+		}
+		if (reward != null) {
+			reward.gameObject.SetActive(true);
+			foreach (Transform t in reward.transform) t.gameObject.SetActive(false);
+		}
+		
+		for (float t = 0; t < 1; t += Time.deltaTime / dur) {
+			levelSmallIcon.color = new Color(1, 1, 1, 1-t);
+			levelSmallIcon.transform.localScale = Vector3.one * (1 + t);
+
+			reward.color = new Color(1, 1, 1, t);
+			yield return null;
+		}
+
+		if (reward != null) {
+			reward.color = Color.white;
+			foreach (Transform t in reward.transform) t.gameObject.SetActive(true);
+		}
+
+		if (level - 1 < levelRewards.Length) CheckHelpWindow(level - 1);
+
+		if (icon != null) {
+			levelSmallIcon.gameObject.SetActive(true);
+			levelSmallIcon.sprite = icon;
+		}
+		else {
+			levelSmallIcon.gameObject.SetActive(false);
+		}
+		levelSmallIcon.color = baseCol;
+		levelSmallIcon.transform.localScale = Vector3.one;
+
+		yield return new WaitForSeconds(dur / 2);
+	}
 
 
     #endregion
