@@ -180,8 +180,9 @@ MonoBehaviour:
   m_text: If you want to learn more about all the plants, you can always come back
     and read the rest of this manual later.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -616,8 +617,9 @@ MonoBehaviour:
   m_text: Keep playing to unlock more equipment and learn what other resources you
     can earn from needy plants.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1160,8 +1162,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Yes
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1448,8 +1451,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Well done!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1711,8 +1715,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Nutrients
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1974,8 +1979,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Needy Plants
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2425,12 +2431,12 @@ PrefabInstance:
     - target: {fileID: 3389510408157395749, guid: 248d5ea7de217dd409bf4284785f9f1d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.2699995
+      value: 5.39
       objectReference: {fileID: 0}
     - target: {fileID: 3389510408157395749, guid: 248d5ea7de217dd409bf4284785f9f1d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0700002
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3389510408157395749, guid: 248d5ea7de217dd409bf4284785f9f1d,
         type: 3}
@@ -2823,16 +2829,15 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1447741836}
+  m_Children: []
   m_Father: {fileID: 1503101184}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -10}
-  m_SizeDelta: {x: 60, y: 60}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -5.100006}
+  m_SizeDelta: {x: 73.7096, y: 73.7096}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &318925089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2906,8 +2911,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: ac31787f9b4acb34a992a5f5fb24ab4c, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2964,8 +2969,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 99acf77ddd1b31a42a5e5d110319aadb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 1bf5b464778644b499a39caad23e490f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3051,7 +3056,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 99acf77ddd1b31a42a5e5d110319aadb, type: 2}
+  - {fileID: 2100000, guid: 1bf5b464778644b499a39caad23e490f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3804,8 +3809,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: The Principle of Companion Planting
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4055,8 +4061,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Now that you''ve read the theory you can play the tutorial:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4220,6 +4227,80 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &444315047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 444315048}
+  - component: {fileID: 444315050}
+  - component: {fileID: 444315049}
+  m_Layer: 0
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &444315048
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444315047}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1998582163}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 149, y: 0}
+  m_SizeDelta: {x: 315.85254, y: 315.85254}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &444315049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444315047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 1f288ebd985f215488492ffb2019ea75, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &444315050
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444315047}
+  m_CullTransparentMesh: 0
 --- !u!1 &448535875
 GameObject:
   m_ObjectHideFlags: 0
@@ -4291,8 +4372,9 @@ MonoBehaviour:
     leaves of squash keep the soil from drying, preserving the moisture corn depends
     on.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4874,8 +4956,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Return home
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4983,8 +5066,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -31}
-  m_SizeDelta: {x: 750.5508, y: 135.47365}
+  m_AnchoredPosition: {x: 0, y: 37.571}
+  m_SizeDelta: {x: 750.5508, y: 126.331314}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &538269250
 MonoBehaviour:
@@ -5009,8 +5092,9 @@ MonoBehaviour:
 
     You missed too many needy plants!'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5041,7 +5125,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5113,7 +5197,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1759057504}
   m_Father: {fileID: 704996821}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5161,7 +5246,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 540543462}
+  m_TargetGraphic: {fileID: 1759057502}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5328,8 +5413,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 99acf77ddd1b31a42a5e5d110319aadb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 1bf5b464778644b499a39caad23e490f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5415,7 +5500,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 99acf77ddd1b31a42a5e5d110319aadb, type: 2}
+  - {fileID: 2100000, guid: 1bf5b464778644b499a39caad23e490f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5522,8 +5607,9 @@ MonoBehaviour:
   m_text: Use it in game by clicking and dragging on a needy plant to complete a
     partial match.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5929,8 +6015,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: No
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6298,8 +6385,9 @@ MonoBehaviour:
     Each section must be associated with two specific
     basic plants to clear, but not necessarily in the displayed order.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6803,7 +6891,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2123459125}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6905,8 +6993,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Next
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7124,18 +7213,11 @@ MonoBehaviour:
     means it
     takes 3 matches
 
-    to clear a needy plant!
-
-
-    Needy plants will die if not
-
-    cleared
-    in ten moves or less,
-
-    making you lose a life.'
+    to clear a needy plant!'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7171,7 +7253,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: -0.2
   m_wordSpacing: -1
-  m_lineSpacing: 0
+  m_lineSpacing: 18
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -7268,8 +7350,9 @@ MonoBehaviour:
   m_text: In each plant's design, what it needs is shown on the inside, and what
     it provides on the outside.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7401,8 +7484,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 16502b91c0e0b59428ca31d42d3c6f87, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 17ce70477e3e00e4b9760d58af70acd8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8162,7 +8245,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885500052}
   m_CullTransparentMesh: 0
---- !u!1 &919515817
+--- !u!1 &910902771
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8170,75 +8253,136 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 919515818}
-  - component: {fileID: 919515820}
-  - component: {fileID: 919515819}
-  m_Layer: 0
-  m_Name: Text
+  - component: {fileID: 910902772}
+  - component: {fileID: 910902774}
+  - component: {fileID: 910902773}
+  m_Layer: 5
+  m_Name: Text (TMP) (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &919515818
+--- !u!224 &910902772
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919515817}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 910902771}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 936821414}
-  m_RootOrder: 0
+  m_Father: {fileID: 2123459125}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -381, y: -313.1}
+  m_SizeDelta: {x: 477.26074, y: 110.90994}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &919515819
+--- !u!114 &910902773
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919515817}
+  m_GameObject: {fileID: 910902771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 136
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 137
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: X
---- !u!222 &919515820
+  m_text: 'Needy plants will die if not
+
+    cleared in ten moves or less,
+
+    making
+    you lose a life.'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 26
+  m_fontSizeBase: 26
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: -0.2
+  m_wordSpacing: -1
+  m_lineSpacing: 18
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &910902774
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919515817}
+  m_GameObject: {fileID: 910902771}
   m_CullTransparentMesh: 0
 --- !u!1 &936821413
 GameObject:
@@ -8269,15 +8413,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 919515818}
+  m_Children: []
   m_Father: {fileID: 704996821}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1757.4, y: 956.88}
-  m_SizeDelta: {x: 160, y: 160}
+  m_AnchoredPosition: {x: 1681.1, y: 893}
+  m_SizeDelta: {x: 315.8525, y: 315.8525}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &936821415
 MonoBehaviour:
@@ -8352,8 +8495,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 7a4189a6107fd254ba8a5230c9247a8c, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8580,8 +8723,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'They are the inspiration for these three plants in our game:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8713,8 +8857,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Moisture
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8976,7 +9121,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -229}
+  m_AnchoredPosition: {x: 0, y: -78}
   m_SizeDelta: {x: 293.11438, y: 104.81099}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1002274087
@@ -9213,8 +9358,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: New high score!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9346,8 +9492,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Got it!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9479,8 +9626,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: There are <b>two groups</b> of basic plants.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9516,7 +9664,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 18
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -9589,7 +9737,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -9.09e-13, y: -233}
-  m_SizeDelta: {x: 572.7985, y: 225.40283}
+  m_SizeDelta: {x: 601.4327, y: 225.40283}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1151686188
 MonoBehaviour:
@@ -9617,8 +9765,9 @@ MonoBehaviour:
     Try
     it yourself and make the first match by sliding the middle line to the right!'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9654,7 +9803,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 18
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -9983,8 +10132,9 @@ MonoBehaviour:
     Explore
     this garden and the new plants by making a few matches.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10020,7 +10170,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 18
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -10156,8 +10306,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Anti-fungi
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10290,8 +10441,9 @@ MonoBehaviour:
   m_text: "Each plant is represented by what it <b>needs</b>\n (inner symbols) and
     what it <b>brings to others</b>\n (outer symbols)."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10327,7 +10479,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 18
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -10405,8 +10557,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 99acf77ddd1b31a42a5e5d110319aadb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 1bf5b464778644b499a39caad23e490f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10492,7 +10644,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 99acf77ddd1b31a42a5e5d110319aadb, type: 2}
+  - {fileID: 2100000, guid: 1bf5b464778644b499a39caad23e490f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10691,8 +10843,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11033,8 +11186,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 2
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11422,8 +11576,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Support
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11532,7 +11687,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 94.2}
-  m_SizeDelta: {x: 750.5508, y: 135.47365}
+  m_SizeDelta: {x: 622.88086, y: 135.47365}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1444910137
 MonoBehaviour:
@@ -11555,11 +11710,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Go back home?
 
-    Your garden will be reset but your score will be added
+
+    The garden will be reset but your score will be added
     to your total.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11590,14 +11747,14 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
+  m_paragraphSpacing: -15.15
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
@@ -11632,139 +11789,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444910135}
-  m_CullTransparentMesh: 0
---- !u!1 &1447741835
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1447741836}
-  - component: {fileID: 1447741838}
-  - component: {fileID: 1447741837}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1447741836
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1447741835}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 318925088}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1447741837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1447741835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: <
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 1
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1447741838
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1447741835}
   m_CullTransparentMesh: 0
 --- !u!1 &1472407384
 GameObject:
@@ -11806,8 +11830,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 99acf77ddd1b31a42a5e5d110319aadb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 1bf5b464778644b499a39caad23e490f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11893,7 +11917,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 99acf77ddd1b31a42a5e5d110319aadb, type: 2}
+  - {fileID: 2100000, guid: 1bf5b464778644b499a39caad23e490f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12011,8 +12035,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Anti-slugs
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12101,7 +12126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1496267253
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12189,8 +12214,9 @@ MonoBehaviour:
     You
     can still unlock decorations for the house if you keep playing.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12322,8 +12348,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Pollinisation
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12625,8 +12652,9 @@ MonoBehaviour:
 
     give you useful resources.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13014,8 +13042,9 @@ MonoBehaviour:
   m_text: 'To summarize, in our game there are six resources that plants either need
     or provide:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13288,8 +13317,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Level X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13393,7 +13423,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2123459125}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13422,8 +13452,9 @@ MonoBehaviour:
   m_text: "Don't forget, the \n<b><i>output</i></b> of basic plants \nis the symbol/color
     of their <b><i>outer</i></b> part."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13459,7 +13490,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 18
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -13675,7 +13706,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642157287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.24, y: -5.94, z: 0}
+  m_LocalPosition: {x: 6.26, y: -6.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1482873177}
@@ -13745,8 +13776,9 @@ MonoBehaviour:
     you have left to grow it. If not grown on time, needy plants will die and make
     you lose a life.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13929,7 +13961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.1267, y: 291.9}
+  m_AnchoredPosition: {x: -7.1267, y: 285.59}
   m_SizeDelta: {x: 793.07086, y: 76.810425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1672281139
@@ -13953,8 +13985,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Welcome to your garden!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14160,8 +14193,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Got it!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14459,8 +14493,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: -53.8}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchoredPosition: {x: -10, y: -61.6}
+  m_SizeDelta: {x: 80, y: 72.22626}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1742292308
 MonoBehaviour:
@@ -14483,8 +14517,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14558,6 +14593,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742292306}
   m_CullTransparentMesh: 0
+--- !u!1 &1759057501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1759057504}
+  - component: {fileID: 1759057503}
+  - component: {fileID: 1759057502}
+  m_Layer: 0
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1759057502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759057501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: ac31787f9b4acb34a992a5f5fb24ab4c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1759057503
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759057501}
+  m_CullTransparentMesh: 0
+--- !u!224 &1759057504
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759057501}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 540543460}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -140, y: 0}
+  m_SizeDelta: {x: 315.85254, y: 315.85254}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1769571152
 GameObject:
   m_ObjectHideFlags: 0
@@ -14618,8 +14727,9 @@ MonoBehaviour:
     plant repels parasitic fungi, a second attracts pollinating insects and the last
     one keeps slugs and snail out by attracting predators such as birds.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14974,8 +15084,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 123
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15107,8 +15218,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: You've unlocked the <b>life fern</b>!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15202,12 +15314,12 @@ PrefabInstance:
     - target: {fileID: 3389510408157395749, guid: 248d5ea7de217dd409bf4284785f9f1d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.9900007
+      value: 4.06
       objectReference: {fileID: 0}
     - target: {fileID: 3389510408157395749, guid: 248d5ea7de217dd409bf4284785f9f1d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.04
+      value: -1.69
       objectReference: {fileID: 0}
     - target: {fileID: 3389510408157395749, guid: 248d5ea7de217dd409bf4284785f9f1d,
         type: 3}
@@ -15600,8 +15712,9 @@ MonoBehaviour:
     You can
     now store the       resource that you get from growing this needy plant:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15811,7 +15924,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2123459125}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15840,8 +15953,9 @@ MonoBehaviour:
   m_text: Try to grow this needy plant before it dies. Take your time, we won't make
     you lose lives yet.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15877,7 +15991,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 18
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -16123,8 +16237,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play the tutorial
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -16224,7 +16339,7 @@ PrefabInstance:
     - target: {fileID: 3389510408157395749, guid: 248d5ea7de217dd409bf4284785f9f1d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.5700006
+      value: 2.77
       objectReference: {fileID: 0}
     - target: {fileID: 3389510408157395749, guid: 248d5ea7de217dd409bf4284785f9f1d,
         type: 3}
@@ -16570,7 +16685,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 444315048}
   m_Father: {fileID: 704996821}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16961,8 +17077,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\xD71.00"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17066,6 +17183,7 @@ RectTransform:
   - {fileID: 874532521}
   - {fileID: 850798874}
   - {fileID: 838047485}
+  - {fileID: 910902772}
   - {fileID: 781575276}
   - {fileID: 1585574775}
   - {fileID: 1864047009}
@@ -17135,8 +17253,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: This new rare kind of needy plant heals you if you manage to grow it!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17268,8 +17387,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3248 / 5000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
+  m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17363,7 +17483,7 @@ PrefabInstance:
     - target: {fileID: 3389510408157395749, guid: 248d5ea7de217dd409bf4284785f9f1d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.7600002
+      value: 4.06
       objectReference: {fileID: 0}
     - target: {fileID: 3389510408157395749, guid: 248d5ea7de217dd409bf4284785f9f1d,
         type: 3}

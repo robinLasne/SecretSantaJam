@@ -47,7 +47,7 @@ public class ScoreManager : MonoBehaviour
 		CheckScore(true);
 
 		highScore = PlayerPrefs.GetInt("highscore");
-		highScoreDisplay.text = highScore.ToString();
+		highScoreDisplay.text = "Hi-Score: "+highScore.ToString();
 
 		ScorePopup = popupPrefab;
 	}
@@ -115,7 +115,7 @@ public class ScoreManager : MonoBehaviour
 			highScoreNotification.SetActive(true);
 			highScore = currentScore;
 			PlayerPrefs.SetInt("highscore", highScore);
-			highScoreDisplay.text = highScore.ToString();
+			highScoreDisplay.text = "Hi-Score: " + highScore.ToString();
 		}
     }
 
