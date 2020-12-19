@@ -11,5 +11,7 @@ public class NeedyPlantsData : SingletonScriptableObject<NeedyPlantsData>
         public Sprite leafSprite;
     }
 
+	public DeathPopup deathPopup;
+
     public LeafType[] data;
 }

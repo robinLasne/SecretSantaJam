@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25da9e8f32d611249b6b1477838ae218, type: 3}
   m_Name: Needy Plants Data
   m_EditorClassIdentifier: 
+  deathPopup: {fileID: 6106913865164734254, guid: d2cafab11660250439c08c4349a6baae,
+    type: 3}
   data:
   - type: 1
     leafSprite: {fileID: 21300000, guid: 314db6337d29d454b974da5bee6b4ee0, type: 3}

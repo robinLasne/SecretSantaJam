@@ -43,9 +43,12 @@ public class NeedyCell : HexCell {
 	private void CheckDeath() {
 		if (!complete && health <= 0) {
 			grid.ReplaceDeadNeedy(this);
-			var goalPos = transform.position;
-			goalPos.z = -1;
-			StartCoroutine(DisAppearAnim(.3f, goalPos));
+
+			var death = Instantiate(NeedyPlantsData.Instance.deathPopup, transform.parent);
+			death.InitAnim();
+
+			SetInFront(true);
+			StartCoroutine(NeedyDeathAnim(death.animDur, death.rotationSpeed));
 		}
 	}
 
@@ -225,6 +228,16 @@ public class NeedyCell : HexCell {
 			yield return null;
 		}
 		Destroy(centerIcon.gameObject);
+	}
+
+	IEnumerator NeedyDeathAnim(float dur, float rotationSpeed) {
+		for(float t = 0; t < 1; t += Time.deltaTime / dur) {
+			transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, t);
+			transform.localEulerAngles = new Vector3(0, 0, -t * rotationSpeed);
+			yield return null;
+		}
+
+		Destroy(gameObject);
 	}
 
 	protected override IEnumerator HighLight() {
