@@ -44,7 +44,7 @@ public class NeedyCell : HexCell {
 		if (!complete && health <= 0) {
 			grid.ReplaceDeadNeedy(this);
 
-			var death = Instantiate(NeedyPlantsData.Instance.deathPopup, transform.parent);
+			var death = Instantiate(NeedyPlantsData.Instance.deathPopup, transform.position, Quaternion.identity, transform.parent);
 			death.InitAnim();
 
 			SetInFront(true);
