@@ -59,12 +59,31 @@ public class GridData : MonoBehaviour {
         directionByIndex = new Vector2[] { Vector2.right, rotate(Vector2.right, Mathf.PI / 3), rotate(Vector2.right, 2 * Mathf.PI / 3) };
     }
 
+	int[,] RandomInitArray() {
+		var res = new int[hexagonRadius + 1, hexagonRadius + 1];
+
+		var pool = Enumerable.Range(0, baseCells.Length).ToArray();
+
+		for(int i = 0; i < hexagonRadius + 1; ++i) {
+			for (int j = 0; j < hexagonRadius + 1; ++j) {
+				int t = (j + i * hexagonRadius)%pool.Length;
+
+				if (t == 0) pool = pool.OrderBy(x => Random.value).ToArray();
+				res[i, j] = pool[t];
+			}
+		}
+		
+		return res;
+	}
+
     public void InitGrid(LevelStartData level)
     {
         DestroyGrid();
         ResetLivesAndBonuses();
         hexagonRadius = level.hexagonRadius;
         cells = new HexCell[hexagonRadius * 2 + 1][];
+
+		var randomArray = RandomInitArray();
 
         for (int j = -hexagonRadius; j <= hexagonRadius; ++j)
         {
@@ -85,7 +104,8 @@ public class GridData : MonoBehaviour {
                 }
                 else if(level.cells[jj][ii] == 0)
                 {
-                    var cell = PlaceNewCellInstant(UnityEngine.Random.Range(0,baseCells.Length), position);
+					int toGrow = randomArray[(i + hexagonRadius) / 2, (j + hexagonRadius) / 2];
+					var cell = PlaceNewCellInstant(toGrow, position);
 					if (level.regrow) {
 						toRegrowNext.Add(cell);
 					}
@@ -109,21 +129,17 @@ public class GridData : MonoBehaviour {
         if (size > 0) hexagonRadius = size;
 		cells = new HexCell[hexagonRadius * 2 + 1][];
 
+		var randomArray = RandomInitArray();
+
 		for (int j = -hexagonRadius; j <= hexagonRadius; ++j) {
 			int minX = -hexagonRadius + Mathf.Abs(j) / 2, maxX = hexagonRadius - (Mathf.Abs(j) + 1) / 2;
 			cells[j + hexagonRadius] = new HexCell[maxX - minX + 1];
 			for (int i = minX; i <= maxX; ++i) {
 				var position = new Vector3Int(i, j, 0);
 
-                //if (i == 0 && j == 0)
-                //{
-                //    var needy = PlaceNewCellInstant(needyPrefab, position);
-                //    needy.Grow(1);
-                //    continue;
-                //}
-
-				var instance = PlaceNewCellInstant(UnityEngine.Random.Range(0, baseCells.Length), position);
-                instance.Grow(1);
+				int toGrow = randomArray[(i + hexagonRadius)/2, (j + hexagonRadius)/2];
+				var instance = PlaceNewCellInstant(toGrow, position);
+				instance.Grow(1);
 			}
 		}
 
