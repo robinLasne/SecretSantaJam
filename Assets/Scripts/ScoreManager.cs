@@ -33,8 +33,8 @@ public class ScoreManager : MonoBehaviour
 
 	[Header("Overall Score")]
     public LevelReward[] levelRewards;
-    public Image levelBar;
-	public Image levelSmallIcon;
+    public Image levelBar, levelSmallIcon;
+	public TextMeshProUGUI levelText, levelProgressText;
     int overallScore;
     public static int curLevel { get; private set; }
 
@@ -147,10 +147,10 @@ public class ScoreManager : MonoBehaviour
         }
         lastLevel++;
 
-        float progress = lastLevel>=levelRewards.Length?1 : (remainingScore + extraPrecision) / (float)levelRewards[lastLevel].expNeeded;
-		
-        curLevel = lastLevel;
-        levelBar.fillAmount = progress;
+		float progress = lastLevel >= levelRewards.Length ? 1 : (remainingScore + extraPrecision) / (float)levelRewards[lastLevel].expNeeded;
+		UpdateDisplay(lastLevel, remainingScore, progress);
+
+		curLevel = lastLevel;
         for (int i = 0; i < curLevel; ++i)
         {
             if(rewardsInstant && levelRewards[i].reward != null)levelRewards[i].reward.gameObject.SetActive(true);
@@ -167,6 +167,12 @@ public class ScoreManager : MonoBehaviour
 			else levelSmallIcon.gameObject.SetActive(false);
 		}
     }
+
+	void UpdateDisplay(int level, int score, float progress) {
+		levelText.text = "Level " + (level + 1);
+		levelProgressText.text = level >= levelRewards.Length ? "All done!" : score + " / " + levelRewards[level].expNeeded;
+		levelBar.fillAmount = progress;
+	}
 
 	void CheckHelpWindow(int i) {
 		if (levelRewards[i].helpWindow != null) {
@@ -194,6 +200,7 @@ public class ScoreManager : MonoBehaviour
             CheckScore(false, floatScore-overallScore);
 			if (curLevel > oldLevel) {
 				for (int i = oldLevel; i < curLevel; ++i) {
+					UpdateDisplay(i, levelRewards[i].expNeeded, 1);
 					yield return StartCoroutine(ChangeReward(i + 1, .7f));
 				}
 				oldLevel = curLevel;
