@@ -32,10 +32,10 @@ public class TutorialManager : MonoBehaviour {
 		Instance = this;
 		HideAllTutorial();
 
-		if (PlayerPrefs.GetInt("tutorial_done", 0) == 0) {
-			PlayerPrefs.SetInt("tutorial_done", 1);
-			StartTutorial();
-		}
+		//if (PlayerPrefs.GetInt("tutorial_done", 0) == 0) {
+		//	PlayerPrefs.SetInt("tutorial_done", 1);
+		//	StartTutorial();
+		//}
 	}
 
 	public void StartTutorial() {

@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
     {
         tutorial = GetComponent<TutorialManager>();
 
-		// Will check here if the tutorial needs to be played
-
 		gameCanvasRaycasts.enabled = false;
 		GridData.matchEvent += (e,fromMove) => { if (gameReady) scoreMnG.AddScore(e); };
 
