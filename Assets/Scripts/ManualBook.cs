@@ -6,6 +6,7 @@ public class ManualBook : MonoBehaviour
 {
 	public Transform pagesParent;
 	public GameObject prevButton, nextButton;
+	public TMPro.TextMeshProUGUI pageNumberL, pageNumberR;
 
 	int _curPage;
 	int curPage {
@@ -17,6 +18,8 @@ public class ManualBook : MonoBehaviour
 			foreach (Transform page in pagesParent) page.gameObject.SetActive(page.GetSiblingIndex() == _curPage);
 			nextButton.SetActive(_curPage < pagesParent.childCount - 1);
 			prevButton.SetActive(_curPage > 0);
+			pageNumberL.text = (curPage * 2 + 1).ToString();
+			pageNumberR.text = (curPage * 2 + 2).ToString();
 		}
 	}
 	private void OnEnable() {
