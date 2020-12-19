@@ -63,7 +63,7 @@ public class ScoreManager : MonoBehaviour
 		highScoreNotification.SetActive(false);
 	}
 
-	public void AddScore(List<CellMatch> matches)
+	public void AddScore(List<CellMatch> matches, bool fromMovement)
     {
         int thisScore = 0;
         foreach (var match in matches)
@@ -100,8 +100,10 @@ public class ScoreManager : MonoBehaviour
 
 		thisScore = Mathf.CeilToInt(thisScore * globalMultiplyer);
 
-		globalMultiplyer += 0.01f;
-		multiplyerDisplay.text = string.Format("×{0:0.00}",globalMultiplyer);
+		if (fromMovement) {
+			globalMultiplyer += 0.01f;
+			multiplyerDisplay.text = string.Format("×{0:0.00}", globalMultiplyer);
+		}
 
 		currentScore += thisScore;
 
@@ -128,11 +130,11 @@ public class ScoreManager : MonoBehaviour
 		scoreDisplay.text = displayedScore.ToString();
 	}
 
-    #endregion
+	#endregion
 
-    #region Overall
+	#region Overall
 
-    void CheckScore(bool rewardsInstant, float extraPrecision = 0)
+	void CheckScore(bool rewardsInstant, float extraPrecision = 0)
     {
         int remainingScore = overallScore;
         int lastLevel=-1;

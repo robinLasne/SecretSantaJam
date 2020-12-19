@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         tutorial = GetComponent<TutorialManager>();
 
 		gameCanvasRaycasts.enabled = false;
-		GridData.matchEvent += (e,fromMove) => { if (gameReady) scoreMnG.AddScore(e); };
+		GridData.matchEvent += (e,fromMove) => { if (gameReady) scoreMnG.AddScore(e, fromMove); };
 
 		BackToWelcome(true);
     }
