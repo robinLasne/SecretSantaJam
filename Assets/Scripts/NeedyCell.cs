@@ -46,6 +46,14 @@ public class NeedyCell : HexCell {
 		}
 	}
 
+	private new void Update() {
+		base.Update();
+		if(Application.isEditor && health > 0 && Input.GetKeyDown(KeyCode.Space)) {
+			health = 0;
+			CheckDeath();
+		}
+	}
+
 	private void CheckDeath() {
 		if (!complete && health <= 0) {
 			grid.ReplaceDeadNeedy(this);

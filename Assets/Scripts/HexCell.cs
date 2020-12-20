@@ -123,7 +123,7 @@ public abstract class HexCell : MonoBehaviour
         debug.color = Color.white;
     }
 
-    private void Update()
+    protected void Update()
     {
         if (gonnaMatch)
         {
