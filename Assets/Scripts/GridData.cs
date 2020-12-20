@@ -21,6 +21,23 @@ public class GridData : MonoBehaviour {
 		}
 	}
 
+	int movesCount;
+	public void fastForward(int steps) {
+		movesCount += steps;
+		if (movesCount < 0) movesCount = 0;
+	}
+
+	bool placeNeedy {
+		get {
+			float progress01 = 1 - 1 / (Mathf.Sqrt(movesCount / 200f) + 1);
+			float probability = Mathf.Lerp(0, .1f, progress01);
+
+			//Debug.LogFormat("Move {0}, progress {1}, probability {2}", movesCount, progress01, probability);
+
+			return Random.value < probability;
+		}
+	}
+
     [Header("Life & Death")]
     public Transform livesContainer;
     public GameObject deathScreen;
@@ -173,6 +190,8 @@ public class GridData : MonoBehaviour {
         }
         livesCount = livesContainer.childCount;
 
+		movesCount = 0;
+
 		BonusPool.StartGame();
     }
 
@@ -293,6 +312,8 @@ public class GridData : MonoBehaviour {
 		}
 
 		if (hasMatches) {
+			if (fromMovement) movesCount++;
+
 			movements.canDrag = false;
 
 			(var newCells, var lastMatchCells) = ApplyMatches(cellsToRemove);
@@ -364,7 +385,7 @@ public class GridData : MonoBehaviour {
 			foreach (var cell in match) {
 				if (cell.ApplyMatch(.3f)) // Some cells don't disappear after their first match
 				{
-					var newCell = (!TutorialManager.Instance.InTutorial && Random.Range(0, 50) == 0) ? PlaceNewCellInstant(randomNeedy, cell.position) : PlaceNewCellInstant(toSpawn, cell.position);
+					var newCell = (!TutorialManager.Instance.InTutorial && placeNeedy) ? PlaceNewCellInstant(randomNeedy, cell.position) : PlaceNewCellInstant(toSpawn, cell.position);
 					newCell.transform.position = cell.transform.position;
 
 					newCells.Add(newCell);
@@ -410,7 +431,9 @@ public class GridData : MonoBehaviour {
 		if(postMatchEvent != null)postMatchEvent.Invoke();
     }
 
-	public void ReplaceDeadNeedy(HexCell old) {
+	public void ReplaceDeadNeedy(NeedyCell old) {
+		movesCount /= 2;
+
 		var newCell = TutorialManager.Instance.InTutorial ? PlaceNewCellInstant(normalNeedies[0], old.position) : PlaceNewCellInstant(LeastOccuringType(), old.position);
 		newCell.transform.position = old.transform.position;
 

@@ -84,6 +84,8 @@ public class NeedyCell : HexCell {
         if (complete)
         {
 			if (!TutorialManager.Instance.InTutorial) {
+				grid.fastForward(health-3);
+
 				if (needyType > 0) BonusPool.CollectBonus(needyType);
 				else grid.AddHealth();
 			}
@@ -94,6 +96,7 @@ public class NeedyCell : HexCell {
             return true;
         }
 
+		// Clearing previous match that contains grown cells
         match = new CellMatch();
 
         return false;
