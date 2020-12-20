@@ -29,10 +29,10 @@ public class GridData : MonoBehaviour {
 
 	bool placeNeedy {
 		get {
-			float progress01 = 1 - 1 / (movesCount*movesCount / 200f + 1);
+			float progress01 = movesCount / 150f;
 			float probability = Mathf.Lerp(0, .06f, progress01);
 
-			//Debug.LogFormat("Move {0}, progress {1}, probability {2}", movesCount, progress01, probability);
+			Debug.LogFormat("Move {0}, progress {1}, probability {2}", movesCount, progress01, probability);
 
 			return Random.value < probability;
 		}
@@ -75,6 +75,12 @@ public class GridData : MonoBehaviour {
 
         directionByIndex = new Vector2[] { Vector2.right, rotate(Vector2.right, Mathf.PI / 3), rotate(Vector2.right, 2 * Mathf.PI / 3) };
     }
+
+	private void Update() {
+		if(Application.isEditor && Input.GetKeyDown(KeyCode.N)) {
+			movesCount += 20;
+		}
+	}
 
 	int[,] RandomInitArray() {
 		var res = new int[hexagonRadius + 1, hexagonRadius + 1];
@@ -433,7 +439,7 @@ public class GridData : MonoBehaviour {
     }
 
 	public void ReplaceDeadNeedy(NeedyCell old) {
-		movesCount /= 2;
+		movesCount -= 10;
 
 		var newCell = TutorialManager.Instance.InTutorial ? PlaceNewCellInstant(normalNeedies[0], old.position) : PlaceNewCellInstant(LeastOccuringType(), old.position);
 		newCell.transform.position = old.transform.position;

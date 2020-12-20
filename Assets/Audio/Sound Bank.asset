@@ -27,6 +27,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 471468dac0e468d4fad03cc9d931eecf, type: 3}
   - {fileID: 8300000, guid: 96edeb24b7639b947965749111444db9, type: 3}
   - {fileID: 8300000, guid: 939a3da7477225945a081d22f010aaec, type: 3}
+  needySpawn: {fileID: 8300000, guid: c6cf1c11bee2c044799eb3eea05b4f9f, type: 3}
   levelUpSound: {fileID: 8300000, guid: 7190d67cf8a93764e97407ed356b6a94, type: 3}
   hurtSound: {fileID: 8300000, guid: 085d4e8ba1fcb244f882fd7b5b77a00f, type: 3}
   deathSound: {fileID: 8300000, guid: 4c9af449b1f535445a509ad64b023734, type: 3}
