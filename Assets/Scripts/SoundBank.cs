@@ -17,7 +17,7 @@ public class SoundBank : SingletonScriptableObject<SoundBank>
 	[SerializeField]
 	private AudioClip[] shovelsounds;
 	[SerializeField]
-	private AudioClip levelUpSound, hurtSound, deathSound;
+	private AudioClip needySpawn, levelUpSound, hurtSound, deathSound;
 
 	public AudioSource prefab;
 
@@ -43,6 +43,10 @@ public class SoundBank : SingletonScriptableObject<SoundBank>
 
 	public void LevelUp() {
 		PlayInstant(levelUpSound);
+	}
+
+	public void NeedyAppears() {
+		PlayInstant(needySpawn, .1f);
 	}
 
 	public void PlayMatchNote() {

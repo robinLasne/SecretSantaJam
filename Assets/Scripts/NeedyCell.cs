@@ -98,6 +98,8 @@ public class NeedyCell : HexCell {
 				else grid.AddHealth();
 			}
 
+			grid.HealNeedies(match.bonusUsed?1:2);
+
             var cR = centerIcon.gameObject.AddComponent<CoroutineRunner>();
 			cR.StartCoroutine(NeedySuccessAnim(dur*5));
             StartCoroutine(matchAnim(dur));

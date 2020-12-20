@@ -15,7 +15,7 @@ public class GridData : MonoBehaviour {
 	NeedyCell randomNeedy {
 		get {
 			if (ScoreManager.curLevel > normalNeedies.Length) {
-				if (Random.Range(0, normalNeedies.Length * 2) == 0) return specialNeedy;
+				if (livesCount<livesContainer.childCount && Random.Range(0, normalNeedies.Length * 2) == 0) return specialNeedy;
 			}
 			return normalNeedies[Random.Range(0, normalNeedies.Length)];
 		}
@@ -29,8 +29,8 @@ public class GridData : MonoBehaviour {
 
 	bool placeNeedy {
 		get {
-			float progress01 = 1 - 1 / (Mathf.Sqrt(movesCount / 200f) + 1);
-			float probability = Mathf.Lerp(0, .1f, progress01);
+			float progress01 = 1 - 1 / (movesCount*movesCount / 200f + 1);
+			float probability = Mathf.Lerp(0, .06f, progress01);
 
 			//Debug.LogFormat("Move {0}, progress {1}, probability {2}", movesCount, progress01, probability);
 
@@ -208,6 +208,7 @@ public class GridData : MonoBehaviour {
 
         if(instance is NeedyCell)
         {
+			SoundBank.Instance.NeedyAppears();
             (instance as NeedyCell).InitLeaves();
         }
 
@@ -464,6 +465,16 @@ public class GridData : MonoBehaviour {
             livesCount++;
         }
     }
+
+	public void HealNeedies(int health) {
+		foreach(var cell in cells.SelectMany(x => x)) {
+			NeedyCell needy = cell as NeedyCell;
+			if(needy != null && !needy.complete) {
+				needy.health += health;
+				needy.healthDisplay.text = needy.health.ToString();
+			}
+		}
+	}
 
 	#region Data Access
 
