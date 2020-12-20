@@ -23,6 +23,18 @@ public class CellMatch{
         }
     }
 
+	public void PlaySound() {
+		var needies = cellsInMatch.Where(x => x is NeedyCell).Select(x => (NeedyCell)x);
+		if (needies.Count() == 0) {
+			SoundBank.Instance.PlayMatchNote();
+		}
+		else {
+			foreach (var needy in needies) {
+				SoundBank.Instance.PlayNeedySound(needy.howManyCouplesDone);
+			}
+		}
+	}
+
 	public Vector3 getCenter() {
 		if (!centerInit) {
 			centerInit = true;

@@ -47,7 +47,7 @@ public class ScoreManager : MonoBehaviour
 		CheckScore(true);
 
 		highScore = PlayerPrefs.GetInt("highscore");
-		highScoreDisplay.text = "Hi-Score: "+highScore.ToString();
+		highScoreDisplay.text = "high score\n"+highScore.ToString();
 
 		ScorePopup = popupPrefab;
 	}
@@ -69,6 +69,7 @@ public class ScoreManager : MonoBehaviour
         foreach (var match in matches)
         {
             thisScore += match.score;
+			match.PlaySound();
 
 			if (match.score > 0) {
 				var popup = Instantiate(popupPrefab, match.getCenter(), Quaternion.identity);
@@ -115,7 +116,7 @@ public class ScoreManager : MonoBehaviour
 			highScoreNotification.SetActive(true);
 			highScore = currentScore;
 			PlayerPrefs.SetInt("highscore", highScore);
-			highScoreDisplay.text = "Hi-Score: " + highScore.ToString();
+			highScoreDisplay.text = "high score\n" + highScore.ToString();
 		}
     }
 
@@ -202,6 +203,7 @@ public class ScoreManager : MonoBehaviour
             CheckScore(false, floatScore-overallScore);
 			if (curLevel > oldLevel) {
 				for (int i = oldLevel; i < curLevel; ++i) {
+					SoundBank.Instance.LevelUp();
 					UpdateDisplay(i, levelRewards[i].expNeeded, 1);
 					yield return StartCoroutine(ChangeReward(i + 1, .7f));
 				}

@@ -11,6 +11,12 @@ public class NeedyCell : HexCell {
 
     bool[] couplesDone = new bool[3];
 
+	public int howManyCouplesDone {
+		get {
+			return couplesDone.Count(x=>x);
+		}
+	}
+
 	public int health = 10;
 	public TMPro.TextMeshPro healthDisplay;
 

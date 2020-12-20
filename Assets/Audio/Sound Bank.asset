@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdc3d0ecf95c62643916187ee062114a, type: 3}
+  m_Name: Sound Bank
+  m_EditorClassIdentifier: 
+  matchNotes:
+  - {fileID: 8300000, guid: 315ad7e000ca9af40823a8cde5375347, type: 3}
+  - {fileID: 8300000, guid: ed470496d8ddbb04386cbb2f239ee407, type: 3}
+  - {fileID: 8300000, guid: f8e5ab29270080848bae5b4ddd7c2341, type: 3}
+  - {fileID: 8300000, guid: f52815a541643b04a84d8417cbb2c6bc, type: 3}
+  needySounds:
+  - {fileID: 8300000, guid: 78fe36c24850c8744a9853bea7e14e1f, type: 3}
+  - {fileID: 8300000, guid: 5f10c56b1ba562848802c8eb16ff72c6, type: 3}
+  - {fileID: 8300000, guid: 0214691cdbc920f4b9a2ec70042564e3, type: 3}
+  soundsDelay: 0.05
+  shovelsounds:
+  - {fileID: 8300000, guid: a66ca3eb002eba04b9dee55614d6d996, type: 3}
+  - {fileID: 8300000, guid: 471468dac0e468d4fad03cc9d931eecf, type: 3}
+  - {fileID: 8300000, guid: 96edeb24b7639b947965749111444db9, type: 3}
+  - {fileID: 8300000, guid: 939a3da7477225945a081d22f010aaec, type: 3}
+  levelUpSound: {fileID: 8300000, guid: 7190d67cf8a93764e97407ed356b6a94, type: 3}
+  hurtSound: {fileID: 8300000, guid: 085d4e8ba1fcb244f882fd7b5b77a00f, type: 3}
+  deathSound: {fileID: 8300000, guid: 4c9af449b1f535445a509ad64b023734, type: 3}
+  prefab: {fileID: 5004277768069615637, guid: fe53ee5e6a93829499322774ceafbf35, type: 3}

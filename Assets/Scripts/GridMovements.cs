@@ -38,6 +38,8 @@ public class GridMovements : MonoBehaviour
             return;
         }
 
+		SoundBank.Instance.Dig();
+
         draggedCellStartPos.z = 0;
         draggedCell = data.getCell(draggedCellStartPos);
 

@@ -420,10 +420,17 @@ public class GridData : MonoBehaviour {
 
 		if (!TutorialManager.Instance.InTutorial) {
 			livesCount--;
-			if (livesCount >= 0) livesContainer.GetChild(livesCount).gameObject.SetActive(false);
+			if (livesCount >= 0) {
+				livesContainer.GetChild(livesCount).gameObject.SetActive(false);
+			}
 
-			if (livesCount <= 0) deathScreen.SetActive(true);
+			if (livesCount <= 0) {
+				deathScreen.SetActive(true);
+				SoundBank.Instance.Death();
+			}
 		}
+
+		if (livesCount > 0) SoundBank.Instance.Hurt();
 	}
 
     public void AddHealth()

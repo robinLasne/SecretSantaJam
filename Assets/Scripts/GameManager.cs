@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
 	public GraphicRaycaster WelcomeCanvasRaycasts, gameCanvasRaycasts;
 
+	public SoundBank soundBank;
+
 	bool gameReady;
 
     TutorialManager tutorial;

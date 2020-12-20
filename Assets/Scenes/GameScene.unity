@@ -4799,7 +4799,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.8, y: 0, z: -10}
+  m_LocalPosition: {x: -35.555557, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8229,7 +8229,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 489037877601c6c4585e4f2290474efe, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -8551,6 +8551,7 @@ MonoBehaviour:
   scoreMnG: {fileID: 947388717}
   WelcomeCanvasRaycasts: {fileID: 1857904282}
   gameCanvasRaycasts: {fileID: 1503101181}
+  soundBank: {fileID: 11400000, guid: e0e4820ad51d1bf4fa497b8e0d94bc1b, type: 2}
 --- !u!4 &947388715
 Transform:
   m_ObjectHideFlags: 0
@@ -14912,8 +14913,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 157.1, y: 0}
-  m_SizeDelta: {x: 161.76276, y: 100}
+  m_AnchoredPosition: {x: 151.9, y: 22.62}
+  m_SizeDelta: {x: 196.83563, y: 100.649414}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1775747405
 MonoBehaviour:
@@ -15082,7 +15083,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 123
+  m_text: 'high score
+
+    123'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe, type: 2}
   m_sharedMaterial: {fileID: -8857674935479601752, guid: 8fe25fa43100aa240b1dcc1f4ac63bbe,
@@ -15110,13 +15113,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 32
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
