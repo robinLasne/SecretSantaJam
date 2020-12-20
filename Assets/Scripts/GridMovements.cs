@@ -41,7 +41,6 @@ public class GridMovements : MonoBehaviour
 		SoundBank.Instance.Dig();
 
         draggedCellStartPos.z = 0;
-        draggedCell = data.getCell(draggedCellStartPos);
 
         dragDir = data.getDirectionIdx(direction);
 
@@ -53,7 +52,9 @@ public class GridMovements : MonoBehaviour
             SnapInstant();
         }
 
-        draggedIndices.Clear();
+		draggedCell = data.getCell(draggedCellStartPos);
+
+		draggedIndices.Clear();
         draggedIndices.Add(draggedCellStartPos);
 
         // Get all cells in drag direction
